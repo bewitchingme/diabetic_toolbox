@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  glucometer_value: 1.5
+  time_of_date: 2015-07-31 15:56:12
+  intake: 1
+  patient_id: 
+
+two:
+  glucometer_value: 1.5
+  time_of_date: 2015-07-31 15:56:12
+  intake: 1
+  patient_id: 
