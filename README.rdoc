@@ -1,3 +1,12 @@
-= DiabeticToolbox
+= Diabetic Toolbox
 
-This project rocks and uses MIT-LICENSE.
+The aim of this project is to provide diabetics with digital tools to record their
+glucometer readings and produce reports for those readings, in addition to providing
+a recipe database and meal planner.
+
+Ideally this project should allow for insulin dosage expectations under a variety of
+approved methods for countries around the world.  For the time being the method used
+to determine insulin dosages are those provided to patients in Canada using carbohydrate
+counting.  Calorie counting should be included as many diabetics still use this method,
+though the application will not support this at this time as it is beyond my knowledge
+as a newly diagnosed diabetic.
