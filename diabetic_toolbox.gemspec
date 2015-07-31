@@ -31,4 +31,5 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency "boostrap-sass", "~> 0.0.2"
   s.add_runtime_dependency "sass-rails", "~> 5.0.3"
   s.add_runtime_dependency "coffee-rails", "~> 4.1.0"
+  s.add_runtime_dependency "acts_as_votable", "~> 0.10.0"
 end
