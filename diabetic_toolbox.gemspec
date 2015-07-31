@@ -5,7 +5,7 @@ require "diabetic_toolbox/version"
 
 # Describe your gem and declare its dependencies:
 Gem::Specification.new do |s|
-  s.name        = "diabetic_toolbox"
+  s.name        = "diabetic-toolbox"
   s.version     = DiabeticToolbox::VERSION
   s.authors     = ["bewitchingme"]
   s.email       = ["rpc@bewitching.me"]
