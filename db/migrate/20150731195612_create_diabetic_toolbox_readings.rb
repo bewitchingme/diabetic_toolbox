@@ -1,7 +1,7 @@
 class CreateDiabeticToolboxReadings < ActiveRecord::Migration
   def change
     create_table :diabetic_toolbox_readings do |t|
-      t.belongs_to :patient
+      t.belongs_to :member
       t.float      :glucometer_value
       t.datetime   :time_of_date
       t.integer    :intake
@@ -9,7 +9,7 @@ class CreateDiabeticToolboxReadings < ActiveRecord::Migration
       t.timestamps null: false
     end
 
-    add_index :diabetic_toolbox_readings, :patient_id
+    add_index :diabetic_toolbox_readings, :member_id
   end
 
   def down

@@ -1,7 +1,7 @@
 class AddAttachmentReportDocumentToReports < ActiveRecord::Migration
   def self.up
     change_table :diabetic_toolbox_reports do |t|
-      t.attachment :report_document
+      add_attachment :diabetic_toolbox_reports, :report_document
     end
   end
 

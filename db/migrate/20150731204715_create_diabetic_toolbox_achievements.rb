@@ -1,7 +1,7 @@
 class CreateDiabeticToolboxAchievements < ActiveRecord::Migration
   def change
     create_table :diabetic_toolbox_achievements do |t|
-      t.belongs_to :patient
+      t.belongs_to :member
       t.string     :name
       t.integer    :points
       t.integer    :level
@@ -9,7 +9,7 @@ class CreateDiabeticToolboxAchievements < ActiveRecord::Migration
       t.timestamps null: false
     end
 
-    add_index :diabetic_toolbox_achievements, :patient_id
+    add_index :diabetic_toolbox_achievements, :member_id
   end
 
   def down
