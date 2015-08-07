@@ -1,0 +1,135 @@
+en:
+  recaptcha:
+    errors:
+      verification_failed: Please Verify Sentience
+      recaptcha_unreachable: Recaptcha Provider Unreachable
+  http:
+    errors:
+      not_found: '404: File Not Found'
+      not_found_message: I'm sorry, the document does not exist at the location that you requested.
+      internal_server_error: '500: Internal Server Error'
+      internal_server_error_message: I'm sorry, the requested interaction resulted in an unrecoverable error.
+      unprocessable_entity: '422: Unprocessable Entity'
+      unprocessable_entity_message: Sorry, could you repeat that again?
+      unauthorized: '401: Unauthorized'
+      unauthorized_message: The resource you are trying to access is currently not available to you.
+      bad_request: '400: Bad Request'
+      bad_request_message: Sorry, your request was malformed.
+      forbidden: '403: Forbidden'
+      forbidden_message: Access to the requested resource is prohibited.
+      method_not_allowed: '405: Method Not Allowed'
+      method_not_allowed_message: The method you are calling for this resource is not prohibited.
+      not_acceptable: '406: Not Acceptable'
+      not_acceptable_message: Sorry, this type is not acceptable.
+      not_implemented: '501: Not Implemented'
+      not_implemented_message: Sorry, this feature does not exist.
+  paginator:
+    views:
+      pagination:
+        first: Start
+        last: End
+        previous: Previous
+        next: Next
+        truncate: "&hellip;"
+    helpers:
+      page_entries_info:
+        one_page:
+          display_entries:
+            zero: "No %{entry_name} found"
+            one: "Displaying <b>1</b> %{entry_name}"
+            other: "Displaying <b>all %{count}</b> %{entry_name}"
+        more_pages:
+          display_entries: "Displaying %{entry_name} <b>%{first}&nbsp;-&nbsp;%{last}</b> of <b>%{total}</b> in total"  # UI for buttons; crud titles contain more verbosity.
+  navigation:
+    brand: Diabetic Toolbox
+    sr_only: Toggle navigation
+    about: About
+    authentication:
+      common:
+        sign_out: Sign Out
+        sign_in: Sign In
+    members:
+      dashboard: Dashboard
+      readings: Readings
+      reports: Reports
+      recipes: Recipes
+      meal_plans: Meal Plans
+  views:
+    modal:
+      close: Close
+      cancel: Cancel
+    admin:
+      common:
+        key: value
+      model:
+        view:
+          key: value
+    model:
+      view:
+        key: value
+  crumbs:
+    root: Home
+    model:
+      root: Galleries
+      new: New
+  flash:
+    model:
+      event:
+        key: value
+      destroyed: value
+  activerecord:
+    attributes:
+      member:
+        first_name: First Name
+        last_name: Last Name
+        username: Username
+        email: Email
+        dob: Date of Birth
+        password: Password
+        password_confirmation: Confirm
+    validations:
+      common:
+        required: Required
+        illegal_value: Illegal value
+      model:
+        key: value
+  errors:
+    format: "%{attribute} %{message}"
+    messages:
+      accepted: must be accepted
+      blank: can't be blank
+      present: must be blank
+      confirmation: doesn't match %{attribute}
+      empty: can't be empty
+      equal_to: must be equal to %{count}
+      even: must be even
+      exclusion: ms reserved
+      greater_than: must be greater than %{count}
+      greater_than_or_equal_to: must be greater than or equal to %{count}
+      inclusion: is not in range
+      invalid: is not valid
+      less_than: "must be less than %{count}"
+      less_than_or_equal_to: "must be less than or equal to %{count}"
+      not_a_number: is not a number
+      not_an_integer: must be an integer
+      odd: must be odd
+      record_invalid: "Validation failed: %{errors}"
+      restrict_dependent_destroy:
+        one: "Cannot delete record because a dependent %{record} exists"
+        many: "Cannot delete record because dependent %{record} exist"
+      taken: has already been taken
+      too_long:
+        one: is too long (maximum is 1 character)
+        other: "is too long (maximum is %{count} characters)"
+      too_short:
+        one: is too short (minimum is 1 character)
+        other: "is too short (minimum is %{count} characters)"
+      wrong_length:
+        one: is the wrong length (should be 1 character)
+        other: "is the wrong length (should be %{count} characters)"
+      other_than: "must be other than %{count}"
+    template:
+      body: "There were problems with the following fields:"
+      header:
+        one: "1 error prohibited this %{model} from being saved"
+        other: "%{count} errors prohibited this %{model} from being saved"
