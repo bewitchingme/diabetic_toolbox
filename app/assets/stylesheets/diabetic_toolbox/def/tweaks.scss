@@ -1,0 +1,24 @@
+.smooth
+{
+  transition: ease 0.3s;
+  transition-property: all;
+}
+.Application
+{
+  margin-top: 55px;
+}
+.content-nav
+{
+  @include column(12, 10, 10, 10);
+  @include column-offsets(0, 1, 1, 1);
+}
+.content-welcome
+{
+  @include column(12, 10, 10, 10);
+  @include column-offsets(0, 1, 1, 1);
+}
+.content-login
+{
+  @include column(12, 8, 6, 6);
+  @include column-offsets(0, 2, 3, 3);
+}

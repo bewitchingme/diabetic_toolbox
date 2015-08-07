@@ -1,0 +1,13 @@
+.container-fluid
+  .row
+    .content-login.smooth
+      %h1 Login
+      = form_for :member_session do |f|
+        .form-group
+          = f.label :email, class: 'control-label'
+          = f.text_field :email, class: 'form-control'
+        .form-group
+          = f.label :password, class: 'control-label'
+          = f.password_field :password, class: 'form-control'
+        .form-group
+          = f.submit 'Login', class: 'btn btn-primary'

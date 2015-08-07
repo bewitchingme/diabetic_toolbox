@@ -1,0 +1,25 @@
+%nav
+  .container-fluid
+    .row
+      .content-nav.smooth
+        %ul.nav.nav-pills.nav-justified
+          %li.active{role: :presentation}
+            %a.pill{href: '#', rel: :relativeanchor, alt: t('navigation.members.dashboard'), title: t('navigation.members.dashboard')}
+              .fa.fa-dashboard
+              = t('navigation.members.dashboard')
+          %li{role: :presentation}
+            %a.pill{href: '#', rel: :relativeanchor, alt: t('navigation.members.readings'), title: t('navigation.members.readings')}
+              .fa.fa-book
+              = t('navigation.members.readings')
+          %li{role: :presentation}
+            %a.pill{href: '#', rel: :relativeanchor, alt: t('navigation.members.reports'), title: t('navigation.members.reports')}
+              .fa.fa-bar-chart
+              = t('navigation.members.reports')
+          %li{role: :presentation}
+            %a.pill{href: '#', rel: :relativeanchor, alt: t('navigation.members.recipes'), title: t('navigation.members.recipes')}
+              .fa.fa-list
+              = t('navigation.members.recipes')
+          %li{role: :presentation}
+            %a.pill{href: '#', rel: :relativeanchor, alt: t('navigation.members.meal_plans'), title: t('navigation.members.meal_plans')}
+              .fa.fa-road
+              = t('navigation.members.meal_plans')
