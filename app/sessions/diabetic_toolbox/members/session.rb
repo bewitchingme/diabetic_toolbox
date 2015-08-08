@@ -20,7 +20,8 @@ module DiabeticToolbox::Members
     #   find(session_token) => DiabeticToolbox::Member
     #
     def self.find(session_token)
-      DiabeticToolbox::Member.find_by_session_token(session_token) if session_token.present?
+      @member = DiabeticToolbox::Member.find_by_session_token(session_token) if session_token.present?
+      @member
     end
 
     ##
