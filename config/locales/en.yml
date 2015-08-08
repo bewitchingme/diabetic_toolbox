@@ -54,6 +54,8 @@ en:
       reports: Reports
       recipes: Recipes
       meal_plans: Meal Plans
+      me: Account
+      settings: Settings
   views:
     modal:
       close: Close
@@ -64,19 +66,20 @@ en:
       model:
         view:
           key: value
-    model:
-      view:
-        key: value
+    members:
+      dash:
+        history: History
   crumbs:
     root: Home
     model:
       root: Galleries
       new: New
   flash:
-    model:
-      event:
-        key: value
-      destroyed: value
+    member:
+      created:
+        success: "Member %{first_name} Created"
+        failure: "Create Member Failed"
+      destroyed: "Member %{first_name} Deleted"
   activerecord:
     attributes:
       member:
@@ -91,8 +94,10 @@ en:
       common:
         required: Required
         illegal_value: Illegal value
-      model:
-        key: value
+      member:
+        maximum: "Max %{maximum} characters"
+        first_name_format: Only letters and spaces allowed
+        last_name_format: Only letters allowed
   errors:
     format: "%{attribute} %{message}"
     messages:
