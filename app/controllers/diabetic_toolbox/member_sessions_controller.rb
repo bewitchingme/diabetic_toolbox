@@ -10,7 +10,7 @@ class DiabeticToolbox::MemberSessionsController < DiabeticToolbox::ApplicationCo
   def create
     @member = DiabeticToolbox::Members::Session.create member_params
     session[:session_token] = @member.session_token
-    redirect_to root_url
+    redirect_to member_dash_path(@member)
   end
 
   def destroy
