@@ -1,0 +1,10 @@
+= javascript_include_tag "//www.google.com/jsapi", "chartkick"
+
+.container-fluid
+  .row
+    .content-dashboard
+      .panel.panel-default.tabbed
+        .panel-heading.zeroed= render_member_navigation :dashboard
+        .panel-body
+          .panel.panel-primary
+            #chartkick.panel-body= line_chart @chart_data, library: @library, height: '18vw'
