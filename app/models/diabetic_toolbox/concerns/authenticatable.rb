@@ -8,7 +8,6 @@ module DiabeticToolbox::Concerns::Authenticatable
     validates :password, length: (8..64), confirmation: true, on: :update, if: :setting_password?
 
     def password=(password_str)
-      warn 'Password method called.'
       @password               = password_str
       self.encryption_salt    = BCrypt::Engine.generate_salt 12
       self.encrypted_password = BCrypt::Engine.hash_secret(password_str, encryption_salt)
