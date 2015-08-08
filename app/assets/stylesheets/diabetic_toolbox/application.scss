@@ -12,11 +12,26 @@
  *
  *= require_self
  */
+
+//region Fonts
+@import url(http://fonts.googleapis.com/css?family=Oxygen:400,700,300);
+@import url(http://fonts.googleapis.com/css?family=Oxygen+Mono);
+@import url(http://fonts.googleapis.com/css?family=Merriweather:400,400italic,700,700italic,300italic,300);
+//endregion
+
+//region Bootstrap
 @import 'bootstrap-sprockets';
 @import 'def/main';
 @import 'bootstrap';
 @import 'bootstrap-compass';
+//endregion
+
+//region FA
 @import 'font-awesome-sprockets';
 @import 'font-awesome';
+//endregion
+
+//region Application requirements.
 @import 'def/util';
 @import 'def/tweaks';
+//endregion
