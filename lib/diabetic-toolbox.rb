@@ -9,7 +9,7 @@ require 'responders'
 require 'font-awesome-sass'
 require 'friendly_id'
 require 'babosa'
-require 'thumbs_up'
+require 'chartkick'
 
 module DiabeticToolbox
 end
