@@ -4,7 +4,8 @@ class DiabeticToolbox::MemberSessionsController < DiabeticToolbox::ApplicationCo
   respond_to :html, :json
 
   def new
-    @member = DiabeticToolbox::Member.new
+    @member          = DiabeticToolbox::Member.new
+    @ensure_cohesion = true
   end
 
   def create
@@ -18,6 +19,14 @@ class DiabeticToolbox::MemberSessionsController < DiabeticToolbox::ApplicationCo
       session.delete :session_token
     end
     redirect_to root_url
+  end
+
+  def password_recovery
+    @ensure_cohesion = true
+  end
+
+  def send_recovery_kit
+
   end
 
   private

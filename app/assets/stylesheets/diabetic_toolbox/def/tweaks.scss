@@ -14,6 +14,15 @@
 }
 //endregion
 
+//region Authentication
+
+#sign-in.content-login.smooth
+{
+  margin-top: 40px;
+}
+
+//endregion
+
 //region Content classes
 .content-nav
 {
@@ -37,8 +46,55 @@
 }
 .content-login
 {
-  @include column(12, 8, 6, 6);
-  @include column-offsets(0, 2, 3, 3);
+  @include column(12, 8, 6, 4);
+  @include column-offsets(0, 2, 3, 4);
+}
+.content-history
+{
+  @include column(12, 12, 6, 6);
+}
+.content-quickies
+{
+  @include column(12, 12, 6, 6);
+}
+//endregion
+
+//region Dashboard
+.quickies-item
+{
+  display: block;
+  margin-bottom: 10px;
+}
+UL#overview
+{
+  list-style-type: none;
+  display: inline;
+  width: auto;
+  margin: 0;
+  padding: 0;
+  li.overview-item
+  {
+    width: 25%;
+    float: left;
+    overflow: hidden;
+    .item-label
+    {
+      @media (min-width: 768px)
+      {
+        font-size: floor(($font-size-base * 0.9));
+      }
+      @media (max-width: 768px)
+      {
+        font-size: floor(($font-size-base * 0.78));
+      }
+      display: block;
+    }
+    .item-value
+    {
+      display: inline-block;
+      font-weight: bold;
+    }
+  }
 }
 //endregion
 

@@ -6,5 +6,10 @@
       .panel.panel-default.tabbed
         .panel-heading.zeroed= render_member_navigation :dashboard
         .panel-body
-          .panel.panel-primary
-            #chartkick.panel-body= line_chart @chart_data, library: @library, height: '18vw'
+          .row
+            .content-quickies.smooth
+              .quickies-item= render_member_overview
+              .quickies-item= link_to t('views.members.dash.record'), '#', class: 'btn btn-default btn-block'
+              .quickies-item= link_to t('views.members.dash.report'), '#', class: 'btn btn-default btn-block'
+            .content-history.smooth
+              #chartkick.panel-body= line_chart @chart_data, library: @library, height: '130px'

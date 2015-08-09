@@ -6,7 +6,7 @@ module DiabeticToolbox::Members
     end
 
     def self.chartkick_library
-      { title: "60 Day History", hAxis: {title: "Date", gridlines: { count: 3, color: "#DDD" } }, vAxis: {title: "Reading" } }
+      { fontName: 'Merriweather', title: "60 Day History", hAxis: {title: "Date", gridlines: { count: 3, color: "#DDD" } }, vAxis: {title: "Reading" } }
     end
   end
 end
