@@ -46,8 +46,10 @@ en:
     about: About
     authentication:
       common:
+        submit: Submit
         sign_out: Sign Out
         sign_in: Sign In
+        forgot_password: Forgot Password?
     members:
       dashboard: Dashboard
       readings: Readings
@@ -69,6 +71,9 @@ en:
     members:
       dash:
         history: History
+        record: New Reading
+        report: Run Report
+        overview: Overview
   crumbs:
     root: Home
     model:
