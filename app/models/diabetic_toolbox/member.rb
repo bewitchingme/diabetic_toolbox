@@ -19,6 +19,7 @@ module DiabeticToolbox
     end
     #endregion
 
+    has_many :settings,              class_name: 'DiabeticToolbox::Setting'
     has_many :readings,              class_name: 'DiabeticToolbox::Reading'
     has_many :report_configurations, class_name: 'DiabeticToolbox::ReportConfiguration'
     has_many :reports,               class_name: 'DiabeticToolbox::Report'
