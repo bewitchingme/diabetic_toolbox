@@ -85,10 +85,15 @@ en:
         - Each of these fields are required to provide accurate results in reporting, please be sure the values
           provided are accurate.
       ll_units_per_day_addon: per day
+      mmol_units: units mmol/L
+      mg_units: units mg/dL
       mmol: mmol/L
       mg: mg/dL
       carbohydrates: grams of carbs
       calories: calories
+      titles:
+        measurements: Measurement Systems
+        settings: Treatment Values
   crumbs:
     root: Home
     model:
@@ -108,6 +113,12 @@ en:
         success: Saved
         failure: Oops
   activerecord:
+    options:
+      diabetic_toolbox/setting:
+        mmol: Molar Concentration (mmol/L)
+        mg: Mass Concentration (mg/dL)
+        carbohydrates: Carbohydrates
+        calories: Calories
     attributes:
       diabetic_toolbox/member:
         first_name: First Name

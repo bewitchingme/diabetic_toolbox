@@ -2,6 +2,9 @@ DiabeticToolbox::Engine.routes.draw do
   # App home.
   root 'welcome#start'
 
+  # Static Pages
+  get '/about', to: 'welcome#about', as: :about
+
   # Authentication routes
   get    '/member/sign_in',  to: 'member_sessions#new',               as: :sign_in
   post   '/member/sign_in',  to: 'member_sessions#create',            as: :begin_session
