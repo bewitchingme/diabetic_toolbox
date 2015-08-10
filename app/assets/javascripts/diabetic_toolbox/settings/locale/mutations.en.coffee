@@ -4,8 +4,8 @@ window.mutations = glucometer: {
     mg: 'mg/dL'
   },
   increments_by: {
-    mmol: 'mmol/L',
-    mg: 'mg/dL'
+    mmol: 'units mmol/L',
+    mg: 'units mg/dL'
   }
 },
 intake: {
