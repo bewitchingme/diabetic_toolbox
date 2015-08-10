@@ -9,15 +9,27 @@ class DiabeticToolbox::MemberSessionsController < DiabeticToolbox::ApplicationCo
   end
 
   def create
-    @member = DiabeticToolbox::Members::Session.create member_params
-    session[:session_token] = @member.session_token
-    redirect_to member_dash_path(@member)
+    @session = DiabeticToolbox::Members::Session.new
+    @member  = @session.create member_params
+
+    if @session.in_progress?
+      session[:session_token] = @member.session_token
+      flash[:success]         = @session.result_message
+
+      redirect_to member_dashboard_path(@member)
+    else
+      flash[:danger]   = @session.result_message
+      @ensure_cohesion = true
+
+      render :new
+    end
   end
 
   def destroy
     if DiabeticToolbox::Members::Session.destroy session[:session_token]
       session.delete :session_token
     end
+
     redirect_to root_url
   end
 
@@ -25,8 +37,8 @@ class DiabeticToolbox::MemberSessionsController < DiabeticToolbox::ApplicationCo
     @ensure_cohesion = true
   end
 
+  # TODO: Must create a mailer to send the recovery kit to the member.
   def send_recovery_kit
-
   end
 
   private

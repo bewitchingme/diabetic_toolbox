@@ -2,15 +2,36 @@ module DiabeticToolbox::Members
   class Session
     require 'digest'
 
+    def initialize
+      @member  = nil
+      @success = false
+    end
+
     ##
     # Returns the DiabeticToolbox::Member upon successful session creation.
     #
     # :call-seq:
     #   create(member_params) => DiabeticToolbox::Member
     #
-    def self.create(params)
+    def create(params)
       @member = DiabeticToolbox::Member.find_by_email params[:email]
-      return @member if self.authenticates?(params[:password]) && self.token_saved?
+
+      if @member.present?
+        @success = true
+        return @member if authenticates?(params[:password]) && token_saved?
+      end
+    end
+
+    def in_progress?
+      @success
+    end
+
+    def result_message
+      if in_progress?
+        I18n.t('views.member_sessions.messages.login_success')
+      else
+        I18n.t('views.member_sessions.messages.login_failure')
+      end
     end
 
     ##
@@ -37,15 +58,15 @@ module DiabeticToolbox::Members
 
     # :enddoc:
     private
-      def self.authenticates?(password)
+      def authenticates?(password)
         @member && @member.authenticate(password)
       end
 
-      def self.token_saved?
-        @member.update_attribute :session_token, self.new_session_token
+      def token_saved?
+        @member.update_attribute :session_token, new_session_token
       end
 
-      def self.new_session_token
+      def new_session_token
         return Digest::SHA2.hexdigest( Time.now.to_f.to_s )
       end
 
