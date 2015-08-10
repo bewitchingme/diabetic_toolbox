@@ -3,7 +3,7 @@ module DiabeticToolbox
     include DiabeticToolbox::Concerns::Authenticatable
     include DiabeticToolbox::Concerns::Voter
 
-    has_karma 'DiabeticToolbox::Recipe', as: :member, weight: 0.5
+    has_karma 'DiabeticToolbox::Recipe', as: :member, weight: 0.25
 
     #region Methods for friendly_id
     extend FriendlyId
@@ -19,12 +19,14 @@ module DiabeticToolbox
     end
     #endregion
 
-    has_many :settings,              class_name: 'DiabeticToolbox::Setting'
+    #region Children
+    has_many :settings,              class_name: 'DiabeticToolbox::Setting',             dependent: :destroy
     has_many :readings,              class_name: 'DiabeticToolbox::Reading'
-    has_many :report_configurations, class_name: 'DiabeticToolbox::ReportConfiguration'
-    has_many :reports,               class_name: 'DiabeticToolbox::Report'
+    has_many :report_configurations, class_name: 'DiabeticToolbox::ReportConfiguration', dependent: :destroy
+    has_many :reports,               class_name: 'DiabeticToolbox::Report',              dependent: :destroy
     has_many :recipes,               class_name: 'DiabeticToolbox::Recipe'
-    has_many :achievements,          class_name: 'DiabeticToolbox::Achievement'
+    has_many :achievements,          class_name: 'DiabeticToolbox::Achievement',         dependent: :destroy
+    #endregion
 
   end
 end
