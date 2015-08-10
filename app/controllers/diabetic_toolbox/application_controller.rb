@@ -13,10 +13,14 @@ module DiabeticToolbox
         @current_member.present?
       end
 
+      def current_ability
+        @current_ability
+      end
+
     protected
       def deploy_member_tabs
         @tabs = {
-            :dashboard  => [I18n.t('navigation.members.dashboard'),  'dashboard', member_dash_path(current_member)],
+            :dashboard  => [I18n.t('navigation.members.dashboard'),  'dashboard', member_dashboard_path(current_member)],
             :readings   => [I18n.t('navigation.members.readings'),   'book',      '#'],
             :reports    => [I18n.t('navigation.members.reports'),    'bar-chart', '#'],
             :recipes    => [I18n.t('navigation.members.recipes'),    'list',      '#'],
@@ -26,7 +30,8 @@ module DiabeticToolbox
 
     private
       def initialize_member_session
-        @current_member ||= DiabeticToolbox::Members::Session.find session[:session_token] if session[:session_token].present?
+        @current_member  ||= DiabeticToolbox::Members::Session.find session[:session_token] if session[:session_token].present?
+        @current_ability = DiabeticToolbox::MemberAbility.new @current_member
       end
   end
 end
