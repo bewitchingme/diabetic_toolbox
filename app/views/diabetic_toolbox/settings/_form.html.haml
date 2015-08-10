@@ -1,5 +1,7 @@
 = form_for @setting, url: (@setting.new_record? ? create_setting_path : update_settings_path) do |f|
   .panel.panel-default
+    .panel-heading.panel-title
+      = t('views.settings.titles.measurements')
     .panel-body
       #settings_dependencies
         .row
@@ -13,6 +15,7 @@
               = f.select :intake_measure_type, intake_options(@setting), { include_blank: (true if @setting.new_record?) }, { class: 'form-control', 'data-toggle' => 'tooltip', 'data-placement' => 'top' }
   %div{ id: "#{'settings_for_calculation' if @setting.new_record?}" }
     .panel.panel-default
+      .panel-heading.panel-title= t('views.settings.titles.settings')
       .panel-body
         .row
           .half.smooth
@@ -33,7 +36,7 @@
               = f.label :increments_by, class: 'control-label'
               .input-group
                 = f.text_field :increments_by, class: 'form-control'
-                #increments_by_addon.input-group-addon= bootstrap_addon_glucometer(@setting)
+                #increments_by_addon.input-group-addon= bootstrap_addon_glucometer(@setting, true)
           .half.smooth
             .form-group
               = f.label :ll_units_per_day, class: 'control-label'
