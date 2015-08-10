@@ -2,15 +2,18 @@ require_dependency "diabetic_toolbox/application_controller"
 
 module DiabeticToolbox
   class MembersController < DiabeticToolbox::ApplicationController
+    load_and_authorize_resource
     respond_to :html, :json
 
     #region Before Action
     before_action :deploy_member_tabs, only: :dash
     before_action :set_member, only: [:show, :edit, :update, :destroy]
+    before_action :set_cohesion, only: :new
     #endregion
 
     #region Creation
     def new
+      @member = DiabeticToolbox::Member.new
     end
 
     def create
@@ -57,6 +60,7 @@ module DiabeticToolbox
 
     #region Member
     def dash
+      redirect_to setup_path if current_member.settings.last.blank?
       @chart_data = DiabeticToolbox::Members::Dashboard.history current_member
       @library    = DiabeticToolbox::Members::Dashboard.chartkick_library
     end
@@ -70,6 +74,10 @@ module DiabeticToolbox
 
       def set_member
         @member = current_member
+      end
+
+      def set_cohesion
+        @ensure_cohesion = true
       end
     #endregion
   end
