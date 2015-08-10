@@ -24,6 +24,11 @@
 //endregion
 
 //region Content classes
+.content-document
+{
+  @include column(12, 10, 10, 10);
+  @include column-offsets(0, 1, 1, 1);
+}
 .content-nav
 {
   @include column(12, 10, 10, 10);
