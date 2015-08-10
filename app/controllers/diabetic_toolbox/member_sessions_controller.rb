@@ -1,6 +1,7 @@
 require_dependency "diabetic_toolbox/application_controller"
 
 class DiabeticToolbox::MemberSessionsController < DiabeticToolbox::ApplicationController
+  load_and_authorize_resource class: 'DiabeticToolbox::Member'
   respond_to :html, :json
 
   def new
@@ -43,6 +44,6 @@ class DiabeticToolbox::MemberSessionsController < DiabeticToolbox::ApplicationCo
 
   private
     def member_params
-      params.require(:member_session).permit :email, :password
+      params.require(:member).permit :email, :password
     end
 end
