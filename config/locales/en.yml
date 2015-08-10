@@ -74,6 +74,21 @@ en:
         record: New Reading
         report: Run Report
         overview: Overview
+    member_sessions:
+      messages:
+        login_failure: Sign In Failed
+        login_success: Welcome Back!
+    settings:
+      primer:
+        - Before you begin, you must set the parameters to be used as outlined in your treatment plan.
+        - Both yourself and your physician will have access to this information, but it is not otherwise shared.
+        - Each of these fields are required to provide accurate results in reporting, please be sure the values
+          provided are accurate.
+      ll_units_per_day_addon: per day
+      mmol: mmol/L
+      mg: mg/dL
+      carbohydrates: grams of carbs
+      calories: calories
   crumbs:
     root: Home
     model:
@@ -85,9 +100,16 @@ en:
         success: "Member %{first_name} Created"
         failure: "Create Member Failed"
       destroyed: "Member %{first_name} Deleted"
+    setting:
+      created:
+        success: Setup Complete
+        failure: Oops
+      updated:
+        success: Saved
+        failure: Oops
   activerecord:
     attributes:
-      member:
+      diabetic_toolbox/member:
         first_name: First Name
         last_name: Last Name
         username: Username
@@ -95,6 +117,13 @@ en:
         dob: Date of Birth
         password: Password
         password_confirmation: Confirm
+      diabetic_toolbox/setting:
+        glucometer_measure_type: I take readings in...
+        intake_measure_type: I count...
+        intake_ratio: 1 unit insulin for every...
+        correction_base: Corrections start at...
+        increments_by: 1 unit correction for every...
+        ll_units_per_day: '# units long-lasting insulin'
     validations:
       common:
         required: Required
