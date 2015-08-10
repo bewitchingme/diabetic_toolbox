@@ -2,6 +2,8 @@ module DiabeticToolbox::Concerns::Voter
   extend ActiveSupport::Concern
 
   class_methods do
+    attr_accessor :karmic_objects
+
     def has_karma(voteable_type, options = {})
       self.karmic_objects ||= {}
       self.karmic_objects[voteable_type.to_s.classify.constantize] = [ (options[:as] ? options[:as].to_s.foreign_key : self.name.foreign_key), [ (options[:weight] || 1) ].flatten.map(&:to_f) ]
@@ -16,7 +18,6 @@ module DiabeticToolbox::Concerns::Voter
   # in a namespaced engine very well.
   included do
     has_many      :votes, as: :voter, dependent: :destroy, class_name: 'DiabeticToolbox::Vote'
-    attr_accessor :karmic_objects
 
     def karma(options = {})
       self.class.base_class.karmic_objects.collect do |object, attr|
@@ -127,4 +128,5 @@ module DiabeticToolbox::Concerns::Voter
     end
 
   end
+
 end
