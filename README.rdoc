@@ -4,9 +4,20 @@ The aim of this project is to provide diabetics with digital tools to record the
 glucometer readings and produce reports for those readings, in addition to providing
 a recipe database and meal planner.
 
-Ideally this project should allow for insulin dosage expectations under a variety of
-approved methods for countries around the world.  For the time being the method used
-to determine insulin dosages are those provided to patients in Canada using carbohydrate
-counting.  Calorie counting should be included as many diabetics still use this method,
-though the application will not support this at this time as it is beyond my knowledge
-as a newly diagnosed diabetic.
+The application supports glucometer records in Mass Concentration (mg/dL) and Molar
+Concentration (mmol/L) and will record meal intake in either carbohydrates or
+calories.  This should satisfy most diabetics treating themselves under modern
+treatment plans.
+
+If you are diabetic and have information that deviates from the above approach
+please contact me so I can discuss how to modify the application to meet your
+treatment parameters.
+
+If you are a physician or healthcare professional and wish to inquire about
+the use of this application, please don't hesitate.
+
+= What This Is Not
+
+This application is NOT designed by a medical professional but by a diabetic who
+has learned as much as he could about how treatment tends to play out.  Do not
+assume that your physician has approved use of this application in any way.
