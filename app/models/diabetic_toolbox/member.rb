@@ -5,6 +5,19 @@ module DiabeticToolbox
 
     has_karma 'DiabeticToolbox::Recipe', as: :member, weight: 0.25
 
+    #region Validations
+    validates :first_name, presence: { message: I18n.t('activerecord.validations.common.required') },
+              length: { in: (1..64), message: I18n.t('activerecord.validations.common.length_range', min: 1, max: 64) },
+              format: { with: /\A[a-zA-Z\s]+\Z/, message: I18n.t('activerecord.validations.diabetic_toolbox/member.first_name_format') }
+    validates :last_name, presence: { message: I18n.t('activerecord.validations.common.required') },
+              length: { in: (1..64), message: I18n.t('activerecord.validations.common.length_range', min: 1, max: 64) },
+              format: { with: /\A[a-zA-Z\-]+\Z/, message: I18n.t('activerecord.validations.diabetic_toolbox/member.last_name_format') }
+    validates :username, on: :create, presence: { message: I18n.t('activerecord.validations.common.required') },
+              length: { in: (4..256), message: I18n.t('activerecord.validations.common.length_range', min: 4, max: 256) },
+              format: { with: /\A[a-zA-Z\d\s]+\Z/, message: I18n.t('activerecord.validations.diabetic_toolbox/member.username_format') }
+    validate  :dob_is_valid?
+    #endregion
+
     #region Methods for friendly_id
     extend FriendlyId
 
@@ -26,6 +39,32 @@ module DiabeticToolbox
     has_many :reports,               class_name: 'DiabeticToolbox::Report',              dependent: :destroy
     has_many :recipes,               class_name: 'DiabeticToolbox::Recipe'
     has_many :achievements,          class_name: 'DiabeticToolbox::Achievement',         dependent: :destroy
+    #endregion
+
+    #region In-house cooking
+    def dob_is_valid?
+      if dob.present? && dob < 18.years.ago
+        errors.add(:dob, I18n.t('activerecord.validations.common.illegal_value'))
+      end
+    end
+    #endregion
+
+    #region Truth or Dare
+    def has_no_readings?
+      readings.size.eql?(0)
+    end
+
+    def has_no_achievements?
+      achievements.size.eql?(0)
+    end
+
+    def has_no_recipes?
+      recipes.size.eql?(0)
+    end
+
+    def configured?
+      !settings.size.eql?(0)
+    end
     #endregion
 
   end

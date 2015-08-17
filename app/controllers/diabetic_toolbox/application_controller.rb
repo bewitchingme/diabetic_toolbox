@@ -17,7 +17,6 @@ module DiabeticToolbox
         @current_ability
       end
 
-    protected
       def deploy_member_tabs
         @tabs = {
             :dashboard  => [I18n.t('navigation.members.dashboard'),  'dashboard', member_dashboard_path(current_member)],
@@ -28,9 +27,12 @@ module DiabeticToolbox
         }
       end
 
+      def member_configured?
+        redirect_to setup_path if current_member.present? && current_member.settings.size.eql?(0)
+      end
     private
       def initialize_member_session
-        @current_member  ||= DiabeticToolbox::Members::Session.find session[:session_token] if session[:session_token].present?
+        @current_member  ||= request.env['warden'].user :member
         @current_ability = DiabeticToolbox::MemberAbility.new @current_member
       end
   end

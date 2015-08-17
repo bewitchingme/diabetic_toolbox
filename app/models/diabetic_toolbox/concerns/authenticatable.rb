@@ -4,8 +4,15 @@ module DiabeticToolbox::Concerns::Authenticatable
   included do
     attr_accessor :password, :password_confirmation
 
-    validates :password, length: (8..64), confirmation: true, presence: true, on: :create
-    validates :password, length: (8..64), confirmation: true, on: :update, if: :setting_password?
+    validates :email, presence: { message: I18n.t('activerecord.validations.common.required')},
+              length: { maximum: 256, message: I18n.t('activerecord.validations.common.maximum', maximum: 256) },
+              format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i, message: I18n.t('activerecord.validations.common.authenticatable.email_format')}
+    validates :password, on: :create, presence: { message: I18n.t('activerecord.validations.common.required') },
+              length: { in: (8..64), message: I18n.t('activerecord.validations.common.length_range', min: 8, max: 64) },
+              confirmation: { message: I18n.t('activerecord.validations.common.authenticatable.password_confirmation') }
+    validates :password, on: :update, if: :setting_password?,
+              length: { in: (8..64), message: I18n.t('activerecord.validations.common.length_range', min: 8, max: 64) },
+              confirmation: { message: I18n.t('activerecord.validations.common.authenticatable.password_confirmation') }
 
     def password=(password_str)
       @password               = password_str

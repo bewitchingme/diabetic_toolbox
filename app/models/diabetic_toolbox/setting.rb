@@ -1,6 +1,6 @@
 module DiabeticToolbox
   class Setting < ActiveRecord::Base
-    belongs_to :member, class_name: 'DiabeticToolbox::Member'
+    belongs_to :member, class_name: 'DiabeticToolbox::Member', counter_cache: true
 
     enum glucometer_measure_type: [:mmol, :mg]
     enum intake_measure_type:     [:carbohydrates, :calories]

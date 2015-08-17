@@ -10,7 +10,7 @@ module DiabeticToolbox
 
     def brand_location
       default_path = root_path
-      default_path = member_dashboard_path(current_member) if member_signed_in?
+      default_path = member_dashboard_path if member_signed_in?
       link_to t('navigation.brand'), default_path, class: 'navbar-brand'
     end
   end

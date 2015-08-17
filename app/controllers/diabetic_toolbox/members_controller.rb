@@ -23,20 +23,16 @@ module DiabeticToolbox
       respond_to do |format|
         if create_member.successful?
           format.html {
-            flash[:result] = create_member.flash
+            flash[:success] = create_member.flash
             redirect_to member_path(@member)
           }
-          format.json {
-            render :json => create_member.response
-          }
+          format.json { render :json => create_member.response }
         else
           format.html {
-            flash[:result] = create_member.flash
+            flash[:warning] = create_member.flash
             redirect_to :new
           }
-          format.json {
-            render :json => create_member.response
-          }
+          format.json { render :json => create_member.response }
         end
       end
     end
@@ -60,9 +56,9 @@ module DiabeticToolbox
 
     #region Member
     def dash
-      redirect_to setup_path if current_member.settings.last.blank?
-      @chart_data = DiabeticToolbox::Members::Dashboard.history current_member
-      @library    = DiabeticToolbox::Members::Dashboard.chartkick_library
+      redirect_to setup_path unless current_member.configured?
+      @chart_data = DiabeticToolbox::Members::Dashboard.history current_member unless current_member.has_no_readings?
+      @library    = DiabeticToolbox::Members::Dashboard.chartkick_library unless current_member.has_no_readings?
     end
     #endregion
 

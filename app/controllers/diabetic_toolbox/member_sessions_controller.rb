@@ -6,36 +6,29 @@ class DiabeticToolbox::MemberSessionsController < DiabeticToolbox::ApplicationCo
 
   def new
     @member          = DiabeticToolbox::Member.new
-    @ensure_cohesion = true
+    there_can_be_only_one
   end
 
   def create
-    @session = DiabeticToolbox::Members::Session.new
-    @member  = @session.create member_params
+    @member = request.env['warden'].authenticate! scope: :member
 
-    if @session.in_progress?
-      session[:session_token] = @member.session_token
-      flash[:success]         = @session.result_message
-
-      redirect_to member_dashboard_path(@member)
+    if request.env['warden'].authenticated? scope: :member
+      flash[:success] = I18n.t('views.member_sessions.messages.login_success')
+      redirect_to login_successful_path
     else
-      flash[:danger]   = @session.result_message
-      @ensure_cohesion = true
-
+      there_can_be_only_one
       render :new
     end
   end
 
   def destroy
-    if DiabeticToolbox::Members::Session.destroy session[:session_token]
-      session.delete :session_token
-    end
+    request.env['warden'].logout :member
 
     redirect_to root_url
   end
 
   def password_recovery
-    @ensure_cohesion = true
+    there_can_be_only_one
   end
 
   # TODO: Must create a mailer to send the recovery kit to the member.
@@ -45,5 +38,17 @@ class DiabeticToolbox::MemberSessionsController < DiabeticToolbox::ApplicationCo
   private
     def member_params
       params.require(:member).permit :email, :password
+    end
+
+    def there_can_be_only_one
+      @ensure_cohesion = true
+    end
+
+    def login_successful_path
+      if @member.settings.count > 0
+        member_dashboard_path
+      else
+        setup_path
+      end
     end
 end

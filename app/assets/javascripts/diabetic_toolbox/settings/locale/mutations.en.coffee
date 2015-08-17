@@ -1,9 +1,9 @@
 window.mutations = glucometer: {
-  correction_base: {
+  correction_begins_at: {
     mmol: 'mmol/L',
     mg: 'mg/dL'
   },
-  increments_by: {
+  increments_per: {
     mmol: 'units mmol/L',
     mg: 'units mg/dL'
   }

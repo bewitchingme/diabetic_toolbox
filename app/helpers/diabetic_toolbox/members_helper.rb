@@ -6,10 +6,10 @@ module DiabeticToolbox
     def render_member_overview
       locals = if member_signed_in?
         {
-          recipes:      current_member.recipes.count,
+          recipes:      current_member.recipes.size,
           since:        current_member.created_at.localtime.strftime( '%D' ),
           karma:        current_member.karma,
-          achievements: current_member.achievements.count
+          achievements: current_member.achievements.size
         }
       end
 

@@ -2,10 +2,10 @@ require_dependency 'diabetic_toolbox/application_controller'
 
 class DiabeticToolbox::SettingsController < DiabeticToolbox::ApplicationController
   load_and_authorize_resource
-  before_action :set_setting,            only: [:edit, :update]
-  before_action :no_settings_configured, only: [:edit, :update]
+  before_action :set_setting, :no_settings_configured, only: [:edit, :update]
 
   def new
+    redirect_to settings_path if current_member.configured?
     @setting = DiabeticToolbox::Setting.new
   end
 

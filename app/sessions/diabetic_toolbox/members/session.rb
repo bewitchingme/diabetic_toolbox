@@ -1,8 +1,11 @@
 module DiabeticToolbox::Members
   class Session
     require 'digest'
+    require 'cgi'
 
-    def initialize
+    def initialize(env, params)
+      @env     = env
+      @params  = params
       @member  = nil
       @success = false
     end
@@ -13,12 +16,12 @@ module DiabeticToolbox::Members
     # :call-seq:
     #   create(member_params) => DiabeticToolbox::Member
     #
-    def create(params)
-      @member = DiabeticToolbox::Member.find_by_email params[:email]
+    def create
+      @member = DiabeticToolbox::Member.find_by_email @params['email']
 
       if @member.present?
         @success = true
-        return @member if authenticates?(params[:password]) && token_saved?
+        return @member if authenticates?(@params['password']) && housekeeping?
       end
     end
 
@@ -62,8 +65,16 @@ module DiabeticToolbox::Members
         @member && @member.authenticate(password)
       end
 
-      def token_saved?
-        @member.update_attribute :session_token, new_session_token
+      def housekeeping?
+        updates = {
+            last_session_began_at: @member.current_session_began_at,
+            last_session_ip: @member.current_session_ip,
+            session_token: new_session_token,
+            current_session_began_at: Time.now,
+            current_session_ip: @env['REMOTE_ADDR']
+        }
+
+        @member.update_attributes updates
       end
 
       def new_session_token

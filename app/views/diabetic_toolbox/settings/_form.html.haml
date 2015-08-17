@@ -26,17 +26,17 @@
                 #intake_measurement_addon.input-group-addon= bootstrap_addon_intake(@setting)
           .half.smooth
             .form-group
-              = f.label :correction_base, class: 'control-label'
+              = f.label :correction_begins_at, class: 'control-label'
               .input-group
-                = f.text_field :correction_base, class: 'form-control'
-                #correction_base_addon.input-group-addon= bootstrap_addon_glucometer(@setting)
+                = f.text_field :correction_begins_at, class: 'form-control'
+                #correction_begins_at_addon.input-group-addon= bootstrap_addon_glucometer(@setting)
         .row
           .half.smooth
             .form-group
-              = f.label :increments_by, class: 'control-label'
+              = f.label :increments_per, class: 'control-label'
               .input-group
-                = f.text_field :increments_by, class: 'form-control'
-                #increments_by_addon.input-group-addon= bootstrap_addon_glucometer(@setting, true)
+                = f.text_field :increments_per, class: 'form-control'
+                #increments_per_addon.input-group-addon= bootstrap_addon_glucometer(@setting, true)
           .half.smooth
             .form-group
               = f.label :ll_units_per_day, class: 'control-label'

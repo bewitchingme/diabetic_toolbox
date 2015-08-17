@@ -22,15 +22,15 @@ class @SettingMutations
   evolve: ->
     combos           = @watch
     change           = @mutate
-    increments_addon = $('#increments_by_addon')
-    correction_addon = $('#correction_base_addon')
+    increments_addon = $('#increments_per_addon')
+    correction_addon = $('#correction_begins_at_addon')
     intake_addon     = $('#intake_measurement_addon')
     calculables      = $('#settings_for_calculation')
 
     @watch.glucometer.combo.change (ev) ->
       value      = $(this).val()
-      correction = change.glucometer.correction_base[value]
-      increments = change.glucometer.increments_by[value]
+      correction = change.glucometer.correction_begins_at[value]
+      increments = change.glucometer.increments_per[value]
 
       correction_addon.html correction if $(this)[0].selectedIndex > 0 || $(this).closest('form').hasClass('edit_setting')
       increments_addon.html increments if $(this)[0].selectedIndex > 0 || $(this).closest('form').hasClass('edit_setting')

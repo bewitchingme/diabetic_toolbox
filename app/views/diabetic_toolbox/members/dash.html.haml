@@ -12,4 +12,8 @@
               .quickies-item= link_to t('views.members.dash.record'), '#', class: 'btn btn-default btn-block'
               .quickies-item= link_to t('views.members.dash.report'), '#', class: 'btn btn-default btn-block'
             .content-history.smooth
-              #chartkick.panel-body= line_chart @chart_data, library: @library, height: '130px'
+              #chartkick.panel-body
+                - if current_member.has_no_readings?
+                  .text-center No Readings Recorded
+                - else
+                  = line_chart @chart_data, library: @library, height: '130px'
