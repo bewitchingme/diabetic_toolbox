@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    diabetic-toolbox (0.0.25)
+    diabetic-toolbox (0.0.38)
       babosa (~> 1.0.2)
       bcrypt (~> 3.1.10)
       bootstrap-sass (~> 3.3.5)
@@ -240,3 +240,6 @@ DEPENDENCIES
   pg
   rspec-rails
   warden-rspec-rails
+
+BUNDLED WITH
+   1.10.5
