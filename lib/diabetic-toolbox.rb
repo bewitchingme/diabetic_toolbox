@@ -1,4 +1,6 @@
+require 'warden'
 require 'diabetic_toolbox/engine'
+require 'sessions/session'
 require 'paperclip'
 require 'haml'
 require 'haml-rails'

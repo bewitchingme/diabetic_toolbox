@@ -1,3 +1,5 @@
+require 'warden'
+
 module DiabeticToolbox
   class Engine < ::Rails::Engine
     isolate_namespace DiabeticToolbox
@@ -7,6 +9,22 @@ module DiabeticToolbox
       g.template_engine   :haml
       g.stylesheet_engine :sass
       g.javascript_engine :coffee
+    end
+
+    config.middleware.use Warden::Manager do |config|
+      config.failure_app        = DiabeticToolbox::UnauthorizedController
+      config.default_scope      = :member
+      config.intercept_401      = :false
+
+      config.scope_defaults :member, strategies: [:standard]
+    end
+
+    Warden::Manager.serialize_from_session(:member) do |token|
+      DiabeticToolbox::Member.find_by_session_token token
+    end
+
+    Warden::Manager.serialize_into_session(:member) do |member|
+      member.session_token
     end
   end
 end
