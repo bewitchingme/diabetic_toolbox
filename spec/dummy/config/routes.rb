@@ -1,4 +1,3 @@
 Rails.application.routes.draw do
-
-  mount DiabeticToolbox::Engine => "/"
+  mount DiabeticToolbox::Engine => '/', as: :toolbox
 end
