@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150809050232) do
+ActiveRecord::Schema.define(version: 20150817053438) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -47,17 +47,21 @@ ActiveRecord::Schema.define(version: 20150809050232) do
     t.string   "encrypted_password",       default: "", null: false
     t.string   "encryption_salt",          default: "", null: false
     t.string   "session_token"
+    t.integer  "recipes_count",            default: 0,  null: false
+    t.integer  "achievements_count",       default: 0,  null: false
+    t.integer  "settings_count",           default: 0,  null: false
+    t.integer  "readings_count",           default: 0,  null: false
     t.date     "dob"
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remembered_at"
     t.datetime "current_session_began_at"
-    t.datetime "last_session_began_at"
     t.string   "current_session_ip"
+    t.datetime "last_session_began_at"
     t.string   "last_session_ip"
     t.string   "confirmation_token"
-    t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
+    t.datetime "confirmed_at"
     t.string   "unconfirmed_email"
     t.integer  "failed_attempts"
     t.string   "unlock_token"
@@ -131,12 +135,12 @@ ActiveRecord::Schema.define(version: 20150809050232) do
 
   create_table "diabetic_toolbox_settings", force: :cascade do |t|
     t.integer  "member_id"
-    t.integer  "intake_ratio"
-    t.float    "correction_base"
-    t.integer  "increments_by"
-    t.integer  "ll_units_per_day"
     t.integer  "glucometer_measure_type"
     t.integer  "intake_measure_type"
+    t.integer  "intake_ratio"
+    t.float    "correction_begins_at"
+    t.integer  "increments_per"
+    t.integer  "ll_units_per_day"
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
   end
@@ -161,8 +165,8 @@ ActiveRecord::Schema.define(version: 20150809050232) do
     t.string   "voteable_type",                 null: false
     t.integer  "voter_id"
     t.string   "voter_type"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
   end
 
   add_index "diabetic_toolbox_votes", ["voteable_id", "voteable_type"], name: "index_diabetic_toolbox_votes_on_voteable_id_and_voteable_type", using: :btree
