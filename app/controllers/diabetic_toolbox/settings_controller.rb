@@ -39,7 +39,7 @@ class DiabeticToolbox::SettingsController < DiabeticToolbox::ApplicationControll
 
   private
     def setting_params
-      params.require(:setting).permit(:intake_ratio, :correction_base, :increments_by,
+      params.require(:setting).permit(:intake_ratio, :correction_begins_at, :increments_per,
                                       :ll_units_per_day, :glucometer_measure_type, :intake_measure_type)
     end
 
