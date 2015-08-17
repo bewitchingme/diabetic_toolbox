@@ -2,15 +2,19 @@ class CreateDiabeticToolboxMembers < ActiveRecord::Migration
   def change
     create_table(:diabetic_toolbox_members) do |t|
       ## Database authenticatable
-      t.string :first_name,              null: false, default: ''
-      t.string :last_name,               null: false, default: ''
-      t.string :username,                null: false, default: ''
-      t.string :slug,                    null: false, default: ''
-      t.string :email,                   null: false, default: ''
-      t.string :encrypted_password,      null: false, default: ''
-      t.string :encryption_salt,         null: false, default: ''
-      t.string :session_token
-      t.date   :dob
+      t.string  :first_name,              null: false, default: ''
+      t.string  :last_name,               null: false, default: ''
+      t.string  :username,                null: false, default: ''
+      t.string  :slug,                    null: false, default: ''
+      t.string  :email,                   null: false, default: ''
+      t.string  :encrypted_password,      null: false, default: ''
+      t.string  :encryption_salt,         null: false, default: ''
+      t.string  :session_token
+      t.integer :recipes_count,           null: false, default: 0
+      t.integer :achievements_count,      null: false, default: 0
+      t.integer :settings_count,          null: false, default: 0
+      t.integer :readings_count,          null: false, default: 0
+      t.date    :dob
 
 
       # Reset password
@@ -22,14 +26,14 @@ class CreateDiabeticToolboxMembers < ActiveRecord::Migration
 
       # Logging
       t.datetime :current_session_began_at
-      t.datetime :last_session_began_at
       t.string   :current_session_ip
+      t.datetime :last_session_began_at
       t.string   :last_session_ip
 
       # Confirm user
       t.string   :confirmation_token
-      t.datetime :confirmed_at
       t.datetime :confirmation_sent_at
+      t.datetime :confirmed_at
       t.string   :unconfirmed_email
 
       # Security measures

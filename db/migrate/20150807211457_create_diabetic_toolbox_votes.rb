@@ -7,7 +7,7 @@ class CreateDiabeticToolboxVotes < ActiveRecord::Migration
       t.boolean    :vote,     :default     => false, :null => false
       t.references :voteable, :polymorphic => true,  :null => false
       t.references :voter,    :polymorphic => true
-      t.timestamps
+      t.timestamps null: false
 
     end
 
