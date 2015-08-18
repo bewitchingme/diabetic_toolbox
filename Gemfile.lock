@@ -240,6 +240,3 @@ DEPENDENCIES
   pg
   rspec-rails
   warden-rspec-rails
-
-BUNDLED WITH
-   1.10.5
