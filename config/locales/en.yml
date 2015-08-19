@@ -69,6 +69,8 @@ en:
         view:
           key: value
     members:
+      primer: >
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet ex ut nibh elementum iaculis id in sem. Ut sollicitudin urna ac libero egestas euismod. Morbi volutpat, nisl eget sagittis malesuada, nisl libero venenatis quam, vitae fermentum diam lectus nec lorem. Interdum et malesuada fames ac ante ipsum primis in faucibus. Vivamus mollis est feugiat, tempus turpis sed, commodo lacus. Nunc sollicitudin odio ac orci semper faucibus. Sed aliquet sapien eu massa mollis, vitae congue enim vulputate. Nullam ac mollis dolor. Proin vel rutrum lacus, non facilisis ligula. Vivamus gravida dignissim commodo. Nulla facilisis varius risus non congue. Morbi eleifend luctus sapien, mollis sagittis dui bibendum non. Curabitur faucibus orci ut diam consequat tempus.
       dash:
         history: History
         record: New Reading
@@ -79,11 +81,11 @@ en:
         login_failure: Sign In Failed
         login_success: Welcome Back!
     settings:
-      primer:
-        - Before you begin, you must set the parameters to be used as outlined in your treatment plan.
-        - Both yourself and your physician will have access to this information, but it is not otherwise shared.
-        - Each of these fields are required to provide accurate results in reporting, please be sure the values
-          provided are accurate.
+      primer: >
+        Before you begin, you must set the parameters to be used as outlined in your treatment plan.
+        Both yourself and your physician will have access to this information, but it is not otherwise shared.
+        Each of these fields are required to provide accurate results in reporting, please be sure the values
+        provided are accurate.
       ll_units_per_day_addon: per day
       mmol_units: units mmol/L
       mg_units: units mg/dL
@@ -119,6 +121,9 @@ en:
         mg: Mass Concentration (mg/dL)
         carbohydrates: Carbohydrates
         calories: Calories
+      diabetic_toolbox/member:
+        male: Male
+        female: Female
     attributes:
       diabetic_toolbox/member:
         first_name: First Name
@@ -126,6 +131,7 @@ en:
         username: Username
         email: Email
         dob: Date of Birth
+        gender: Gender
         password: Password
         password_confirmation: Confirm
       diabetic_toolbox/setting:
