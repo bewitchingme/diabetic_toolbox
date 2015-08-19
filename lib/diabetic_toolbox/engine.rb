@@ -7,8 +7,12 @@ module DiabeticToolbox
     config.generators do |g|
       g.test_framework    :rspec, fixture: false
       g.template_engine   :haml
-      g.stylesheet_engine :sass
+      g.stylesheet_engine :scss
       g.javascript_engine :coffee
+    end
+
+    %w( members member_sessions settings welcome ).each do |controller|
+      config.assets.precompile += ["diabetic_toolbox/#{controller}.css"]
     end
 
     config.middleware.use Warden::Manager do |config|
