@@ -3,7 +3,5 @@
     .content-settings.smooth
       .panel.panel-info
         .panel-body.text-muted
-          #primer
-            - t('views.settings.primer').each do |p|
-              %p= p
+          #primer= t('views.settings.primer')
       = render 'form'
