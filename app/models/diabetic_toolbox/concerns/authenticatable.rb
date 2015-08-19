@@ -20,6 +20,11 @@ module DiabeticToolbox::Concerns::Authenticatable
       self.encrypted_password = BCrypt::Engine.hash_secret(password_str, encryption_salt)
     end
 
+    def authenticate!(password)
+      return true if authenticate password
+      raise "Authentication Failure For: #{email}"
+    end
+
     def authenticate(password)
       password.present? && encrypted_password.present? && encrypted_password == BCrypt::Engine.hash_secret(password, encryption_salt)
     end
