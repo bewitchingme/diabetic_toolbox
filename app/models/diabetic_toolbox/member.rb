@@ -1,9 +1,14 @@
 module DiabeticToolbox
   class Member < ActiveRecord::Base
+    #region Includes
     include DiabeticToolbox::Concerns::Authenticatable
     include DiabeticToolbox::Concerns::Voter
+    #endregion
 
+    #region Settings & Enums
     has_karma 'DiabeticToolbox::Recipe', as: :member, weight: 0.25
+    enum gender: [:male, :female]
+    #endregion
 
     #region Validations
     validates :first_name, presence: { message: I18n.t('activerecord.validations.common.required') },
@@ -64,6 +69,15 @@ module DiabeticToolbox
 
     def configured?
       !settings.size.eql?(0)
+    end
+    #endregion
+
+    #region Enum Representation
+    def self.gender_options
+      [
+        [I18n.t('activerecord.options.diabetic_toolbox/member.male'),   :male],
+        [I18n.t('activerecord.options.diabetic_toolbox/member.female'), :female]
+      ]
     end
     #endregion
 
