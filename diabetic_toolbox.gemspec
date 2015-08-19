@@ -39,6 +39,8 @@ Gem::Specification.new do |s|
   s.add_dependency 'cancancan', '~> 1.12.0'
   s.add_dependency 'jquery-rails'
   s.add_dependency 'bootstrap-sass', '~> 3.3.5'
+  s.add_dependency 'momentjs-rails', '>= 2.9.0'
+  s.add_dependency 'bootstrap3-datetimepicker-rails', '~> 4.15.35'
   s.add_dependency 'sass-rails', '~> 5.0.3'
   s.add_dependency 'coffee-rails', '~> 4.1.0'
   s.add_dependency 'bcrypt', '~> 3.1.10'
