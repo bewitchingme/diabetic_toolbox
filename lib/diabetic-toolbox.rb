@@ -13,6 +13,8 @@ require 'font-awesome-sass'
 require 'friendly_id'
 require 'babosa'
 require 'chartkick'
+require 'momentjs-rails'
+require 'bootstrap3-datetimepicker-rails'
 
 module DiabeticToolbox
 end
