@@ -2,7 +2,7 @@
 %html
   %head
     %title= t('navigation.brand')
-    = stylesheet_link_tag    "diabetic_toolbox/application", media: "all"
+    = stylesheet_link_tag    "diabetic_toolbox/application", params[:controller], media: "all"
     = javascript_include_tag "diabetic_toolbox/application"
     = csrf_meta_tags
   %body
