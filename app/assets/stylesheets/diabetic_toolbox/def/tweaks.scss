@@ -12,6 +12,12 @@
 {
   margin-top: 65px;
 }
+#primer
+{
+  font-weight: 400;
+  margin-bottom: 8px;
+  color: $brand-info;
+}
 //endregion
 
 //region Authentication
@@ -49,6 +55,11 @@
   @include column(12, 10, 10, 10);
   @include column-offsets(0, 1, 1, 1);
 }
+.content-register
+{
+  @include column(12, 10, 8, 6);
+  @include column-offsets(0, 1, 2, 3);
+}
 .content-login
 {
   @include column(12, 8, 6, 4);
@@ -66,6 +77,11 @@
 .content-quickies
 {
   @include column(12, 12, 6, 6);
+}
+.half
+{
+  @include column(10, 6, 6, 6);
+  @include column-offsets(1, 0, 0, 0);
 }
 //endregion
 
@@ -157,19 +173,16 @@ UL#member_nav > LI > A
 //endregion
 
 //region Member settings
-.half
-{
-  @include column(10, 8, 6, 6);
-  @include column-offsets(1, 2, 0, 0);
-}
-#primer
-{
-  font-weight: 400;
-  margin-bottom: 8px;
-  color: $brand-info;
-}
 #settings_for_calculation
 {
   display: none;
+}
+//endregion
+
+//region Members
+.name
+{
+  @include column(12, 6, 3, 3);
+  @include column-offsets(0, 1, 1, 1);
 }
 //endregion
