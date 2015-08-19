@@ -62,7 +62,7 @@ module DiabeticToolbox::Members
     # :enddoc:
     private
       def authenticates?(password)
-        @member && @member.authenticate(password)
+        @member && @member.authenticate!(password)
       end
 
       def housekeeping?
