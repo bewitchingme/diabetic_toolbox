@@ -26,7 +26,7 @@ module DiabeticToolbox
 
           expect(create_member.actual.slug).to eq safe_model_data[:slug]
           expect(create_member.successful?).to eq true
-          expect(create_member.actual.authenticate(member_params[:password])).to eq true
+          expect(create_member.actual.authenticate!(member_params[:password])).to eq true
           expect(create_member.response).to eq [create_success_message, {}, safe_model_data]
         end
         #endregion
