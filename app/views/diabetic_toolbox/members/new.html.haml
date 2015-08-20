@@ -1,7 +1,7 @@
 .container-fluid
   .row
     .content-register.smooth
-      %h3 Member Registration
+      %h3= t('views.members.new.header')
       #member-welcome
         %p
           %span.glyphicon.glyphicon-info-sign
@@ -11,49 +11,60 @@
     .row
       .content-register.smooth
         .half.smooth
-          %h4 Your Name *
+          %h4
+            = t('views.members.new.your_name')
+            %span.glyphicon.glyphicon-asterisk.asterisk
           .form-group
-            = f.text_field :first_name, class: 'form-control', autofocus: true, placeholder: 'First', tabindex: 1
+            = f.text_field :first_name, class: 'form-control', autofocus: true, placeholder: t('views.members.new.placeholders.first_name'), tabindex: 1
           .form-group
-            = f.text_field :last_name, class: 'form-control', placeholder: 'Last', tabindex: 2
-          %h4.optional Date of Birth
+            = f.text_field :last_name, class: 'form-control', placeholder: t('views.members.new.placeholders.last_name'), tabindex: 2
+        .half.smooth
+          %h4
+            = t('views.members.new.account')
+            %span.glyphicon.glyphicon-asterisk.asterisk
+          .form-group
+            .input-group
+              = f.text_field :email, class: 'form-control', placeholder: t('views.members.new.placeholders.email'), tabindex: 3
+              %span.input-group-addon
+                .glyphicon.glyphicon-envelope
+          .form-group
+            .input-group
+              = f.text_field :username, class: 'form-control', placeholder: t('views.members.new.placeholders.username'), tabindex: 4
+              %span.input-group-addon
+                .glyphicon.glyphicon-user
+          .form-group
+            .input-group
+              = f.password_field :password, class: 'form-control', placeholder: t('views.members.new.placeholders.password'), tabindex: 5
+              %span.input-group-addon
+                .glyphicon.glyphicon-lock
+          .form-group
+            = f.password_field :password_confirmation, class: 'form-control', placeholder: t('views.members.new.placeholders.confirm'), tabindex: 6
+    .row
+      .content-register.smooth
+        .half.smooth
+          %h4.optional= t('views.members.new.dob')
           .form-group
             #dob-picker.input-group
-              = f.text_field :dob, class: 'form-control', placeholder: 'YYYY-MM-DD', tabindex: 8
-              %span.input-group-addon
+              = f.text_field :dob, class: 'form-control', placeholder: t('views.members.new.placeholders.dob'), tabindex: 8
+              %span#dob-addon.input-group-addon
                 %span.glyphicon.glyphicon-calendar
-            :javascript
-              $(function() {
-                $('#dob-picker').datetimepicker({
-                  format: 'YYYY-MM-DD',
-                  viewMode: 'years'
-                });
-              });
-          %h4.optional Gender
+        .half.smooth
+          %h4.optional= t('views.members.new.gender')
           .form-group
             = f.select :gender, DiabeticToolbox::Member.gender_options, { include_blank: true }, {class: 'form-control', tabindex: 9}
-        .half.smooth
-          %h4 Account Settings *
-          .form-group
-            = f.text_field :email, class: 'form-control', placeholder: 'Email', tabindex: 3
-          .form-group
-            = f.text_field :username, class: 'form-control', placeholder: 'Username', tabindex: 4
-          .form-group
-            = f.password_field :password, class: 'form-control', placeholder: 'Password', tabindex: 5
-          .form-group
-            = f.password_field :password_confirmation, class: 'form-control', placeholder: 'Confirm', tabindex: 6
     .row
       .content-register.smooth
         .form-group
-          %label.checkbox-inline
+          %label#accept-terms.checkbox-inline
             = f.check_box :accepted_tos, tabindex: 7
-            I have read and understand the
-            = link_to 'Terms of Service', '#', data: {toggle: 'modal', target: '#terms'}
+            = t('views.members.new.tos_pre')
+            = link_to t('views.members.new.tos'), '#', data: {toggle: 'modal', target: '#terms'}
     .row
       .content-register.text-center.smooth
         .form-group
-          = f.submit 'Register', class: 'btn btn-default'
-#terms.modal.fade{role: :dialog}
+          = f.submit t('views.members.new.register'), class: 'btn btn-default'
+
+#terms.modal.fade{role: :dialog, 'aria-labelledby': t('views.members.new.tos')}
   .modal-dialog.modal-lg{role: :document}
     .modal-content
       .modal-header
