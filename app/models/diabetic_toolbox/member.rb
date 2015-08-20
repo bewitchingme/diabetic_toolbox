@@ -20,6 +20,7 @@ module DiabeticToolbox
     validates :username, on: :create, presence: { message: I18n.t('activerecord.validations.common.required') },
               length: { in: (4..256), message: I18n.t('activerecord.validations.common.length_range', min: 4, max: 256) },
               format: { with: /\A[a-zA-Z\d\s]+\Z/, message: I18n.t('activerecord.validations.diabetic_toolbox/member.username_format') }
+    validates :accepted_tos, on: :create, presence: { message: I18n.t('activerecord.validations.common.required') }
     validate  :dob_is_valid?
     #endregion
 
