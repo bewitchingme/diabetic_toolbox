@@ -34,6 +34,7 @@
                       %li= link_to content_tag(:span, '', class: 'fa fa-sliders menu-icon') + t('navigation.members.settings'), settings_path
                       %li= link_to content_tag(:span, '', class: 'fa fa-sign-out menu-icon') + t('navigation.authentication.common.sign_out') , sign_out_path, method: :delete
                 - else
+                  %li= link_to( t('navigation.register'), new_member_path ) unless @ensure_cohesion.present?
                   %li= link_to t('navigation.authentication.common.sign_in'), sign_in_path unless @ensure_cohesion.present?
     #Application
       = yield
