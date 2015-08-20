@@ -17,17 +17,17 @@ module DiabeticToolbox
 
     config.middleware.use Warden::Manager do |config|
       config.failure_app        = DiabeticToolbox::UnauthorizedController
-      config.default_scope      = :member
+      config.default_scope      = :diabetic_toolbox__member
       config.intercept_401      = :false
 
-      config.scope_defaults :member, strategies: [:standard]
+      config.scope_defaults :diabetic_toolbox__member, strategies: [:standard]
     end
 
-    Warden::Manager.serialize_from_session(:member) do |token|
+    Warden::Manager.serialize_from_session(:diabetic_toolbox__member) do |token|
       DiabeticToolbox::Member.find_by_session_token token
     end
 
-    Warden::Manager.serialize_into_session(:member) do |member|
+    Warden::Manager.serialize_into_session(:diabetic_toolbox__member) do |member|
       member.session_token
     end
   end
