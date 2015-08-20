@@ -71,8 +71,24 @@ en:
           key: value
     members:
       new:
-        primer: Only information denoted by an asterisk (*) is required for membership.
+        placeholders:
+          first_name: First
+          last_name: Last
+          dob: YYYY-MM-DD
+          email: Email
+          username: Username
+          password: Password
+          confirm: Confirm
+        header: Member Registration
+        primer: Only information denoted by an asterisk is required for membership.
         terms: Terms of Service & Legal
+        your_name: Your Name
+        dob: Date of Birth
+        gender: Gender
+        account: Account Specifics
+        tos_pre: I have read and understand the
+        tos: Terms of Service
+        register: Register
       dash:
         history: History
         record: New Reading
