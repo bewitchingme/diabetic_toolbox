@@ -15,7 +15,7 @@ module DiabeticToolbox
       @current_member
     end
 
-    def instant_in(member, scope = :member)
+    def instant_in(member, scope = :diabetic_toolbox__member)
       request.env['warden'].set_user( member, scope: scope )
     end
 
@@ -53,7 +53,7 @@ module DiabeticToolbox
     private
     #region Authentication
     def initialize_member_session
-      @current_member  ||= request.env['warden'].user :member
+      @current_member  ||= request.env['warden'].user :diabetic_toolbox__member
       @current_ability = DiabeticToolbox::MemberAbility.new @current_member
     end
     #endregion

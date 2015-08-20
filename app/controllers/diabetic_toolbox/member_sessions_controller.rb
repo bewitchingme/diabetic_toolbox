@@ -10,9 +10,9 @@ class DiabeticToolbox::MemberSessionsController < DiabeticToolbox::ApplicationCo
   end
 
   def create
-    @member = request.env['warden'].authenticate! scope: :member
+    @member = request.env['warden'].authenticate! scope: :diabetic_toolbox__member
 
-    if request.env['warden'].authenticated? scope: :member
+    if request.env['warden'].authenticated? scope: :diabetic_toolbox__member
       flash[:success] = I18n.t('views.member_sessions.messages.login_success')
       redirect_to login_successful_path
     else
@@ -22,7 +22,7 @@ class DiabeticToolbox::MemberSessionsController < DiabeticToolbox::ApplicationCo
   end
 
   def destroy
-    request.env['warden'].logout :member
+    request.env['warden'].logout :diabetic_toolbox__member
 
     redirect_to root_url
   end
