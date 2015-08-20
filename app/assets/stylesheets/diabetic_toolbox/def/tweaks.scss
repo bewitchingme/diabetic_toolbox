@@ -80,8 +80,8 @@
 }
 .half
 {
-  @include column(10, 6, 6, 6);
-  @include column-offsets(1, 0, 0, 0);
+  @include column(12, 6, 6, 6);
+  @include column-offsets(0, 0, 0, 0);
 }
 //endregion
 
@@ -180,9 +180,31 @@ UL#member_nav > LI > A
 //endregion
 
 //region Members
-.name
+#member-welcome
 {
-  @include column(12, 6, 3, 3);
-  @include column-offsets(0, 1, 1, 1);
+  padding-top: 10px;
+  padding-bottom: 3px;
+  padding-left: 10px;
+  color: $brand-info;
+  font-weight: 500;
+  letter-spacing: 1.2px;
+}
+.optional
+{
+  color: lighten($gray-light, 10%);
+}
+#terms.modal.fade
+{
+  .modal-dialog
+  {
+    .modal-content
+    {
+      .modal-body
+      {
+        height: 60vh;
+        overflow-y: auto;
+      }
+    }
+  }
 }
 //endregion
