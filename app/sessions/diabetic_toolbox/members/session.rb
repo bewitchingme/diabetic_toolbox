@@ -1,15 +1,19 @@
 module DiabeticToolbox::Members
   class Session
+    #region Requirements
     require 'digest'
-    require 'cgi'
+    #endregion
 
-    def initialize(env, params)
-      @env     = env
+    #region Init
+    def initialize(remote_user_ip_address, params)
+      @ip      = remote_user_ip_address
       @params  = params
       @member  = nil
       @success = false
     end
+    #endregion
 
+    #region Instance Methods
     ##
     # Returns the DiabeticToolbox::Member upon successful session creation.
     #
@@ -25,10 +29,23 @@ module DiabeticToolbox::Members
       end
     end
 
+    ##
+    # Returns true if the session is in progress, false if a session could
+    # not be established.
+    #
+    # :call-seq:
+    #   in_progress? => Boolean
+    #
     def in_progress?
       @success
     end
 
+    ##
+    # Localized result message for the authentication attempt.
+    #
+    # :call-seq:
+    #   result_message => String
+    #
     def result_message
       if in_progress?
         I18n.t('views.member_sessions.messages.login_success')
@@ -36,7 +53,9 @@ module DiabeticToolbox::Members
         I18n.t('views.member_sessions.messages.login_failure')
       end
     end
+    #endregion
 
+    #region Static
     ##
     # Returns the DiabeticToolbox::Member that matches the session token.
     #
@@ -58,32 +77,35 @@ module DiabeticToolbox::Members
       @member = self.find(session_token)
       return true if @member && self.clear
     end
+    #endregion
 
     # :enddoc:
+    #region Private
     private
-      def authenticates?(password)
-        @member && @member.authenticate!(password)
-      end
 
-      def housekeeping?
-        updates = {
-            last_session_began_at: @member.current_session_began_at,
-            last_session_ip: @member.current_session_ip,
-            session_token: new_session_token,
-            current_session_began_at: Time.now,
-            current_session_ip: @env['REMOTE_ADDR']
-        }
+    def authenticates?(password)
+      @member && @member.authenticate!(password)
+    end
 
-        @member.update_attributes updates
-      end
+    def housekeeping?
+      updates = {
+          last_session_began_at:    @member.current_session_began_at,
+          last_session_ip:          @member.current_session_ip,
+          session_token:            new_session_token,
+          current_session_began_at: Time.now,
+          current_session_ip:       @ip
+      }
 
-      def new_session_token
-        return Digest::SHA2.hexdigest( Time.now.to_f.to_s )
-      end
+      @member.update_attributes updates
+    end
 
-      def self.clear
-        @member.update_attribute :session_token, nil
-      end
+    def new_session_token
+      return Digest::SHA2.hexdigest( Time.now.to_f.to_s )
+    end
 
+    def self.clear
+      @member.update_attribute :session_token, nil
+    end
+    #endregion
   end
 end
