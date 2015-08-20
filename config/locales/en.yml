@@ -44,9 +44,10 @@ en:
     brand: Diabetic Toolbox
     sr_only: Toggle navigation
     about: About
+    register: Register
     authentication:
       common:
-        submit: Submit
+        title: Toolbox Authentication
         sign_out: Sign Out
         sign_in: Sign In
         forgot_password: Forgot Password?
@@ -69,8 +70,9 @@ en:
         view:
           key: value
     members:
-      primer: >
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet ex ut nibh elementum iaculis id in sem. Ut sollicitudin urna ac libero egestas euismod. Morbi volutpat, nisl eget sagittis malesuada, nisl libero venenatis quam, vitae fermentum diam lectus nec lorem. Interdum et malesuada fames ac ante ipsum primis in faucibus. Vivamus mollis est feugiat, tempus turpis sed, commodo lacus. Nunc sollicitudin odio ac orci semper faucibus. Sed aliquet sapien eu massa mollis, vitae congue enim vulputate. Nullam ac mollis dolor. Proin vel rutrum lacus, non facilisis ligula. Vivamus gravida dignissim commodo. Nulla facilisis varius risus non congue. Morbi eleifend luctus sapien, mollis sagittis dui bibendum non. Curabitur faucibus orci ut diam consequat tempus.
+      new:
+        primer: Only information denoted by an asterisk (*) is required for membership.
+        terms: Terms of Service & Legal
       dash:
         history: History
         record: New Reading
