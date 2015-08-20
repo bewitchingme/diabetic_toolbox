@@ -1,19 +1,64 @@
 .container-fluid
   .row
-    .content-member.smooth
-      = form_for @member, url: create_member_url do |f|
+    .content-register.smooth
+      %h3 Member Registration
+      #member-welcome
+        %p
+          %span.glyphicon.glyphicon-info-sign
+          = t('views.members.new.primer')
+= form_for @member, url: create_member_url do |f|
+  .container-fluid
+    .row
+      .content-register.smooth
+        .half.smooth
+          %h4 Your Name *
+          .form-group
+            = f.text_field :first_name, class: 'form-control', autofocus: true, placeholder: 'First', tabindex: 1
+          .form-group
+            = f.text_field :last_name, class: 'form-control', placeholder: 'Last', tabindex: 2
+          %h4.optional Date of Birth
+          .form-group
+            #dob-picker.input-group
+              = f.text_field :dob, class: 'form-control', placeholder: 'YYYY-MM-DD', tabindex: 8
+              %span.input-group-addon
+                %span.glyphicon.glyphicon-calendar
+            :javascript
+              $(function() {
+                $('#dob-picker').datetimepicker({
+                  format: 'YYYY-MM-DD',
+                  viewMode: 'years'
+                });
+              });
+          %h4.optional Gender
+          .form-group
+            = f.select :gender, DiabeticToolbox::Member.gender_options, { include_blank: true }, {class: 'form-control', tabindex: 9}
+        .half.smooth
+          %h4 Account Settings *
+          .form-group
+            = f.text_field :email, class: 'form-control', placeholder: 'Email', tabindex: 3
+          .form-group
+            = f.text_field :username, class: 'form-control', placeholder: 'Username', tabindex: 4
+          .form-group
+            = f.password_field :password, class: 'form-control', placeholder: 'Password', tabindex: 5
+          .form-group
+            = f.password_field :password_confirmation, class: 'form-control', placeholder: 'Confirm', tabindex: 6
+    .row
+      .content-register.smooth
         .form-group
-          = f.label :first_name, class: 'control-label'
-          = f.text_field :first_name, class: 'form-control', autofocus: true
+          %label.checkbox-inline
+            = f.check_box :accepted_tos, tabindex: 7
+            I have read and understand the
+            = link_to 'Terms of Service', '#', data: {toggle: 'modal', target: '#terms'}
+    .row
+      .content-register.text-center.smooth
         .form-group
-          = f.label :last_name, class: 'control-label'
-          = f.text_field :last_name, class: 'form-control'
-        .form-group
-          = f.label :email, class: 'control-label'
-          = f.text_field :email, class: 'form-control'
-        .form-group
-          = f.label :username, class: 'control-label'
-          = f.text_field :username, class: 'form-control'
-        .form-group.alert-danger
-          = f.label :dob, class: 'control-label'
-          = f.date_field :dob, class: 'form-control'
+          = f.submit 'Register', class: 'btn btn-default'
+#terms.modal.fade{role: :dialog}
+  .modal-dialog.modal-lg{role: :document}
+    .modal-content
+      .modal-header
+        %h4.modal-title= t('views.members.new.terms')
+      .modal-body
+        = render partial: 'tos'
+      .modal-footer
+        %button.btn.btn-default{'data-dismiss' => 'modal'}= t('views.modal.close')

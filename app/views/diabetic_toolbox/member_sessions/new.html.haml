@@ -2,7 +2,7 @@
   .row
     #sign-in.content-login.smooth
       .panel.panel-default
-        .panel-heading.panel-title= t('navigation.authentication.common.sign_in')
+        .panel-heading.panel-title= t('navigation.authentication.common.title')
         .panel-body
           = form_for @member, url: begin_session_path do |f|
             .form-group
@@ -12,5 +12,5 @@
               = f.label :password, class: 'control-label'
               = f.password_field :password, class: 'form-control'
             .form-group
-              = f.submit t('navigation.authentication.common.submit'), class: 'btn btn-primary'
+              = f.submit t('navigation.authentication.common.sign_in'), class: 'btn btn-default'
               = link_to t('navigation.authentication.common.forgot_password'), password_recovery_path, class: 'btn btn-info pull-right'
