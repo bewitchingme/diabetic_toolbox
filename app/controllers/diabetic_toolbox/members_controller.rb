@@ -79,7 +79,7 @@ module DiabeticToolbox
         @ensure_cohesion = true
       end
 
-      def login_new_user
+      def login_new_member
         session = DiabeticToolbox::Members::Session.new( request.env['REMOTE_ADDR'], {'email' => member_params[:email], 'password' => member_params[:password]} )
         member  = session.create
 
