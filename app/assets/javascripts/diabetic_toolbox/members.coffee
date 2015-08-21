@@ -8,4 +8,4 @@ $ ->
     $('#dob-picker, #dob-addon').on 'click', () ->
       $('#dob-picker').data('DateTimePicker').toggle()
       true
-    true
+  true
