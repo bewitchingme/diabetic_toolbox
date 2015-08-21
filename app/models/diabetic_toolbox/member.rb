@@ -5,6 +5,11 @@ module DiabeticToolbox
     include DiabeticToolbox::Concerns::Voter
     #endregion
 
+    #region Scopes
+    scope :males,   -> { where(:gender => self.genders[:male]  ) }
+    scope :females, -> { where(:gender => self.genders[:female]) }
+    #endregion
+
     #region Settings & Enums
     has_karma 'DiabeticToolbox::Recipe', as: :member, weight: 0.25
     enum gender: [:male, :female]
@@ -49,7 +54,7 @@ module DiabeticToolbox
 
     #region In-house cooking
     def dob_is_valid?
-      if dob.present? && dob < 18.years.ago
+      if dob.present? && dob >= 18.years.ago
         errors.add(:dob, I18n.t('activerecord.validations.common.illegal_value'))
       end
     end
@@ -81,6 +86,5 @@ module DiabeticToolbox
       ]
     end
     #endregion
-
   end
 end
