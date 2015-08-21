@@ -24,7 +24,7 @@ module DiabeticToolbox
 
       respond_to do |format|
         if create_member.successful?
-          login_new_user
+          sign_in_new_member
           format.html {
             flash[:success] = create_member.flash
             redirect_to setup_path
@@ -79,7 +79,7 @@ module DiabeticToolbox
         @ensure_cohesion = true
       end
 
-      def login_new_member
+      def sign_in_new_member
         session = DiabeticToolbox::Members::Session.new( request.env['REMOTE_ADDR'], {'email' => member_params[:email], 'password' => member_params[:password]} )
         member  = session.create
 
