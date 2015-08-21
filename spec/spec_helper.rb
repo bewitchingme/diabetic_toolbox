@@ -31,7 +31,7 @@ RSpec.configure do |config|
     #
     # warden.authenticate! scope: :member
     member.save if member.new_record?
-    warden.set_user member
+    warden.set_user member, scope: :diabetic_toolbox__member
     #@request.env['warden'] = warden
   end
 end

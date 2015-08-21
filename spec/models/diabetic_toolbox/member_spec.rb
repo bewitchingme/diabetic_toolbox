@@ -5,7 +5,8 @@ module DiabeticToolbox
     #region Definitions
     let(:member_params) { {first_name: 'Frodo', last_name: 'Baggins',
         email: 'frodo.baggins@example.com', username: 'Ring Bearer',
-        password: 'password', password_confirmation: 'password'} }
+        password: 'password', password_confirmation: 'password',
+        accepted_tos: true } }
     let(:create_success_message) { 'Member Frodo Created' }
     let(:create_failure_message) { 'Create Member Failed' }
     let(:safe_model_data) { { first_name: 'Frodo', last_name: 'Baggins', username: 'Ring Bearer', slug: 'ring-bearer' } }
@@ -15,6 +16,7 @@ module DiabeticToolbox
     let(:validations_first_name_format) { { first_name: ['Only letters and spaces allowed'] } }
     let(:validations_last_name_format) { { last_name: ['Only letters and hyphens allowed'] } }
     let(:validations_username_format) { { username: ['Only letters, spaces and numbers allowed'] } }
+    let(:validations_accepted_tos_required) { { accepted_tos: ['Required'] } }
     #endregion
 
     #region Stories
@@ -137,6 +139,19 @@ module DiabeticToolbox
           expect(create_member.actual.new_record?).to eq true
           expect(create_member.response[1].size).to be >= 1
           expect(create_member.response).to eq [ create_failure_message, validations_username_format, expected ]
+        end
+        #endregion
+
+        #region TOS
+        it 'should not save without acceptance of the terms of service' do
+          params = member_params
+          params.delete :accepted_tos
+
+          create_member = Members::CreateMember.new(member_params).call
+
+          expect(create_member.actual.slug).to eq safe_model_data[:slug]
+          expect(create_member.successful?).to eq false
+          expect(create_member.response).to eq [create_failure_message, validations_accepted_tos_required, safe_model_data]
         end
         #endregion
       end
