@@ -1,41 +1,42 @@
 require_dependency "diabetic_toolbox/application_controller"
 
-class DiabeticToolbox::MemberSessionsController < DiabeticToolbox::ApplicationController
-  load_and_authorize_resource class: 'DiabeticToolbox::Member'
-  respond_to :html, :json
+module DiabeticToolbox
+  class MemberSessionsController < ApplicationController
+    load_and_authorize_resource class: 'DiabeticToolbox::Member'
+    respond_to :html, :json
 
-  def new
-    @member          = DiabeticToolbox::Member.new
-    there_can_be_only_one
-  end
-
-  def create
-    @member = request.env['warden'].authenticate! scope: :diabetic_toolbox__member
-
-    if request.env['warden'].authenticated? scope: :diabetic_toolbox__member
-      flash[:success] = I18n.t('views.member_sessions.messages.login_success')
-      redirect_to login_successful_path
-    else
+    def new
+      @member = Member.new
       there_can_be_only_one
-      render :new
     end
-  end
 
-  def destroy
-    request.env['warden'].logout :diabetic_toolbox__member
+    def create
+      @member = request.env['warden'].authenticate! scope: :diabetic_toolbox__member
 
-    redirect_to root_url
-  end
+      if request.env['warden'].authenticated? scope: :diabetic_toolbox__member
+        flash[:success] = I18n.t('views.member_sessions.messages.login_success')
+        redirect_to login_successful_path
+      else
+        there_can_be_only_one
+        render :new
+      end
+    end
 
-  def password_recovery
-    there_can_be_only_one
-  end
+    def destroy
+      request.env['warden'].logout :diabetic_toolbox__member
 
-  # TODO: Must create a mailer to send the recovery kit to the member.
-  def send_recovery_kit
-  end
+      redirect_to root_url
+    end
 
-  private
+    def password_recovery
+      there_can_be_only_one
+    end
+
+    # TODO: Must create a mailer to send the recovery kit to the member.
+    def send_recovery_kit
+    end
+
+    private
     def member_params
       params.require(:member).permit :email, :password
     end
@@ -51,4 +52,5 @@ class DiabeticToolbox::MemberSessionsController < DiabeticToolbox::ApplicationCo
         setup_path
       end
     end
+  end
 end

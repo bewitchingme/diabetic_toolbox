@@ -54,7 +54,7 @@ module DiabeticToolbox
     #region Authentication
     def initialize_member_session
       @current_member  ||= request.env['warden'].user :diabetic_toolbox__member
-      @current_ability = DiabeticToolbox::MemberAbility.new @current_member
+      @current_ability = MemberAbility.new @current_member
     end
     #endregion
 

@@ -15,11 +15,11 @@ module DiabeticToolbox
 
     #region Creation
     def new
-      @member = DiabeticToolbox::Member.new
+      @member = Member.new
     end
 
     def create
-      create_member = DiabeticToolbox::Members::CreateMember.new( member_params ).call
+      create_member = CreateMember.new( member_params ).call
       @member       = create_member.actual
 
       respond_to do |format|
@@ -60,8 +60,8 @@ module DiabeticToolbox
     #region Member
     def dash
       redirect_to setup_path unless current_member.configured?
-      @chart_data = DiabeticToolbox::Members::Dashboard.history current_member unless current_member.has_no_readings?
-      @library    = DiabeticToolbox::Members::Dashboard.chartkick_library unless current_member.has_no_readings?
+      @chart_data = MemberDashboard.history current_member unless current_member.has_no_readings?
+      @library    = MemberDashboard.chartkick_library unless current_member.has_no_readings?
     end
     #endregion
 
