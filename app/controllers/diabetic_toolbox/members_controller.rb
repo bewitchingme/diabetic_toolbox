@@ -80,7 +80,7 @@ module DiabeticToolbox
       end
 
       def sign_in_new_member
-        session = DiabeticToolbox::Members::Session.new( request.env['REMOTE_ADDR'], {'email' => member_params[:email], 'password' => member_params[:password]} )
+        session = DiabeticToolbox::MemberSession.new( request.env['REMOTE_ADDR'], {'email' => member_params[:email], 'password' => member_params[:password]} )
         member  = session.create
 
         instant_in(member) if session.in_progress?
