@@ -21,7 +21,7 @@ module DiabeticToolbox
     def bootstrap_addon_intake(setting)
       unless setting.new_record?
         return t('views.settings.carbohydrates') if setting.intake_measure_type.to_sym.eql? :carbohydrates
-        return t('views.settings.calories') if setting.intake_measure_type.eql? :calories
+        return t('views.settings.calories') if setting.intake_measure_type.to_sym.eql? :calories
       end
     end
 
