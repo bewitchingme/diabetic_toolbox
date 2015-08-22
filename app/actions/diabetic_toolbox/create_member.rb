@@ -1,5 +1,5 @@
 # TODO: Must implement the mailer here to confirm the member.
-module DiabeticToolbox::Members
+module DiabeticToolbox
   # The DiabeticToolbox::Members::CreateMember action is used to
   # create a new member and prepare resulting response data
   # to the caller.
@@ -30,12 +30,11 @@ module DiabeticToolbox::Members
     #   call() => DiabeticToolbox::Members::CreateMember
     #
     def call
-      @member  = DiabeticToolbox::Member.new @params
+      @member  = Member.new @params
 
       if @member.save
         @respond_with = I18n.t('flash.member.created.success', first_name: @member.first_name)
         @success      = true
-        _after_save
       else
         @messages     = @member.errors.messages
       end
@@ -90,10 +89,6 @@ module DiabeticToolbox::Members
     private
       def _safe
         Hash[ SAFE.each.map { |n| [n, @member[n]] } ]
-      end
-
-      def _after_save
-
       end
   end
 end
