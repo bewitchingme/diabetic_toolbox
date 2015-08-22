@@ -24,7 +24,7 @@ module DiabeticToolbox
       context 'using action class' do
         #region Success Conditions
         it 'should save with appropriate parameters' do
-          create_member = Members::CreateMember.new(member_params).call
+          create_member = CreateMember.new(member_params).call
 
           expect(create_member.actual.slug).to eq safe_model_data[:slug]
           expect(create_member.successful?).to eq true
@@ -39,7 +39,7 @@ module DiabeticToolbox
           params.delete(:password)
           params.delete(:password_confirmation)
 
-          create_member = Members::CreateMember.new(params).call
+          create_member = CreateMember.new(params).call
 
           expect(create_member.successful?).to eq false
           expect(create_member.actual.slug).to eq safe_model_data[:slug]
@@ -52,7 +52,7 @@ module DiabeticToolbox
           params = member_params
           params[:password] = 'fred'
           params[:password_confirmation] = 'fred'
-          short = Members::CreateMember.new(params).call
+          short = CreateMember.new(params).call
 
 
           expect(short.successful?).to eq false
@@ -66,7 +66,7 @@ module DiabeticToolbox
           params = member_params
           pass   = Faker::Internet.password 65
           params[:password] = params[:password_confirmation] = pass
-          long = Members::CreateMember.new(params).call
+          long = CreateMember.new(params).call
 
           expect(long.successful?).to eq false
           expect(long.actual.slug).to eq safe_model_data[:slug]
@@ -79,7 +79,7 @@ module DiabeticToolbox
           params = member_params
           params[:password_confirmation] = 'password1'
 
-          create_member = Members::CreateMember.new(params).call
+          create_member = CreateMember.new(params).call
 
           expect(create_member.successful?).to eq false
           expect(create_member.actual.slug).to eq safe_model_data[:slug]
@@ -97,7 +97,7 @@ module DiabeticToolbox
           params[:first_name]   = 'Frodo 959'
           expected[:first_name] = 'Frodo 959'
 
-          create_member = Members::CreateMember.new(params).call
+          create_member = CreateMember.new(params).call
 
           expect(create_member.successful?).to eq false
           expect(create_member.actual.slug).to eq safe_model_data[:slug]
@@ -113,7 +113,7 @@ module DiabeticToolbox
           params[:last_name]   = 'Baggins 88'
           expected[:last_name] = 'Baggins 88'
 
-          create_member = Members::CreateMember.new(params).call
+          create_member = CreateMember.new(params).call
 
           expect(create_member.successful?).to eq false
           expect(create_member.actual.slug).to eq safe_model_data[:slug]
@@ -132,7 +132,7 @@ module DiabeticToolbox
           expected[:username] = '!!Ring Bearer'
           expected[:slug]     = safe_model_data[:slug]
 
-          create_member = Members::CreateMember.new(params).call
+          create_member = CreateMember.new(params).call
 
           expect(create_member.successful?).to eq false
           expect(create_member.actual.slug).to eq expected[:slug]
@@ -147,7 +147,7 @@ module DiabeticToolbox
           params = member_params
           params.delete :accepted_tos
 
-          create_member = Members::CreateMember.new(member_params).call
+          create_member = CreateMember.new(member_params).call
 
           expect(create_member.actual.slug).to eq safe_model_data[:slug]
           expect(create_member.successful?).to eq false
