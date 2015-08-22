@@ -16,13 +16,13 @@ class CreateDiabeticToolboxMembers < ActiveRecord::Migration
       t.integer :readings_count,          null: false, default: 0
       t.date    :dob
 
-
       # Reset password
       t.string   :reset_password_token
       t.datetime :reset_password_sent_at
 
       # Remember user
       t.datetime :remembered_at
+      t.string   :remembrance_token
 
       # Logging
       t.datetime :current_session_began_at
@@ -48,6 +48,7 @@ class CreateDiabeticToolboxMembers < ActiveRecord::Migration
     add_index :diabetic_toolbox_members, :email,                unique: true
     add_index :diabetic_toolbox_members, :session_token,        unique: true
     add_index :diabetic_toolbox_members, :reset_password_token, unique: true
+    add_index :diabetic_toolbox_members, :remembrance_token,    unique: true
     add_index :diabetic_toolbox_members, :confirmation_token,   unique: true
     add_index :diabetic_toolbox_members, :unlock_token,         unique: true
   end
