@@ -10,8 +10,6 @@
 # you'll amass, the slower it'll run and the greater likelihood for issues).
 #
 # It's strongly recommended that you check this file into your version control system.
-#
-# Added to assist tests.
 
 ActiveRecord::Schema.define(version: 20150819220213) do
 
@@ -57,6 +55,7 @@ ActiveRecord::Schema.define(version: 20150819220213) do
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remembered_at"
+    t.string   "remembrance_token"
     t.datetime "current_session_began_at"
     t.string   "current_session_ip"
     t.datetime "last_session_began_at"
@@ -76,6 +75,7 @@ ActiveRecord::Schema.define(version: 20150819220213) do
 
   add_index "diabetic_toolbox_members", ["confirmation_token"], name: "index_diabetic_toolbox_members_on_confirmation_token", unique: true, using: :btree
   add_index "diabetic_toolbox_members", ["email"], name: "index_diabetic_toolbox_members_on_email", unique: true, using: :btree
+  add_index "diabetic_toolbox_members", ["remembrance_token"], name: "index_diabetic_toolbox_members_on_remembrance_token", unique: true, using: :btree
   add_index "diabetic_toolbox_members", ["reset_password_token"], name: "index_diabetic_toolbox_members_on_reset_password_token", unique: true, using: :btree
   add_index "diabetic_toolbox_members", ["session_token"], name: "index_diabetic_toolbox_members_on_session_token", unique: true, using: :btree
   add_index "diabetic_toolbox_members", ["slug"], name: "index_diabetic_toolbox_members_on_slug", unique: true, using: :btree
