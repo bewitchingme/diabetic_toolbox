@@ -1,5 +1,5 @@
-module DiabeticToolbox::Members
-  class Session
+module DiabeticToolbox
+  class MemberSession
     #region Requirements
     require 'digest'
     #endregion
