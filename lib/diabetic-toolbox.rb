@@ -15,6 +15,14 @@ require 'babosa'
 require 'chartkick'
 require 'momentjs-rails'
 require 'bootstrap3-datetimepicker-rails'
+require 'prawn-rails'
 
 module DiabeticToolbox
+  def self.from(scope, options)
+    if options.has_key? :require
+      options[:require].each do |requirement|
+        require "#{Engine.root}/app/actions/diabetic_toolbox/#{scope.to_s}/#{requirement}"
+      end
+    end
+  end
 end
