@@ -21,24 +21,22 @@ module DiabeticToolbox
     def create
       DiabeticToolbox.from :members, require: %w(create_member)
 
-      create_member = CreateMember.new( member_params ).call
-      @member       = create_member.actual
+      result  = CreateMember.new( member_params ).call
 
       respond_to do |format|
-        if create_member.successful?
-          sign_in_new_member
-          format.html {
-            flash[:success] = create_member.flash
+        format.html do
+          if result.success?
+            sign_in_new_member
+            flash[:success] = result.flash
             redirect_to setup_path
-          }
-          format.json { render :json => create_member.response }
-        else
-          format.html {
-            flash[:warning] = create_member.flash
+          else
+            @member         = result.actual
+            flash[:warning] = result.flash
             render :new
-          }
-          format.json { render :json => create_member.response }
+          end
         end
+
+        format.json { render :json => result.response }
       end
     end
     #endregion
@@ -53,9 +51,44 @@ module DiabeticToolbox
 
     #region Mutation
     def update
+      DiabeticToolbox.from :members, require: %w(update_member)
+
+      result = UpdateMember.new( params[:id], member_params ).call
+
+      respond_to do |format|
+        format.html do
+          if result.success?
+            flash[:success] = result.flash
+            redirect_to edit_member_path result.actual
+          else
+            @member         = result.actual
+            flash[:warning] = result.flash
+            render :edit
+          end
+        end
+
+        format.json { render :json => result.response }
+      end
     end
 
     def destroy
+      DiabeticToolbox.from :members, require: %w(destroy_member)
+
+      result = DestroyMember.new( params[:id] ).call
+
+      respond_to do |format|
+        format.html do
+          if result.success?
+            flash[:info] = result.flash
+            redirect_to root_path
+          else
+            flash[:warning] = result.flash
+            redirect_to member_dashboard_path
+          end
+        end
+
+        format.json { render :json => result.response }
+      end
     end
     #endregion
 
