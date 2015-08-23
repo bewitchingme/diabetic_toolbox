@@ -123,8 +123,13 @@ en:
     member:
       created:
         success: "Member %{first_name} Created"
-        failure: "Create Member Failed"
-      destroyed: "Member %{first_name} Deleted"
+        failure: Create Member Failed
+      updated:
+        success: Saved
+        failure: 'Error: Record Unsaved'
+      destroyed:
+        success: Account Deleted
+        failure: 'Error: Could Not Delete'
     setting:
       created:
         success: Setup Complete
