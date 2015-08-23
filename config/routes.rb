@@ -13,14 +13,14 @@ DiabeticToolbox::Engine.routes.draw do
   post   '/member/recover',  to: 'member_sessions#send_recovery_kit', as: :recovery_kit
 
   # Members self-management
-  get    '/register',      to: 'members#new',            as: :new_member
-  post   '/register',      to: 'members#create',         as: :create_member
-  get    '/member/:id',    to: 'members#show',           as: :show_member
-  get    '/me/:id',        to: 'members#edit',           as: :edit_member
-  match  '/me/:id',        to: 'members#update',         as: :update_member, via: [:patch, :put]
-  delete '/member/delete', to: 'members#destroy',        as: :destroy_member
-  get    '/dash',          to: 'members#dash',           as: :member_dashboard
-  get    '/member/delete', to: 'members#confirm_delete', as: :last_chance
+  get    '/register',              to: 'members#new',            as: :new_member
+  post   '/register',              to: 'members#create',         as: :create_member
+  get    '/members/:id',           to: 'members#show',           as: :show_member
+  get    '/me/:id',                to: 'members#edit',           as: :edit_member
+  match  '/me/:id',                to: 'members#update',         as: :update_member, via: [:patch, :put]
+  get    '/dash',                  to: 'members#dash',           as: :member_dashboard
+  delete '/membership/cancel/:id', to: 'members#destroy',        as: :destroy_member
+  get    '/membership/cancel',     to: 'members#confirm_delete', as: :last_chance
 
   # Member settings
   get    '/setup',    to: 'settings#new',    as: :setup
