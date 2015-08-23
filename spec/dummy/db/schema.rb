@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150819220213) do
+ActiveRecord::Schema.define(version: 20150822224023) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -141,9 +141,9 @@ ActiveRecord::Schema.define(version: 20150819220213) do
     t.integer  "member_id"
     t.integer  "glucometer_measure_type"
     t.integer  "intake_measure_type"
-    t.integer  "intake_ratio"
+    t.float    "intake_ratio"
     t.float    "correction_begins_at"
-    t.integer  "increments_per"
+    t.float    "increments_per"
     t.integer  "ll_units_per_day"
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
