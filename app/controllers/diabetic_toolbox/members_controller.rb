@@ -9,7 +9,7 @@ module DiabeticToolbox
 
     #region Before Action
     before_action :deploy_member_tabs,    only: :dash
-    before_action :set_member,            only: [:show, :edit, :update, :destroy]
+    before_action :set_member,            only: [:show, :edit]
     before_action :there_can_be_only_one, only: :new
     #endregion
 
@@ -46,6 +46,9 @@ module DiabeticToolbox
     end
 
     def edit
+    end
+
+    def confirm_delete
     end
     #endregion
 
