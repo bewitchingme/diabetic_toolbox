@@ -1,14 +1,15 @@
-class DiabeticToolbox::MemberAbility
-  include CanCan::Ability
+module DiabeticToolbox
+  class MemberAbility
+    include CanCan::Ability
 
-  def initialize(member)
-    @member = member
+    def initialize(member)
+      @member = member
 
-    show_interest
-    self_manage if @member.present?
-  end
+      show_interest
+      self_manage if @member.present?
+    end
 
-  private
+    private
     def show_interest
       can [:new, :create],  DiabeticToolbox::Member
       can [:start, :about], :welcome
@@ -16,8 +17,9 @@ class DiabeticToolbox::MemberAbility
     end
 
     def self_manage
-      can [:manage, :dash], DiabeticToolbox::Member,  id:        @member.id
-      can [:manage],        DiabeticToolbox::Setting, member_id: @member.id
-      can [:destroy],       :member_sessions,         member_id: @member.id
+      can [:manage, :dash, :confirm_delete], DiabeticToolbox::Member,  id:        @member.id
+      can [:manage],                         DiabeticToolbox::Setting, member_id: @member.id
+      can [:destroy],                        :member_sessions,         member_id: @member.id
     end
+  end
 end
