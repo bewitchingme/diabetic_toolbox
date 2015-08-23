@@ -21,13 +21,14 @@ module DiabeticToolbox
 
     #region Stories
     describe 'a member being created' do
+      DiabeticToolbox.from :members, require: %w(create_member)
       context 'using action class' do
         #region Success Conditions
         it 'should save with appropriate parameters' do
           create_member = CreateMember.new(member_params).call
 
           expect(create_member.actual.slug).to eq safe_model_data[:slug]
-          expect(create_member.successful?).to eq true
+          expect(create_member.success?).to eq true
           expect(create_member.actual.authenticate!(member_params[:password])).to eq true
           expect(create_member.response).to eq [create_success_message, {}, safe_model_data]
         end
@@ -41,7 +42,7 @@ module DiabeticToolbox
 
           create_member = CreateMember.new(params).call
 
-          expect(create_member.successful?).to eq false
+          expect(create_member.success?).to eq false
           expect(create_member.actual.slug).to eq safe_model_data[:slug]
           expect(create_member.actual.new_record?).to eq true
           expect(create_member.actual.errors.messages.size).to be >= 1
@@ -55,7 +56,7 @@ module DiabeticToolbox
           short = CreateMember.new(params).call
 
 
-          expect(short.successful?).to eq false
+          expect(short.success?).to eq false
           expect(short.actual.slug).to eq safe_model_data[:slug]
           expect(short.actual.new_record?).to eq true
           expect(short.actual.errors.messages.size).to be >= 1
@@ -68,7 +69,7 @@ module DiabeticToolbox
           params[:password] = params[:password_confirmation] = pass
           long = CreateMember.new(params).call
 
-          expect(long.successful?).to eq false
+          expect(long.success?).to eq false
           expect(long.actual.slug).to eq safe_model_data[:slug]
           expect(long.actual.new_record?).to eq true
           expect(long.actual.errors.messages.size).to be >= 1
@@ -81,7 +82,7 @@ module DiabeticToolbox
 
           create_member = CreateMember.new(params).call
 
-          expect(create_member.successful?).to eq false
+          expect(create_member.success?).to eq false
           expect(create_member.actual.slug).to eq safe_model_data[:slug]
           expect(create_member.actual.new_record?).to eq true
           expect(create_member.actual.errors.messages.size).to be >= 1
@@ -99,7 +100,7 @@ module DiabeticToolbox
 
           create_member = CreateMember.new(params).call
 
-          expect(create_member.successful?).to eq false
+          expect(create_member.success?).to eq false
           expect(create_member.actual.slug).to eq safe_model_data[:slug]
           expect(create_member.actual.new_record?).to eq true
           expect(create_member.response[1].size).to be >= 1
@@ -115,7 +116,7 @@ module DiabeticToolbox
 
           create_member = CreateMember.new(params).call
 
-          expect(create_member.successful?).to eq false
+          expect(create_member.success?).to eq false
           expect(create_member.actual.slug).to eq safe_model_data[:slug]
           expect(create_member.actual.new_record?).to eq true
           expect(create_member.response[1].size).to be >= 1
@@ -134,7 +135,7 @@ module DiabeticToolbox
 
           create_member = CreateMember.new(params).call
 
-          expect(create_member.successful?).to eq false
+          expect(create_member.success?).to eq false
           expect(create_member.actual.slug).to eq expected[:slug]
           expect(create_member.actual.new_record?).to eq true
           expect(create_member.response[1].size).to be >= 1
@@ -150,7 +151,7 @@ module DiabeticToolbox
           create_member = CreateMember.new(member_params).call
 
           expect(create_member.actual.slug).to eq safe_model_data[:slug]
-          expect(create_member.successful?).to eq false
+          expect(create_member.success?).to eq false
           expect(create_member.response).to eq [create_failure_message, validations_accepted_tos_required, safe_model_data]
         end
         #endregion
