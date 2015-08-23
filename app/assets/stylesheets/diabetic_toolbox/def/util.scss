@@ -12,3 +12,10 @@
   @include make-md-column-offset($md-os);
   @include make-lg-column-offset($lg-os);
 }
+
+@mixin input-box-shadow($args...)
+{
+  -webkit-box-shadow: $args !important;
+  -moz-box-shadow: $args !important;
+  box-shadow: $args !important;
+}
