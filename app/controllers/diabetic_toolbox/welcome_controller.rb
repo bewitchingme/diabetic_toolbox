@@ -5,7 +5,7 @@ module DiabeticToolbox
     load_and_authorize_resource class: false
 
     def start
-      redirect_to member_dash_path(current_member) if member_signed_in?
+      redirect_to member_dashboard_path if member_signed_in?
     end
 
     def about

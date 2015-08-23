@@ -19,6 +19,8 @@ module DiabeticToolbox
     end
 
     def create
+      DiabeticToolbox.from :members, require: %w(create_member)
+
       create_member = CreateMember.new( member_params ).call
       @member       = create_member.actual
 
@@ -59,6 +61,8 @@ module DiabeticToolbox
 
     #region Member
     def dash
+      DiabeticToolbox.from :members, require: %w(member_dashboard)
+
       redirect_to setup_path unless current_member.configured?
       @chart_data = MemberDashboard.history current_member unless current_member.has_no_readings?
       @library    = MemberDashboard.chartkick_library unless current_member.has_no_readings?
