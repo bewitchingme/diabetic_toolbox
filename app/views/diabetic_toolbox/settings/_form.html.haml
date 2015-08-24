@@ -8,11 +8,11 @@
           .half.smooth
             .form-group
               = f.label :glucometer_measure_type, class: 'control-label'
-              = f.select :glucometer_measure_type, glucometer_options(@setting), { include_blank: (true if @setting.new_record?) }, { class: 'form-control', 'data-toggle' => 'tooltip', 'data-placement' => 'top' }
+              = f.select :glucometer_measure_type, glucometer_options(@setting), { include_blank: (true if @setting.new_record?) }, { class: 'form-control input-sm', 'data-toggle' => 'tooltip', 'data-placement' => 'top' }
           .half.smooth
             .form-group
               = f.label :intake_measure_type, class: 'control-label'
-              = f.select :intake_measure_type, intake_options(@setting), { include_blank: (true if @setting.new_record?) }, { class: 'form-control', 'data-toggle' => 'tooltip', 'data-placement' => 'top' }
+              = f.select :intake_measure_type, intake_options(@setting), { include_blank: (true if @setting.new_record?) }, { class: 'form-control input-sm', 'data-toggle' => 'tooltip', 'data-placement' => 'top' }
   %div{ id: "#{'settings_for_calculation' if @setting.new_record?}" }
     .panel.panel-default
       .panel-heading.panel-title= t('views.settings.titles.settings')
@@ -22,26 +22,26 @@
             .form-group
               = f.label :intake_ratio, class: 'control-label'
               .input-group
-                = f.text_field :intake_ratio, class: 'form-control'
+                = f.text_field :intake_ratio, class: 'form-control input-sm'
                 #intake_measurement_addon.input-group-addon= bootstrap_addon_intake(@setting)
           .half.smooth
             .form-group
               = f.label :correction_begins_at, class: 'control-label'
               .input-group
-                = f.text_field :correction_begins_at, class: 'form-control'
+                = f.text_field :correction_begins_at, class: 'form-control input-sm'
                 #correction_begins_at_addon.input-group-addon= bootstrap_addon_glucometer(@setting)
         .row
           .half.smooth
             .form-group
               = f.label :increments_per, class: 'control-label'
               .input-group
-                = f.text_field :increments_per, class: 'form-control'
+                = f.text_field :increments_per, class: 'form-control input-sm'
                 #increments_per_addon.input-group-addon= bootstrap_addon_glucometer(@setting, true)
           .half.smooth
             .form-group
               = f.label :ll_units_per_day, class: 'control-label'
               .input-group
-                = f.text_field :ll_units_per_day, class: 'form-control'
+                = f.text_field :ll_units_per_day, class: 'form-control input-sm'
                 #ll_units_per_day_addon.input-group-addon= t('views.settings.ll_units_per_day_addon')
     .form-group.text-center
-      = f.submit 'Submit', class: 'btn btn-primary'
+      = f.submit 'Submit', class: 'btn btn-primary btn-sm'
