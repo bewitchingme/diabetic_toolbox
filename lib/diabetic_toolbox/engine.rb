@@ -16,11 +16,10 @@ module DiabeticToolbox
     end
 
     config.middleware.use Warden::Manager do |config|
-      config.failure_app        = UnauthorizedController
-      config.default_scope      = :diabetic_toolbox__member
-      config.intercept_401      = :false
-
-      config.scope_defaults :diabetic_toolbox__member, strategies: [:member]
+      config.failure_app    = UnauthorizedController
+      config.default_scope  = :diabetic_toolbox__member
+      config.intercept_401  = :false
+      config.scope_defaults   :diabetic_toolbox__member, strategies: [:member]
     end
 
     Warden::Manager.serialize_from_session(:diabetic_toolbox__member) do |token|
