@@ -46,7 +46,7 @@ module DiabeticToolbox
     end
 
     def login_successful_path
-      if @member.settings.count > 0
+      if @member.configured?
         member_dashboard_path
       else
         setup_path
