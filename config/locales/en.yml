@@ -1,4 +1,7 @@
 en:
+  diabetic_toolbox:
+    result:
+      blank: Empty Result - Please Specify :message
   recaptcha:
     errors:
       verification_failed: Please Verify Sentience
