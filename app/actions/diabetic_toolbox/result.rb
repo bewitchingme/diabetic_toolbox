@@ -6,7 +6,7 @@ module DiabeticToolbox
       def initialize(&block)
         @options = {
           subject: nil,
-          message: I18n.t('result.blank')
+          message: I18n.t('diabetic_toolbox.result.blank')
         }
 
         if block_given?
