@@ -42,14 +42,14 @@
     .row
       .content-register.smooth
         .half.smooth
-          %h4.optional= t('views.members.new.dob')
+          %h4= t('views.members.new.dob')
           .form-group
             #dob-picker.input-group
               = f.text_field :dob, class: 'form-control input-sm', placeholder: t('views.members.new.placeholders.dob'), tabindex: 8
               %span#dob-addon.input-group-addon
                 %span.glyphicon.glyphicon-calendar
         .half.smooth
-          %h4.optional= t('views.members.new.gender')
+          %h4= t('views.members.new.gender')
           .form-group
             = f.select :gender, DiabeticToolbox::Member.gender_options, { include_blank: true }, {class: 'form-control input-sm', tabindex: 9}
     .row
