@@ -1,19 +1,27 @@
 module DiabeticToolbox
-  class UpdateMember
-    ##
-    # SAFE outlines which attributes of the active record model are
-    # approved for return to the caller using #safe_model_data
-    SAFE = [:first_name, :last_name, :username, :slug]
+  rely_on :action
 
+  class UpdateMember < Action
     ##
     # Construct with the parameters for the member.
     #
     # :call-seq:
     #   new(id, member_params) => Boolean
     #
-    def initialize(id, member_params)
-      @member_id = id
-      @params    = member_params
+    def initialize(member_id, member_params)
+      super(member_params)
+
+      @member_id = member_id
+
+      @succeeded = lambda do |option|
+        option[:subject] = member
+        option[:message] = I18n.t('flash.member.updated.success')
+      end
+
+      @failed = lambda do |option|
+        option[:subject] = member
+        option[:message] = I18n.t('flash.member.updated.failure')
+      end
     end
 
     ##
@@ -22,13 +30,13 @@ module DiabeticToolbox
     # :call-seq:
     #   call(id = nil) => DiabeticToolbox::Result::Base
     #
-    def call
-      member = Member.find @member_id
+    def _call
+      member = Member.find(@member_id)
 
       if member.update @params
-        Result::Success.new model: member, message: I18n.t('flash.member.updated.success'), safe: SAFE
+        success &@succeeded
       else
-        Result::Failure.new model: member, message: I18n.t('flash.member.updated.failure'), safe: SAFE
+        failure &@failed
       end
     end
   end
