@@ -1,2 +1,52 @@
-%h1 Members#edit
-%p Find me in app/views/diabetic_toolbox/members/edit.html.haml
+.container-fluid
+  .row
+    .content-member
+      %h3= "#{@member.first_name} #{@member.last_name}"
+= form_for @member, url: update_member_url(@member) do |f|
+  .container-fluid
+    .row
+      .content-member.smooth
+        .half.smooth
+          %h4
+            = t('views.members.form.labels.your_name')
+          .form-group
+            = f.text_field :first_name, class: 'form-control input-sm', placeholder: t('views.members.form.placeholders.first_name'), tabindex: 1
+          .form-group
+            = f.text_field :last_name, class: 'form-control input-sm', placeholder: t('views.members.form.placeholders.last_name'), tabindex: 2
+        .half.smooth
+          %h4
+            = t('views.members.form.labels.account')
+          .form-group
+            .input-group
+              = f.text_field :email, class: 'form-control input-sm', placeholder: t('views.members.form.placeholders.email'), tabindex: 3
+              %span.input-group-addon
+                .glyphicon.glyphicon-envelope
+          .form-group
+            .input-group
+              = f.text_field :username, class: 'form-control input-sm', placeholder: t('views.members.form.placeholders.username'), tabindex: 4
+              %span.input-group-addon
+                .glyphicon.glyphicon-user
+          .form-group
+            .input-group
+              = f.password_field :password, class: 'form-control input-sm', placeholder: t('views.members.form.placeholders.password'), tabindex: 5
+              %span.input-group-addon
+                .glyphicon.glyphicon-lock
+          .form-group
+            = f.password_field :password_confirmation, class: 'form-control input-sm', placeholder: t('views.members.form.placeholders.confirm'), tabindex: 6
+    .row
+      .content-member.smooth
+        .half.smooth
+          %h4= t('views.members.form.labels.dob')
+          .form-group
+            #dob-picker.input-group
+              = f.text_field :dob, class: 'form-control input-sm', placeholder: t('views.members.form.placeholders.dob'), tabindex: 8
+              %span#dob-addon.input-group-addon
+                %span.glyphicon.glyphicon-calendar
+        .half.smooth
+          %h4= t('views.members.form.labels.gender')
+          .form-group
+            = f.select :gender, DiabeticToolbox::Member.gender_options, { include_blank: true }, {class: 'form-control input-sm', tabindex: 9}
+    .row
+      .content-member.text-center.smooth
+        .form-group
+          = f.submit t('views.members.update.save'), class: 'btn btn-default btn-sm'
