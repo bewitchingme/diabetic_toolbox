@@ -11,17 +11,7 @@ module DiabeticToolbox
     def initialize(member_id, member_params)
       super(member_params)
 
-      @member_id = member_id
-
-      @succeeded = lambda do |option|
-        option[:subject] = member
-        option[:message] = I18n.t('flash.member.updated.success')
-      end
-
-      @failed = lambda do |option|
-        option[:subject] = member
-        option[:message] = I18n.t('flash.member.updated.failure')
-      end
+      @member = Member.find(member_id)
     end
 
     ##
@@ -31,12 +21,16 @@ module DiabeticToolbox
     #   call(id = nil) => DiabeticToolbox::Result::Base
     #
     def _call
-      member = Member.find(@member_id)
-
-      if member.update @params
-        success &@succeeded
+      if @member.update @params
+        success do |option|
+          option[:subject] = @member
+          option[:message] = I18n.t('flash.member.updated.success')
+        end
       else
-        failure &@failed
+        failure do |option|
+          option[:subject] = @member
+          option[:message] = I18n.t('flash.member.updated.failure')
+        end
       end
     end
   end

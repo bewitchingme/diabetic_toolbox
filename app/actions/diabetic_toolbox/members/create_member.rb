@@ -1,9 +1,6 @@
 module DiabeticToolbox
   rely_on :action
 
-  # The DiabeticToolboxs::CreateMember action is used to
-  # create a new member and prepare resulting response data
-  # to the caller.
   class CreateMember < Action
     ##
     # Construct with the parameters for the member.
@@ -13,16 +10,6 @@ module DiabeticToolbox
     #
     def initialize(member_params)
       super member_params
-
-      @successful = lambda do |option|
-        option[:subject] = @member
-        option[:message] = I18n.t('flash.member.created.success', first_name: @member.first_name)
-      end
-
-      @failed = lambda do |option|
-        option[:subject] = @member
-        option[:message] = I18n.t('flash.member.created.failure')
-      end
     end
 
     ##
@@ -36,9 +23,15 @@ module DiabeticToolbox
       @member = Member.new @params
 
       if @member.save
-        success &@successful
+        success do |option|
+          option[:subject] = @member
+          option[:message] = I18n.t('flash.member.created.success', first_name: @member.first_name)
+        end
       else
-        failure &@failed
+        failure do |option|
+          option[:subject] = @member
+          option[:message] = I18n.t('flash.member.created.failure')
+        end
       end
     end
 
