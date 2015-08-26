@@ -10,9 +10,10 @@ module DiabeticToolbox::Concerns::Authenticatable
     validates :password, on: :create, presence: { message: I18n.t('activerecord.validations.common.required') },
               length: { in: (8..64), message: I18n.t('activerecord.validations.common.length_range', min: 8, max: 64) },
               confirmation: { message: I18n.t('activerecord.validations.common.authenticatable.password_confirmation') }
-    validates :password, on: :update, if: :setting_password?,
+    validates :password, on: :update,
               length: { in: (8..64), message: I18n.t('activerecord.validations.common.length_range', min: 8, max: 64) },
-              confirmation: { message: I18n.t('activerecord.validations.common.authenticatable.password_confirmation') }
+              confirmation: { message: I18n.t('activerecord.validations.common.authenticatable.password_confirmation') },
+              if: :setting_password?
 
     def password=(password_str)
       @password               = password_str
@@ -31,7 +32,7 @@ module DiabeticToolbox::Concerns::Authenticatable
 
     private
       def setting_password?
-        self.password || self.password_confirmation
+        self.password.present? || self.password_confirmation.present?
       end
   end
 
