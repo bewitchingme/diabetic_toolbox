@@ -45,7 +45,7 @@ module DiabeticToolbox
 
     #region Children
     has_many :settings,              class_name: 'DiabeticToolbox::Setting',             dependent: :destroy
-    has_many :readings,              class_name: 'DiabeticToolbox::Reading'
+    has_many :readings,              class_name: 'DiabeticToolbox::Reading',             dependent: :destroy
     has_many :report_configurations, class_name: 'DiabeticToolbox::ReportConfiguration', dependent: :destroy
     has_many :reports,               class_name: 'DiabeticToolbox::Report',              dependent: :destroy
     has_many :recipes,               class_name: 'DiabeticToolbox::Recipe'
