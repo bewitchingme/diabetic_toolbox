@@ -18,7 +18,7 @@ module DiabeticToolbox
 
       if @setting.save
         flash[:success] = t('flash.setting.created.success')
-        redirect_to member_dashboard_path current_member
+        redirect_to member_dashboard_path
       else
         flash[:warning] = t('flash.setting.created.failure')
         render :new
@@ -26,8 +26,7 @@ module DiabeticToolbox
     end
 
     def update
-      @next_version    = current_member.settings.new setting_params
-      @next_version.id = nil
+      @next_version = current_member.settings.new setting_params
 
       if @next_version.save
         flash[:info] = t('flash.setting.updated.success')
@@ -49,7 +48,7 @@ module DiabeticToolbox
     end
 
     def no_settings_configured
-      redirect_to setup_path if @setting.blank?
+      redirect_to setup_path unless current_member.configured?
     end
   end
 end
