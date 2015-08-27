@@ -87,6 +87,8 @@ en:
           dob: Date of Birth
           gender: Gender
           account: Account Specifics
+          change_password: Change Password
+          about_you: About You
       new:
         header: Member Registration
         primer: Only information denoted by an asterisk is required for membership.
@@ -180,10 +182,12 @@ en:
         authenticatable:
           password_confirmation: Passwords must match
           email_format: Invalid address
+          email_uniqueness: Email Already Exists
       diabetic_toolbox/member:
         first_name_format: Only letters and spaces allowed
         last_name_format: Only letters and hyphens allowed
         username_format: Only letters, spaces and numbers allowed
+        username_uniqueness: Username Already Exists
   errors:
     format: "%{attribute} %{message}"
     messages:
