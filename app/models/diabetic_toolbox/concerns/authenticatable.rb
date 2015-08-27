@@ -6,19 +6,21 @@ module DiabeticToolbox::Concerns::Authenticatable
 
     validates :email, presence: { message: I18n.t('activerecord.validations.common.required')},
               length: { maximum: 256, message: I18n.t('activerecord.validations.common.maximum', maximum: 256) },
-              format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i, message: I18n.t('activerecord.validations.common.authenticatable.email_format')}
+              format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i, message: I18n.t('activerecord.validations.common.authenticatable.email_format')},
+              uniqueness: { message: I18n.t('activerecord.validations.common.authenticatable.email_uniqueness') }
     validates :password, on: :create, presence: { message: I18n.t('activerecord.validations.common.required') },
               length: { in: (8..64), message: I18n.t('activerecord.validations.common.length_range', min: 8, max: 64) },
               confirmation: { message: I18n.t('activerecord.validations.common.authenticatable.password_confirmation') }
-    validates :password, on: :update,
-              length: { in: (8..64), message: I18n.t('activerecord.validations.common.length_range', min: 8, max: 64) },
+    validates :password, length: { in: (8..64), message: I18n.t('activerecord.validations.common.length_range', min: 8, max: 64) },
               confirmation: { message: I18n.t('activerecord.validations.common.authenticatable.password_confirmation') },
-              if: :setting_password?
+              if: :setting_password?, on: :update
 
     def password=(password_str)
       @password               = password_str
-      self.encryption_salt    = BCrypt::Engine.generate_salt 12
-      self.encrypted_password = BCrypt::Engine.hash_secret(password_str, encryption_salt)
+      if @password.present? && @password.length > 0
+        self.encryption_salt    = BCrypt::Engine.generate_salt 12
+        self.encrypted_password = BCrypt::Engine.hash_secret(password_str, encryption_salt)
+      end
     end
 
     def authenticate!(password)
