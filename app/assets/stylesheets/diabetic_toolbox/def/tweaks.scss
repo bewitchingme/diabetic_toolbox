@@ -55,7 +55,7 @@
   @include column(12, 10, 10, 10);
   @include column-offsets(0, 1, 1, 1);
 }
-.content-register
+.content-member-form
 {
   @include column(12, 10, 8, 6);
   @include column-offsets(0, 1, 2, 3);
