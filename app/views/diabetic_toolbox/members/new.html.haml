@@ -1,6 +1,6 @@
 .container-fluid
   .row
-    .content-register.smooth
+    .content-member-form.smooth
       %h3= t('views.members.new.header')
       #member-welcome
         %p
@@ -9,7 +9,7 @@
 = form_for @member, url: create_member_url do |f|
   .container-fluid
     .row
-      .content-register.smooth
+      .content-member-form.smooth
         .half.smooth
           %h4
             = t('views.members.form.labels.your_name')
@@ -40,7 +40,7 @@
           .form-group
             = f.password_field :password_confirmation, class: 'form-control input-sm', placeholder: t('views.members.form.placeholders.confirm'), tabindex: 6
     .row
-      .content-register.smooth
+      .content-member-form.smooth
         .half.smooth
           %h4= t('views.members.form.labels.dob')
           .form-group
@@ -53,14 +53,14 @@
           .form-group
             = f.select :gender, DiabeticToolbox::Member.gender_options, { include_blank: true }, {class: 'form-control input-sm', tabindex: 9}
     .row
-      .content-register.smooth
+      .content-member-form.smooth
         .form-group
           %label#accept-terms.checkbox-inline
             = f.check_box :accepted_tos, tabindex: 7
             = t('views.members.new.tos_pre')
             = link_to t('views.members.new.tos'), '#', data: {toggle: 'modal', target: '#terms'}
     .row
-      .content-register.text-center.smooth
+      .content-member-form.text-center.smooth
         .form-group
           = f.submit t('views.members.new.register'), class: 'btn btn-default btn-sm'
 
