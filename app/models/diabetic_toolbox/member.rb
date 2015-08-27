@@ -1,8 +1,9 @@
 module DiabeticToolbox
   class Member < ActiveRecord::Base
-    #region Includes
+    #region Includes & Extends
     include DiabeticToolbox::Concerns::Authenticatable
     include DiabeticToolbox::Concerns::Voter
+    extend  FriendlyId
     #endregion
 
     #region Scopes
@@ -13,6 +14,7 @@ module DiabeticToolbox
     #region Settings & Enums
     has_karma 'DiabeticToolbox::Recipe', as: :member, weight: 0.25
     enum gender: [:male, :female]
+    friendly_id :username, use: [:slugged, :finders]
     #endregion
 
     #region Validations
@@ -24,22 +26,15 @@ module DiabeticToolbox
               format: { with: /\A[a-zA-Z\-]+\Z/, message: I18n.t('activerecord.validations.diabetic_toolbox/member.last_name_format') }
     validates :username, on: :create, presence: { message: I18n.t('activerecord.validations.common.required') },
               length: { in: (4..256), message: I18n.t('activerecord.validations.common.length_range', min: 4, max: 256) },
-              format: { with: /\A[a-zA-Z\d\s]+\Z/, message: I18n.t('activerecord.validations.diabetic_toolbox/member.username_format') }
+              format: { with: /\A[a-zA-Z\d\s]+\Z/, message: I18n.t('activerecord.validations.diabetic_toolbox/member.username_format') },
+              uniqueness: { message: I18n.t('activerecord.validations.diabetic_toolbox/member.username_uniqueness') }
     validates :accepted_tos, on: :create, presence: { message: I18n.t('activerecord.validations.common.required') }
     validate  :dob_is_valid?
-    #endregion
 
-    #region Methods for friendly_id
-    extend FriendlyId
-
-    friendly_id :username, use: [:slugged, :finders]
-
-    def should_generate_new_friendly_id?
-      new_record? || slug.blank?
-    end
-
-    def normalize_friendly_id(text)
-      text.to_slug.normalize! :transliterations => [:russian, :latin]
+    def dob_is_valid?
+      if dob.present? && dob >= 18.years.ago
+        errors.add(:dob, I18n.t('activerecord.validations.common.illegal_value'))
+      end
     end
     #endregion
 
@@ -50,14 +45,6 @@ module DiabeticToolbox
     has_many :reports,               class_name: 'DiabeticToolbox::Report',              dependent: :destroy
     has_many :recipes,               class_name: 'DiabeticToolbox::Recipe'
     has_many :achievements,          class_name: 'DiabeticToolbox::Achievement',         dependent: :destroy
-    #endregion
-
-    #region In-house cooking
-    def dob_is_valid?
-      if dob.present? && dob >= 18.years.ago
-        errors.add(:dob, I18n.t('activerecord.validations.common.illegal_value'))
-      end
-    end
     #endregion
 
     #region Truth or Dare
@@ -84,6 +71,16 @@ module DiabeticToolbox
         [I18n.t('activerecord.options.diabetic_toolbox/member.male'),   :male],
         [I18n.t('activerecord.options.diabetic_toolbox/member.female'), :female]
       ]
+    end
+    #endregion
+
+    #region Methods for friendly_id
+    def should_generate_new_friendly_id?
+      new_record? || slug.blank?
+    end
+
+    def normalize_friendly_id(text)
+      text.to_slug.normalize! :transliterations => [:russian, :latin]
     end
     #endregion
   end
