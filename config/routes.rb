@@ -22,7 +22,7 @@ DiabeticToolbox::Engine.routes.draw do
   delete '/membership/cancel/:id', to: 'members#destroy',        as: :destroy_member
   get    '/membership/cancel',     to: 'members#confirm_delete', as: :last_chance
 
-  # Member settings
+  # Settings for members
   get    '/setup',    to: 'settings#new',    as: :setup
   post   '/setup',    to: 'settings#create', as: :create_setting
   get    '/settings', to: 'settings#edit',   as: :settings
