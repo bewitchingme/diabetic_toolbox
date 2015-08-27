@@ -1,5 +1,7 @@
 module DiabeticToolbox
-  class DestroyMember
+  rely_on :action
+
+  class DestroyMember < Action
     ##
     # Construct with the id of the member to be destroyed.
     #
@@ -7,7 +9,9 @@ module DiabeticToolbox
     #   new(member_id) => Boolean
     #
     def initialize(member_id)
-      @member_id = member_id
+      super nil
+
+      @member = Member.find member_id
     end
 
     ##
@@ -16,13 +20,17 @@ module DiabeticToolbox
     # :call-seq:
     #   call() => DiabeticToolbox::Members::CreateMember
     #
-    def call
-      member = Member.find @member_id
-
-      if member.destroy
-        Result::Success.new model: member, message: I18n.t('flash.member.destroyed.success')
+    def _call
+      if @member.destroy
+        success do |option|
+          option[:subject] = @member
+          option[:message] = I18n.t('flash.member.destroyed.success')
+        end
       else
-        Result::Failure.new model: member, message: I18n.t('flash.member.destroyed.failure')
+        failure do |option|
+          option[:subject] = @member
+          option[:message] = I18n.t('flash.member.destroyed.failure')
+        end
       end
     end
   end
