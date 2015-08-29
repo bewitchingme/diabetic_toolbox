@@ -155,7 +155,7 @@ module DiabeticToolbox
         end
         #endregion
       end
-    end#describe creation
+    end
 
     describe 'a member being updated' do
       DiabeticToolbox.from :members, require: %w(update_member)
@@ -165,20 +165,60 @@ module DiabeticToolbox
           member = build(:member)
           member.save
 
-          update_params  = {first_name: 'Roy'}
-          update_member  = UpdateMember.new member.id, update_params
-          result         = update_member.call
-          updated_member = Member.find(member.id)
+          result  = UpdateMember.new( member.id, {first_name: 'Roy'} ).call
+          updated = Member.find(member.id)
 
           expect(result.flash).to eq 'Saved'
           expect(result.response).to eq ['Saved', {}, {first_name: 'Roy', last_name: member.last_name, username: member.username, slug: member.slug}]
           expect(result.actual.first_name).to eq 'Roy'
           expect(result.success?).to eq true
-          expect(updated_member.first_name).to eq 'Roy'
+          expect(updated.first_name).to eq 'Roy'
         end
         #endregion
 
         #region Password
+        it 'should not update without confirmation of password if password is present' do
+          member = build(:member)
+          member.save
+
+          result  = UpdateMember.new( member.id, {password: 'passable'} ).call
+          updated = Member.find(member.id)
+
+          expect(result.flash).to eq 'Error: Record Unsaved'
+          expect(result.response[1]).to eq password_confirmation: ['Required']
+          expect(result.success?).to eq false
+          expect(updated.encrypted_password).to eq member.encrypted_password
+        end
+
+        it 'should not update with a password under minimum length' do
+          member = build(:member)
+          member.save
+
+          result  = UpdateMember.new( member.id, {password: 'fred', password_confirmation: 'fred'} ).call
+          updated = Member.find member.id
+
+          expect(result.flash).to eq 'Error: Record Unsaved'
+          expect(result.response[1]).to eq password: ['Between 8 and 64 characters']
+          expect(result.success?).to eq false
+          expect(updated.encrypted_password).to eq member.encrypted_password
+        end
+
+        it 'should not update with a password over maximum length' do
+          member = build(:member)
+          member.save
+          pass = 'a'
+          64.times do
+            pass += 'a'
+          end
+
+          result  = UpdateMember.new( member.id, {password: pass, password_confirmation: pass} ).call
+          updated = Member.find member.id
+
+          expect(result.flash).to eq 'Error: Record Unsaved'
+          expect(result.response[1]).to eq password: ['Between 8 and 64 characters']
+          expect(result.success?).to eq false
+          expect(updated.encrypted_password).to eq member.encrypted_password
+        end
         #endregion
 
         #region Name First/Last
@@ -218,5 +258,5 @@ module DiabeticToolbox
       end
     end
     #endregion
-  end#describe Member
+  end
 end
