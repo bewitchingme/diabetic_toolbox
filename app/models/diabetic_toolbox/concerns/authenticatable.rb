@@ -2,7 +2,9 @@ module DiabeticToolbox::Concerns::Authenticatable
   extend ActiveSupport::Concern
 
   included do
-    attr_accessor :password, :password_confirmation
+    attr_accessor :password
+
+    before_save :encrypt_password_if_present
 
     validates :email, presence: { message: I18n.t('activerecord.validations.common.required')},
               length: { maximum: 256, message: I18n.t('activerecord.validations.common.maximum', maximum: 256) },
@@ -14,14 +16,7 @@ module DiabeticToolbox::Concerns::Authenticatable
     validates :password, length: { in: (8..64), message: I18n.t('activerecord.validations.common.length_range', min: 8, max: 64) },
               confirmation: { message: I18n.t('activerecord.validations.common.authenticatable.password_confirmation') },
               if: :setting_password?, on: :update
-
-    def password=(password_str)
-      @password               = password_str
-      if @password.present? && @password.length > 0
-        self.encryption_salt    = BCrypt::Engine.generate_salt 12
-        self.encrypted_password = BCrypt::Engine.hash_secret(password_str, encryption_salt)
-      end
-    end
+    validates :password_confirmation, presence: { message: I18n.t('activerecord.validations.common.required') }, if: :setting_password?
 
     def authenticate!(password)
       return true if authenticate password
@@ -34,7 +29,14 @@ module DiabeticToolbox::Concerns::Authenticatable
 
     private
       def setting_password?
-        self.password.present? || self.password_confirmation.present?
+        !self.password.blank?
+      end
+
+      def encrypt_password_if_present
+        if setting_password?
+          self.encryption_salt    = BCrypt::Engine.generate_salt 12
+          self.encrypted_password = BCrypt::Engine.hash_secret(self.password, encryption_salt)
+        end
       end
   end
 
