@@ -222,9 +222,73 @@ module DiabeticToolbox
         #endregion
 
         #region Name First/Last
-        #endregion
+        it 'should not update if first name is of invalid format' do
+          member = build(:member)
+          first  = member.first_name
+          member.save
 
-        #region Username
+          result  = UpdateMember.new(member.id, {first_name: 'Groyo!1!'}).call
+          updated = Member.find member.id
+
+          expect(result.flash).to eq 'Error: Record Unsaved'
+          expect(result.response[1]).to eq first_name: ['Only letters and spaces allowed']
+          expect(result.success?).to eq false
+          expect(updated.first_name).to eq first
+        end
+
+        it 'should not update if first name is of invalid length' do
+          member = build(:member)
+          first  = member.first_name
+          member.save
+
+          first_to = 'A'
+
+          64.times do
+            first_to += 'a'
+          end
+
+          result  = UpdateMember.new(member.id, {first_name: first_to} ).call
+          updated = Member.find member.id
+
+          expect(result.flash).to eq 'Error: Record Unsaved'
+          expect(result.response[1]).to eq first_name: ['Between 1 and 64 characters']
+          expect(result.success?).to eq false
+          expect(updated.first_name).to eq first
+        end
+
+        it 'should not update if last name is of invalid format' do
+          member = build(:member)
+          last   = member.last_name
+          member.save
+
+          result  = UpdateMember.new(member.id, {last_name: 'Summer Dog'} ).call
+          updated = Member.find member.id
+
+          expect(result.flash).to eq 'Error: Record Unsaved'
+          expect(result.response[1]).to eq last_name: ['Only letters and hyphens allowed']
+          expect(result.success?).to eq false
+          expect(updated.last_name).to eq last
+        end
+
+        it 'should not update if last name is of invalid length' do
+          member = build(:member)
+          last   = member.last_name
+          member.save
+
+          last_to = 'A'
+
+          64.times do
+            last_to += 'a'
+          end
+
+          result  = UpdateMember.new(member.id, {last_name: last_to}).call
+          updated = Member.find member.id
+
+          expect(result.flash).to eq 'Error: Record Unsaved'
+          expect(result.response[1]).to eq last_name: ['Between 1 and 64 characters']
+          expect(result.success?).to eq false
+          expect(updated.last_name).to eq last
+        end
         #endregion
       end
     end
