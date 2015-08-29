@@ -23,6 +23,7 @@ module DiabeticToolbox
     end
 
     def destroy
+      DiabeticToolbox::MemberSession.destroy current_member.session_token
       request.env['warden'].logout :diabetic_toolbox__member
 
       redirect_to root_url
