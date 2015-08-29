@@ -293,22 +293,6 @@ module DiabeticToolbox
       end
     end
 
-    describe 'a member being authenticated' do
-      context 'using session class' do
-        #region Success Conditions
-        #endregion
-
-        #region Failure Conditions
-        #endregion
-
-        #region Warden Checks
-        #endregion
-
-        #region Tracking Checks
-        #endregion
-      end
-    end
-
     describe 'a member being destroyed' do
       context 'using action class' do
         #region SuccessConditions
