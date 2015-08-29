@@ -37,6 +37,8 @@ module DiabeticToolbox
   #   end
   class Action
     #:enddoc:
+
+    #region Public
     def initialize(params)
       @params  = params
       @result  = nil
@@ -48,7 +50,9 @@ module DiabeticToolbox
       _after_call
       @result
     end
+    #endregion
 
+    #region Protected
     protected
     def success(&block)
       @result = Result.success &block
@@ -63,5 +67,6 @@ module DiabeticToolbox
     def _before_call ; end
 
     def _after_call ; end
+    #endregion
   end
 end
