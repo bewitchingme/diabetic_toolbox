@@ -1,5 +1,34 @@
 module DiabeticToolbox
+  # = MemberSession
+  #
+  # MemberSession is responsible for creating the database requirements for
+  # session data.  It is used as follows:
+  #
+  # ==== Creation
+  #
+  #   session = MemberSession.new(remote_ip_address, params)
+  #   member  = session.create
+  #
+  #   if session.in_progress?
+  #     flash[:success] = session.result_message
+  #     # Success
+  #   else
+  #     flash[:failure] = session.result_message
+  #     # Failure
+  #   end
+  #
+  # == Static Members
+  #
+  # To find a session that is in progress, use the following:
+  #
+  #   MemberSession.find session_token
+  #
+  # To destroy a session that is in progress:
+  #
+  #   MemberSession.destroy session_token
+  #
   class MemberSession
+    # :enddoc:
     #region Requirements
     require 'digest'
     #endregion
@@ -14,12 +43,6 @@ module DiabeticToolbox
     #endregion
 
     #region Instance Methods
-    ##
-    # Returns the DiabeticToolbox::Member upon successful session creation.
-    #
-    # :call-seq:
-    #   create(member_params) => DiabeticToolbox::Member
-    #
     def create
       @member = DiabeticToolbox::Member.find_by_email @params['email']
 
@@ -29,23 +52,10 @@ module DiabeticToolbox
       end
     end
 
-    ##
-    # Returns true if the session is in progress, false if a session could
-    # not be established.
-    #
-    # :call-seq:
-    #   in_progress? => Boolean
-    #
     def in_progress?
       @success
     end
 
-    ##
-    # Localized result message for the authentication attempt.
-    #
-    # :call-seq:
-    #   result_message => String
-    #
     def result_message
       if in_progress?
         I18n.t('views.member_sessions.messages.login_success')
@@ -56,30 +66,17 @@ module DiabeticToolbox
     #endregion
 
     #region Static
-    ##
-    # Returns the DiabeticToolbox::Member that matches the session token.
-    #
-    # :call-seq:
-    #   find(session_token) => DiabeticToolbox::Member
-    #
     def self.find(session_token)
       @member = DiabeticToolbox::Member.find_by_session_token(session_token) if session_token.present?
       @member
     end
 
-    ##
-    # Destroy the member with the provided session token.
-    #
-    # :call-seq:
-    #   destroy(session_token) => Boolean
-    #
     def self.destroy(session_token)
       @member = self.find(session_token)
       return true if @member && self.clear
     end
     #endregion
 
-    # :enddoc:
     #region Private
     private
 
