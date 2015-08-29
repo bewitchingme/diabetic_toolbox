@@ -55,7 +55,6 @@ module DiabeticToolbox
           params[:password_confirmation] = 'fred'
           short = CreateMember.new(params).call
 
-
           expect(short.success?).to eq false
           expect(short.actual.slug).to eq safe_model_data[:slug]
           expect(short.actual.new_record?).to eq true
@@ -159,8 +158,24 @@ module DiabeticToolbox
     end#describe creation
 
     describe 'a member being updated' do
+      DiabeticToolbox.from :members, require: %w(update_member)
       context 'using action class' do
         #region Success Conditions
+        it 'should update with valid parameters' do
+          member = build(:member)
+          member.save
+
+          update_params  = {first_name: 'Roy'}
+          update_member  = UpdateMember.new member.id, update_params
+          result         = update_member.call
+          updated_member = Member.find(member.id)
+
+          expect(result.flash).to eq 'Saved'
+          expect(result.response).to eq ['Saved', {}, {first_name: 'Roy', last_name: member.last_name, username: member.username, slug: member.slug}]
+          expect(result.actual.first_name).to eq 'Roy'
+          expect(result.success?).to eq true
+          expect(updated_member.first_name).to eq 'Roy'
+        end
         #endregion
 
         #region Password
