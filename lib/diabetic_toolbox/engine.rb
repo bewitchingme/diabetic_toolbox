@@ -23,7 +23,7 @@ module DiabeticToolbox
     end
 
     Warden::Manager.serialize_from_session(:diabetic_toolbox__member) do |token|
-      DiabeticToolbox::Member.find_by_session_token token
+      DiabeticToolbox::MemberSession.find token
     end
 
     Warden::Manager.serialize_into_session(:diabetic_toolbox__member) do |member|
