@@ -1,25 +1,26 @@
 module DiabeticToolbox
   rely_on :action
 
+  # = UpdateMember
+  #
+  # This action allows for the modification of a Member and is used as follows:
+  #
+  #   result = UpdateMember.new(member_id, params).call
+  #
+  #   if result.success?
+  #     # Success
+  #   else
+  #     # Failure
+  #   end
+  #
   class UpdateMember < Action
-    ##
-    # Construct with the parameters for the member.
-    #
-    # :call-seq:
-    #   new(id, member_params) => Boolean
-    #
+    #:enddoc:
     def initialize(member_id, member_params)
       super(member_params)
 
       @member = Member.find(member_id)
     end
 
-    ##
-    # Initiates the action to update the member.
-    #
-    # :call-seq:
-    #   call(id = nil) => DiabeticToolbox::Result::Base
-    #
     def _call
       if @member.update @params
         success do |option|

@@ -1,23 +1,25 @@
 module DiabeticToolbox
   rely_on :action
 
+  # = CreateMember
+  #
+  # This action allows for the creation of a new authenticatable Member.
+  # To use CreateMember see the following:
+  #
+  #   result = CreateMember.new(params).call
+  #
+  #   if result.success?
+  #     # Success
+  #   else
+  #     # Failure
+  #   end
+  #
   class CreateMember < Action
-    ##
-    # Construct with the parameters for the member.
-    #
-    # :call-seq:
-    #   new(member_params) => Boolean
-    #
+    # :enddoc:
     def initialize(member_params)
       super member_params
     end
 
-    ##
-    # Initiates the action to create the member.
-    #
-    # :call-seq:
-    #   call() => DiabeticToolbox::Result::<Base>
-    #
     protected
     def _call
       @member = Member.new @params

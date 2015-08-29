@@ -1,25 +1,27 @@
 module DiabeticToolbox
   rely_on :action
 
+  # = DestroyMember
+  #
+  # This action allows for the destruction of a member and is used
+  # as follows:
+  #
+  #   result = DestroyMember.new(member_id).call
+  #
+  #   if result.success?
+  #     # Success
+  #   else
+  #     # Failure
+  #   end
+  #
   class DestroyMember < Action
-    ##
-    # Construct with the id of the member to be destroyed.
-    #
-    # :call-seq:
-    #   new(member_id) => Boolean
-    #
+    #:enddoc:
     def initialize(member_id)
       super nil
 
       @member = Member.find member_id
     end
 
-    ##
-    # Initiates the action to destroy the member.
-    #
-    # :call-seq:
-    #   call() => DiabeticToolbox::Members::CreateMember
-    #
     def _call
       if @member.destroy
         success do |option|
