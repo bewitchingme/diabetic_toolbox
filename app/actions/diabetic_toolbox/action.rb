@@ -1,7 +1,42 @@
 module DiabeticToolbox
   rely_on :result
 
+  # = Action
+  #
+  # Action is the base for each action taken in the Diabetic Toolbox.  When
+  # a class defined which inherits from Action, the child is required at minimum
+  # to redefine +_call+ which carries out the necessary work to perform the action.
+  #
+  # The following is a brief example
+  #
+  #   class MyAction < Action
+  #     def initialize(params)
+  #       super params
+  #     end
+  #
+  #     protected
+  #     def _call
+  #       # ...
+  #     end
+  #   end
+  #
+  # If there is some necessary preparation to do before the call is made,
+  # you should implement +_before_call+ as follows:
+  #
+  #   protected
+  #   def _before_call
+  #     # ...
+  #   end
+  #
+  # And similarly when there is work to be performed after the call,
+  # +_after_call+ should be defined:
+  #
+  #   protected
+  #   def _after_call
+  #     # ...
+  #   end
   class Action
+    #:enddoc:
     def initialize(params)
       @params  = params
       @result  = nil
@@ -23,11 +58,6 @@ module DiabeticToolbox
       @result = Result.failure &block
     end
 
-    ##
-    # The following are to be implemented in the extending
-    # classes and are defined only to ensure that any method
-    # not implemented still has an endpoint
-    #
     def _call ; end
 
     def _before_call ; end

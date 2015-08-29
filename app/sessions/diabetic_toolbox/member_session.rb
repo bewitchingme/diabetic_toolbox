@@ -17,13 +17,13 @@ module DiabeticToolbox
   #     # Failure
   #   end
   #
-  # == Static Members
+  # ==== Static Methods
   #
-  # To find a session that is in progress, use the following:
+  # To find a session that is in progress, use:
   #
   #   MemberSession.find session_token
   #
-  # To destroy a session that is in progress:
+  # To destroy a session that is in progress, use:
   #
   #   MemberSession.destroy session_token
   #
