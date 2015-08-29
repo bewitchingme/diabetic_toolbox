@@ -32,9 +32,8 @@ module DiabeticToolbox
     validate  :dob_is_valid?
 
     def dob_is_valid?
-      if dob.present? && dob >= 18.years.ago
-        errors.add(:dob, I18n.t('activerecord.validations.common.illegal_value'))
-      end
+      return true if dob.present? && dob.is_a?( Date ) || dob.blank?
+      errors.add(:dob, I18n.t('activerecord.validations.common.illegal_value')) if dob.present? && !dob.is_a?( Date )
     end
     #endregion
 
