@@ -3,6 +3,7 @@ require 'warden'
 module DiabeticToolbox
   class Engine < ::Rails::Engine
     isolate_namespace DiabeticToolbox
+    config.action_dispatch.rescue_responses.merge! 'CanCan::AccessDenied' => :forbidden
 
     config.generators do |g|
       g.test_framework    :rspec, fixture: false
