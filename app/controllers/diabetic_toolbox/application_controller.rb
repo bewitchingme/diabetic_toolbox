@@ -15,12 +15,24 @@ module DiabeticToolbox
       @current_member
     end
 
-    def instant_in(member, scope = :diabetic_toolbox__member)
+    def begin_arbitrary_session(member, scope = :diabetic_toolbox__member)
       request.env['warden'].set_user( member, scope: scope )
     end
 
+    def sign_in(scope = :diabetic_toolbox__member)
+      request.env['warden'].authenticate! scope: :diabetic_toolbox__member
+    end
+
+    def sign_out(scope = :diabetic_toolbox__member)
+      request.env['warden'].logout scope
+    end
+
+    def authenticated?(scope = :diabetic_toolbox__member)
+      request.env['warden'].authenticated? scope: scope
+    end
+
     def member_signed_in?
-      @current_member.present?
+      @current_member.present? && authenticated?
     end
     #endregion
 
