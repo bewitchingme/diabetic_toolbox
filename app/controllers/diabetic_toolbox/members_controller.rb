@@ -79,6 +79,8 @@ module DiabeticToolbox
 
       result = DestroyMember.new( params[:id] ).call
 
+      sign_out if result.success?
+
       respond_to do |format|
         format.html do
           if result.success?
@@ -124,7 +126,7 @@ module DiabeticToolbox
         session = DiabeticToolbox::MemberSession.new( request.env['REMOTE_ADDR'], {'email' => member_params[:email], 'password' => member_params[:password]} )
         member  = session.create
 
-        instant_in(member) if session.in_progress?
+        begin_arbitrary_session(member) if session.in_progress?
       end
     #endregion
   end

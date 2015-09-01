@@ -11,9 +11,9 @@ module DiabeticToolbox
     end
 
     def create
-      @member = request.env['warden'].authenticate! scope: :diabetic_toolbox__member
+      @member = sign_in
 
-      if request.env['warden'].authenticated? scope: :diabetic_toolbox__member
+      if authenticated?
         flash[:success] = I18n.t('views.member_sessions.messages.login_success')
         redirect_to login_successful_path
       else
@@ -24,7 +24,7 @@ module DiabeticToolbox
 
     def destroy
       DiabeticToolbox::MemberSession.destroy current_member.session_token
-      request.env['warden'].logout :diabetic_toolbox__member
+      sign_out
 
       redirect_to root_url
     end
