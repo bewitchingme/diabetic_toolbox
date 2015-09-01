@@ -97,9 +97,10 @@ module DiabeticToolbox
 
     #region Member
     def dash
+      redirect_to setup_path unless current_member.configured?
+
       DiabeticToolbox.from :members, require: %w(member_dashboard)
 
-      redirect_to setup_path unless current_member.configured?
       @chart_data = MemberDashboard.history current_member unless current_member.has_no_readings?
       @library    = MemberDashboard.chartkick_library unless current_member.has_no_readings?
     end
