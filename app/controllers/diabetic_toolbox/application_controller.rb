@@ -19,7 +19,7 @@ module DiabeticToolbox
       request.env['warden'].set_user( member, scope: scope )
     end
 
-    def sign_in(scope = :diabetic_toolbox__member)
+    def sign_in!(scope = :diabetic_toolbox__member)
       request.env['warden'].authenticate! scope: :diabetic_toolbox__member
     end
 
