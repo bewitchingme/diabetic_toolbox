@@ -294,14 +294,25 @@ module DiabeticToolbox
     end
 
     describe 'a member being destroyed' do
+      DiabeticToolbox.from :members, require: %w(destroy_member)
       context 'using action class' do
         #region SuccessConditions
-        #endregion
+        it 'should be deleted along with all data excepting recipes' do
+          member = create(:member)
+          member.settings.create glucometer_measure_type: :mmol, intake_measure_type: :carbohydrates
+          id_to_delete = member.id
+          result = DestroyMember.new(id_to_delete).call
 
-        #region Failure Conditions
-        #endregion
+          expect { Member.find(id_to_delete) }.to raise_error ActiveRecord::RecordNotFound
+          expect { Setting.find(member_id: id_to_delete) }.to raise_error ActiveRecord::RecordNotFound
+          expect { Reading.find(member_id: id_to_delete) }.to raise_error ActiveRecord::RecordNotFound
+          expect { Achievement.find(member_id: id_to_delete) }.to raise_error ActiveRecord::RecordNotFound
+          expect { ReportConfiguration.find(member_id: id_to_delete) }.to raise_error ActiveRecord::RecordNotFound
+          expect { Report.find(member_id: id_to_delete) }.to raise_error ActiveRecord::RecordNotFound
+          expect { Vote.find(voter_id: id_to_delete) }.to raise_error ActiveRecord::RecordNotFound
 
-        #region Warden Checks
+          expect(result.success?).to eq true
+        end
         #endregion
       end
     end
