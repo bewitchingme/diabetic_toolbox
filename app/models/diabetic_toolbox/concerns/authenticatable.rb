@@ -20,6 +20,7 @@ module DiabeticToolbox::Concerns::Authenticatable
 
     def authenticate!(password)
       return true if authenticate password
+      # TODO: Find a way to more gracefully handle this.
       raise "Authentication Failure For: #{email}"
     end
 
