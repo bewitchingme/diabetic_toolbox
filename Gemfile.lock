@@ -220,6 +220,8 @@ GEM
       sprockets-rails (>= 2.0, < 4.0)
       tilt (~> 1.1)
     sexp_processor (4.6.0)
+    shoulda-matchers (2.8.0)
+      activesupport (>= 3.0.0)
     sprockets (3.3.3)
       rack (~> 1.0)
     sprockets-rails (2.3.2)
@@ -249,4 +251,5 @@ DEPENDENCIES
   faker
   pg
   rspec-rails
+  shoulda-matchers
   warden-rspec-rails
