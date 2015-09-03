@@ -3,9 +3,6 @@ RSpec.configure do |config|
 
   config.before(:suite) do
     begin
-      DatabaseCleaner.strategy = :transaction
-      DatabaseCleaner.clean_with :truncation
-
       DatabaseCleaner.start
       DatabaseCleaner.clean
       FactoryGirl.lint
