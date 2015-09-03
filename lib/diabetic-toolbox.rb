@@ -18,6 +18,7 @@ require 'chartkick'
 require 'momentjs-rails'
 require 'bootstrap3-datetimepicker-rails'
 require 'prawn-rails'
+require 'jquery-rails'
 #endregion
 
 #region DiabeticToolbox

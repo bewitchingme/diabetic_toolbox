@@ -6,10 +6,11 @@ module DiabeticToolbox
     config.action_dispatch.rescue_responses.merge! 'CanCan::AccessDenied' => :forbidden
 
     config.generators do |g|
-      g.test_framework    :rspec, fixture: false
-      g.template_engine   :haml
-      g.stylesheet_engine :scss
-      g.javascript_engine :coffee
+      g.test_framework      :rspec,        fixture: false
+      g.fixture_replacement :factory_girl, dir:     'spec/factories'
+      g.template_engine     :haml
+      g.stylesheet_engine   :scss
+      g.javascript_engine   :coffee
     end
 
     %w( members member_sessions settings welcome ).each do |controller|
