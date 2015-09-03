@@ -6,12 +6,14 @@ module DiabeticToolbox
     respond_to :html, :json
 
     def new
+      redirect_when_signed_in
       @member = Member.new
       there_can_be_only_one
     end
 
     def create
-      @member = sign_in
+      redirect_when_signed_in
+      @member = sign_in!
 
       if authenticated?
         flash[:success] = I18n.t('views.member_sessions.messages.login_success')
@@ -51,6 +53,13 @@ module DiabeticToolbox
         member_dashboard_path
       else
         setup_path
+      end
+    end
+
+    def redirect_when_signed_in
+      if member_signed_in?
+        redirect_to member_dashboard_path if current_member.configured?
+        redirect_to setup_path if !current_member.configured?
       end
     end
   end
