@@ -1,9 +1,8 @@
 require 'spec_helper'
 
 RSpec.describe 'Visitor Signs In', type: :feature do
-  let(:member) { build(:member) }
+  let(:member) { create(:member) }
   it 'should display the username regardless of route on successful login' do
-    member.save
     visit sign_in_path
 
     fill_in 'Email', with: member.email
