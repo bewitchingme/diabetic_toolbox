@@ -45,7 +45,7 @@ module DiabeticToolbox
     #region Navigation
     def deploy_member_tabs
       @tabs = {
-          :summary    => [I18n.t('navigation.members.summary'),    'thumb-tack', member_dashboard_path(current_member)],
+          :summary    => [I18n.t('navigation.members.summary'),    'thumb-tack', member_dashboard_path],
           :readings   => [I18n.t('navigation.members.readings'),   'book',       '#'],
           :reports    => [I18n.t('navigation.members.reports'),    'bar-chart',  '#'],
           :recipes    => [I18n.t('navigation.members.recipes'),    'list',       '#'],
