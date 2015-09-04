@@ -45,11 +45,11 @@ module DiabeticToolbox
     #region Navigation
     def deploy_member_tabs
       @tabs = {
-          :dashboard  => [I18n.t('navigation.members.dashboard'),  'dashboard', member_dashboard_path(current_member)],
-          :readings   => [I18n.t('navigation.members.readings'),   'book',      '#'],
-          :reports    => [I18n.t('navigation.members.reports'),    'bar-chart', '#'],
-          :recipes    => [I18n.t('navigation.members.recipes'),    'list',      '#'],
-          :meal_plans => [I18n.t('navigation.members.meal_plans'), 'road',      '#']
+          :summary    => [I18n.t('navigation.members.summary'),    'thumb-tack', member_dashboard_path(current_member)],
+          :readings   => [I18n.t('navigation.members.readings'),   'book',       '#'],
+          :reports    => [I18n.t('navigation.members.reports'),    'bar-chart',  '#'],
+          :recipes    => [I18n.t('navigation.members.recipes'),    'list',       '#'],
+          :meal_plans => [I18n.t('navigation.members.meal_plans'), 'road',       '#']
       }
     end
     #endregion
