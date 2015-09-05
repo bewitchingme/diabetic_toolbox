@@ -6,7 +6,7 @@
         = "#{@member.username}"
         .pull-right
           = @member.email
-          = link_to content_tag(:span, '', class: 'fa fa-edit'), '#'
+          = link_to content_tag(:span, '', class: 'fa fa-edit'), edit_member_email_path
 = form_for @member, url: update_member_url(@member) do |f|
   .container-fluid
     .row
