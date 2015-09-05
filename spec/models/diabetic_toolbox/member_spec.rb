@@ -16,6 +16,7 @@ module DiabeticToolbox
     let(:validations_first_name_format) { { first_name: ['Only letters and spaces allowed'] } }
     let(:validations_last_name_format) { { last_name: ['Only letters and hyphens allowed'] } }
     let(:validations_username_format) { { username: ['Only letters, spaces and numbers allowed'] } }
+    let(:validations_email_format) { { email: ['Invalid address'] } }
     let(:validations_accepted_tos_required) { { accepted_tos: ['Required'] } }
     #endregion
 
@@ -34,6 +35,20 @@ module DiabeticToolbox
         end
         #endregion
 
+        #region Email
+        it 'should not save with invalid email address' do
+          params = member_params
+          params[:email] = 'some_bad_string'
+
+          result = CreateMember.new( params ).call
+
+          expect(result.actual.new_record?).to eq true
+          expect(result.success?).to eq false
+          expect(result.flash).to eq create_failure_message
+          expect(result.response).to eq [create_failure_message, validations_email_format, safe_model_data]
+        end
+        #endregion
+
         #region Password
         it 'should not save without a password' do
           params = member_params
@@ -45,7 +60,6 @@ module DiabeticToolbox
           expect(create_member.success?).to eq false
           expect(create_member.actual.slug).to eq safe_model_data[:slug]
           expect(create_member.actual.new_record?).to eq true
-          expect(create_member.actual.errors.messages.size).to be >= 1
           expect(create_member.response).to eq [create_failure_message, validations_password_empty, safe_model_data]
         end
 
@@ -58,7 +72,6 @@ module DiabeticToolbox
           expect(short.success?).to eq false
           expect(short.actual.slug).to eq safe_model_data[:slug]
           expect(short.actual.new_record?).to eq true
-          expect(short.actual.errors.messages.size).to be >= 1
           expect(short.response).to eq [ create_failure_message, validations_password_length, safe_model_data ]
         end
 
@@ -71,7 +84,6 @@ module DiabeticToolbox
           expect(long.success?).to eq false
           expect(long.actual.slug).to eq safe_model_data[:slug]
           expect(long.actual.new_record?).to eq true
-          expect(long.actual.errors.messages.size).to be >= 1
           expect(long.response).to eq [ create_failure_message, validations_password_length, safe_model_data ]
         end
 
@@ -84,7 +96,6 @@ module DiabeticToolbox
           expect(create_member.success?).to eq false
           expect(create_member.actual.slug).to eq safe_model_data[:slug]
           expect(create_member.actual.new_record?).to eq true
-          expect(create_member.actual.errors.messages.size).to be >= 1
           expect(create_member.response).to eq [ create_failure_message, validations_password_mismatch, safe_model_data ]
         end
         #endregion
@@ -288,6 +299,84 @@ module DiabeticToolbox
           expect(result.response[1]).to eq last_name: ['Between 1 and 64 characters']
           expect(result.success?).to eq false
           expect(updated.last_name).to eq last
+        end
+        #endregion
+      end
+    end
+
+    describe 'a member changing their email' do
+      DiabeticToolbox.from :members, require: %w(change_member_email)
+      context 'using action class' do
+        #region Success Conditions
+        it 'should update with email and confirmation' do
+          member = create(:member)
+
+          update_params = {
+              unconfirmed_email: 'some@example.com',
+              unconfirmed_email_confirmation: 'some@example.com'
+          }
+          safe = {
+              first_name: member.first_name,
+              last_name: member.last_name,
+              username: member.username,
+              slug: member.slug
+          }
+          result  = ChangeMemberEmail.new( member.id, update_params ).call
+          updated = Member.find(member.id)
+
+          expect(result.flash).to eq 'Confirmation Sent'
+          expect(result.response).to eq ['Confirmation Sent', {}, safe]
+          expect(result.success?).to eq true
+          expect(result.actual.unconfirmed_email).to eq 'some@example.com'
+          expect(updated.unconfirmed_email).to eq 'some@example.com'
+        end
+        #endregion
+
+        #region Failure
+        it 'should not update with invalid email format with confirmation on update' do
+          member = create(:member)
+
+          update_params = {
+            unconfirmed_email: 'some_bad_string',
+            unconfirmed_email_confirmation: 'some_bad_string'
+          }
+          safe = {
+              first_name: member.first_name,
+              last_name: member.last_name,
+              username: member.username,
+              slug: member.slug
+          }
+
+          result  = ChangeMemberEmail.new( member.id, update_params ).call
+          updated = Member.find(member.id)
+
+          expect(result.flash).to eq 'Error: Email Unchanged'
+          expect(result.response).to eq ['Error: Email Unchanged', {unconfirmed_email: ['Invalid address']}, safe]
+          expect(result.success?).to eq false
+          expect(updated.unconfirmed_email).to eq member.unconfirmed_email
+        end
+
+        it 'should not update with email address without matching confirmation' do
+          member = create(:member)
+
+          update_params = {
+            unconfirmed_email: 'some@example.com',
+            unconfirmed_email_confirmation: 'fruit@example.com'
+          }
+
+          result  = ChangeMemberEmail.new( member.id, update_params ).call
+          updated = Member.find(member.id)
+          safe = {
+            first_name: member.first_name,
+            last_name: member.last_name,
+            username: member.username,
+            slug: member.slug
+          }
+
+          expect(result.flash).to eq 'Error: Email Unchanged'
+          expect(result.response).to eq ['Error: Email Unchanged', {unconfirmed_email_confirmation: ['Emails must match']}, safe]
+          expect(result.success?).to eq false
+          expect(updated.email).to eq member.email
         end
         #endregion
       end
