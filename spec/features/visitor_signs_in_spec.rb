@@ -6,6 +6,7 @@ RSpec.describe 'Visitor Signs In', type: :feature do
   let(:setting) { build(:setting) }
   #endregion
 
+  #region Tests
   it 'should display the username regardless of route on successful login' do
     sign_in
 
@@ -27,7 +28,10 @@ RSpec.describe 'Visitor Signs In', type: :feature do
       expect(page).to have_text chunk
     end
   end
+  #endregion
 
+  #region Private
+  private
   def sign_in
     visit sign_in_path
 
@@ -36,4 +40,5 @@ RSpec.describe 'Visitor Signs In', type: :feature do
 
     click_button 'Sign In'
   end
+  #endregion
 end
