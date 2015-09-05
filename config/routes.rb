@@ -18,6 +18,8 @@ DiabeticToolbox::Engine.routes.draw do
   get    '/members/:id',           to: 'members#show',           as: :show_member
   get    '/me/:id',                to: 'members#edit',           as: :edit_member
   match  '/me/:id',                to: 'members#update',         as: :update_member, via: [:patch, :put]
+  get    '/edit_email',            to: 'members#edit_email',     as: :edit_member_email
+  match  '/edit_email',            to: 'members#update_email',   as: :update_member_email, via: [:patch, :put]
   get    '/dash',                  to: 'members#dash',           as: :member_dashboard
   delete '/membership/cancel/:id', to: 'members#destroy',        as: :destroy_member
   get    '/membership/cancel',     to: 'members#confirm_delete', as: :last_chance
