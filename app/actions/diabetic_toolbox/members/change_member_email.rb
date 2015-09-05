@@ -5,7 +5,7 @@ module DiabeticToolbox
   #
   # This action allows for the modification of a Member email address and is used as follows:
   #
-  #   result = UpdateMember.new(member_id, params).call
+  #   result = ChangeMemberEmail.new(member_id, params).call
   #
   #   if result.success?
   #     # Success
