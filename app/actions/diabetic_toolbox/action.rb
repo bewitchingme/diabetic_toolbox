@@ -54,6 +54,10 @@ module DiabeticToolbox
 
     #region Protected
     protected
+    def result
+      @result
+    end
+
     def success(&block)
       @result = Result.success &block
     end
