@@ -139,6 +139,9 @@ en:
       destroyed:
         success: Account Deleted
         failure: 'Error: Could Not Delete'
+      updated_email:
+        failure: 'Error: Email Unchanged'
+        success: Confirmation Sent
     setting:
       created:
         success: Setup Complete
@@ -162,6 +165,8 @@ en:
         last_name: Last Name
         username: Username
         email: Email
+        unconfirmed_email: Email
+        unconfirmed_email_confirmation: Confirm
         dob: Date of Birth
         gender: Gender
         password: Password
@@ -183,6 +188,7 @@ en:
           password_confirmation: Passwords must match
           email_format: Invalid address
           email_uniqueness: Email Already Exists
+          unconfirmed_email_confirmation: Emails must match
       diabetic_toolbox/member:
         first_name_format: Only letters and spaces allowed
         last_name_format: Only letters and hyphens allowed
