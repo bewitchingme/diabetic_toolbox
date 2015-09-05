@@ -14,6 +14,7 @@ module DiabeticToolbox
   #   end
   #
   class ChangeMemberEmail < Action
+    #:enddoc:
     def initialize(member_id, member_params)
       super member_params
       @member = Member.find(member_id)
