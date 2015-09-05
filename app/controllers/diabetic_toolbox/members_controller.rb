@@ -9,7 +9,7 @@ module DiabeticToolbox
 
     #region Before Action
     before_action :deploy_member_tabs,    only: :dash
-    before_action :set_member,            only: [:show, :edit]
+    before_action :set_member,            only: [:show, :edit, :edit_email]
     before_action :there_can_be_only_one, only: :new
     #endregion
 
@@ -36,7 +36,7 @@ module DiabeticToolbox
           end
         end
 
-        format.json { render :json => result.response }
+        format.json { render json: result.response }
       end
     end
     #endregion
@@ -49,6 +49,9 @@ module DiabeticToolbox
     end
 
     def confirm_delete
+    end
+
+    def edit_email
     end
     #endregion
 
@@ -70,7 +73,28 @@ module DiabeticToolbox
           end
         end
 
-        format.json { render :json => result.response }
+        format.json { render json: result.response }
+      end
+    end
+
+    def update_email
+      DiabeticToolbox.from :members, require: %(change_member_email)
+
+      result = ChangeMemberEmail.new( current_member.id, member_params ).call
+
+      respond_to do |format|
+        format.html do
+          if result.success?
+            flash[:info] = result.flash
+            redirect_to edit_member_path result.actual
+          else
+            @member         = result.actual
+            flash[:warning] = result.flash
+            render :edit_email
+          end
+        end
+
+        format.json { render json: result.response }
       end
     end
 
@@ -92,7 +116,7 @@ module DiabeticToolbox
           end
         end
 
-        format.json { render :json => result.response }
+        format.json { render json: result.response }
       end
     end
     #endregion
