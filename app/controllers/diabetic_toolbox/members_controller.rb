@@ -78,7 +78,7 @@ module DiabeticToolbox
     end
 
     def update_email
-      DiabeticToolbox.from :members, require: %(change_member_email)
+      DiabeticToolbox.from :members, require: %w(change_member_email)
 
       result = ChangeMemberEmail.new( current_member.id, member_params ).call
 
