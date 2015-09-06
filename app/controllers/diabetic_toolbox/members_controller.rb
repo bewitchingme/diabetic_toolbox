@@ -1,4 +1,4 @@
-require_dependency "diabetic_toolbox/application_controller"
+require_dependency 'diabetic_toolbox/application_controller'
 
 module DiabeticToolbox
   class MembersController < DiabeticToolbox::ApplicationController
