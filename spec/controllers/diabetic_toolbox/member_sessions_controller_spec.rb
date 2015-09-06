@@ -8,6 +8,7 @@ module DiabeticToolbox
     let(:setting) { build(:setting) }
     #endregion
 
+    #region Visitor
     describe 'a visitor' do
       it 'should be able to GET :new' do
         get :new
@@ -19,7 +20,9 @@ module DiabeticToolbox
         expect { delete :destroy }.to raise_error CanCan::AccessDenied
       end
     end
+    #endregion
 
+    #region Member
     describe 'a member' do
       context 'who is authenticated and has no configured settings' do
         it 'should be redirected to the setup when trying to GET :new' do
@@ -41,5 +44,6 @@ module DiabeticToolbox
         end
       end
     end
+    #endregion
   end
 end
