@@ -25,13 +25,13 @@ module DiabeticToolbox
     def _call
       if @member.destroy
         success do |option|
-          option[:subject] = @member
-          option[:message] = I18n.t('flash.member.destroyed.success')
+          option.subject = @member
+          option.message = I18n.t('flash.member.destroyed.success')
         end
       else
         failure do |option|
-          option[:subject] = @member
-          option[:message] = I18n.t('flash.member.destroyed.failure')
+          option.subject = @member
+          option.message = I18n.t('flash.member.destroyed.failure')
         end
       end
     end

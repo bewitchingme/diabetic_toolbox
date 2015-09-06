@@ -1,23 +1,25 @@
 module DiabeticToolbox
   module Result
+    #region Options
+    class Options
+      attr_accessor :subject, :message
+    end
+    private_constant :Options
+    #endregion
+
     #region Base
     class Base
       #region New
       def initialize(&block)
-        @options = {
-          subject: nil,
-          message: I18n.t('diabetic_toolbox.result.blank')
-        }
+        @options         = Options.new
+        @options.subject = nil
+        @options.message = I18n.t('diabetic_toolbox.result.blank')
 
         if block_given?
           block.call @options
         end
 
-        @messages = if has_validation_errors?
-                      validation_errors
-                    else
-                      {}
-                    end
+        @messages = validation_errors
       end
       #endregion
 
@@ -27,7 +29,7 @@ module DiabeticToolbox
       end
 
       def flash
-        @options[:message]
+        @options.message
       end
 
       def response
@@ -35,7 +37,7 @@ module DiabeticToolbox
       end
 
       def actual
-        @options[:subject]
+        @options.subject
       end
       #endregion
 
@@ -53,23 +55,26 @@ module DiabeticToolbox
       #region Private
       private
       def _safe
-        Hash[ DiabeticToolbox.safe(subject_safe_identity).each.map { |n| [n, @options[:subject][n]] } ] if can_generate_safe?
+        Hash[ DiabeticToolbox.safe(subject_safe_identity).each.map { |n| [n, @options.subject[n]] } ] if can_generate_safe?
       end
 
       def can_generate_safe?
-        DiabeticToolbox.safe(subject_safe_identity).length > 0 && @options[:subject].present?
+        DiabeticToolbox.safe(subject_safe_identity).length > 0 && @options.subject.present?
       end
 
       def subject_safe_identity
-        @options[:subject].class.name.split('::').last.downcase.to_sym
+        @options.subject.class.name.split('::').last.downcase.to_sym
       end
 
-      def has_validation_errors?
-        validation_errors.keys.length > 0 if validation_errors
+      def error_count
+        count = 0
+        count = @options.subject.errors.messages.keys.length if @options.subject.present?
+        count
       end
 
       def validation_errors
-        @options[:subject].errors.messages if @options[:subject]
+        return {} unless error_count > 0
+        @options.subject.errors.messages
       end
       #endregion
     end

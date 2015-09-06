@@ -26,13 +26,13 @@ module DiabeticToolbox
 
       if @member.save
         success do |option|
-          option[:subject] = @member
-          option[:message] = I18n.t('flash.member.created.success', first_name: @member.first_name)
+          option.subject = @member
+          option.message = I18n.t('flash.member.created.success', first_name: @member.first_name)
         end
       else
         failure do |option|
-          option[:subject] = @member
-          option[:message] = I18n.t('flash.member.created.failure')
+          option.subject = @member
+          option.message = I18n.t('flash.member.created.failure')
         end
       end
     end

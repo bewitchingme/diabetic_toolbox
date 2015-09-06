@@ -24,13 +24,13 @@ module DiabeticToolbox
     def _call
       if @member.update @params
         success do |option|
-          option[:message] = I18n.t('flash.member.updated_email.success')
-          option[:subject] = @member
+          option.message = I18n.t('flash.member.updated_email.success')
+          option.subject = @member
         end
       else
         failure do |option|
-          option[:message] = I18n.t('flash.member.updated_email.failure')
-          option[:subject] = @member
+          option.message = I18n.t('flash.member.updated_email.failure')
+          option.subject = @member
         end
       end
     end
