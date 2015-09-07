@@ -28,6 +28,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'database_cleaner'
   s.add_development_dependency 'faker'
   s.add_development_dependency 'warden-rspec-rails'
+  s.add_development_dependency 'rdoc-generator-fivefish'
   s.add_dependency 'warden', '~> 1.2.3'
   s.add_dependency 'haml', '~> 4.0.6'
   s.add_dependency 'haml-rails', '~> 0.9.0'
