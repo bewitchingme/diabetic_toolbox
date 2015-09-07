@@ -3,6 +3,8 @@
 require 'warden'
 require 'diabetic_toolbox/engine'
 require 'sessions/session'
+require 'diabetic_toolbox/nutritional_facts'
+require 'diabetic_toolbox/reference_standard'
 require 'paperclip'
 require 'haml'
 require 'haml-rails'
@@ -51,6 +53,13 @@ module DiabeticToolbox
         require Engine.root.join 'app', 'actions', @@me.to_s, requirement.to_s
       end
     end
+  end
+  #endregion
+
+  #region Calculations
+  # http://www.wikihow.com/Convert-Grams-to-Calories
+  def grams_to_calories(intake_nutrition)
+    (intake_nutrition.protein * 4) + (intake_nutrition.carbohydrate * 4) + (intake_nutrition.fat * 9)
   end
   #endregion
 end

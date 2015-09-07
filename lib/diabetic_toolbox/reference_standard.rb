@@ -46,7 +46,8 @@ module DiabeticToolbox
       manganese:    {value: 2,    unit: :milligrams},
       chromium:     {value: 120,  unit: :micrograms},
       molybdenum:   {value: 75,   unit: :micrograms},
-      chloride:     {value: 3400, unit: :milligrams}
+      chloride:     {value: 3400, unit: :milligrams},
+      protein:      {value: 51,   unit: :grams}
     }
 
     def self.get(nutrient)

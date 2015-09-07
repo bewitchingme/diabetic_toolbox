@@ -6,7 +6,7 @@ module DiabeticToolbox
                   :niacin, :vitamin_b6, :folate, :vitamin_b12, :pantothenate,
                   :vitamin_k, :biotin, :calcium, :phosphorus, :magnesium,
                   :iron, :zinc, :iodide, :selenium, :copper, :manganese,
-                  :chromium, :molybdenum, :chloride
+                  :chromium, :molybdenum, :chloride, :protein
 
     def initialize(&block)
       raise 'Requires block to initialize' unless block_given?
