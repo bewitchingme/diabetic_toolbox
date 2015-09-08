@@ -36,9 +36,10 @@ module DiabeticToolbox
     end
 
     def _after_call
-      if result.success?
+      if @result.success?
         # TODO: Record was updated, now we send a confirmation email
-        # TODO: with a hash to complete this process
+        # TODO: with a hash assigned to confirmation_token to complete
+        # TODO: this process.
       end
     end
   end
