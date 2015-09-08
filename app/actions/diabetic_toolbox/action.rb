@@ -54,7 +54,7 @@ module DiabeticToolbox
 
     #region Protected
     protected
-    def result
+    def call_result
       @result
     end
 
