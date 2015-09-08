@@ -21,3 +21,27 @@ the use of this application, please don't hesitate.
 This application is NOT designed by a medical professional but by a diabetic who
 has learned as much as he could about how treatment tends to play out.  Do not
 assume that your physician has approved use of this application in any way.
+
+= RDoc
+
+In the event that you wish to generate the RDoc documentation for the classes
+and modules contained in this project, use the following:
+
+  $ rake rdoc
+
+= Testing
+
+To run the current tests you will need to configure three environment variables first:
+
+  export DUMMY_DATABASE="some_database"
+  export DUMMY_USER="some_user"
+  export DUMMY_PASSWORD="a secret"
+
+Then perform the following to setup the database:
+
+  $ rake app:db:setup
+  $ rake app:db:migrate
+
+Then finally:
+
+  $ rake spec
