@@ -13,16 +13,17 @@ DiabeticToolbox::Engine.routes.draw do
   post   '/member/recover',  to: 'member_sessions#send_recovery_kit', as: :recovery_kit
 
   # Members self-management
-  get    '/register',              to: 'members#new',            as: :new_member
-  post   '/register',              to: 'members#create',         as: :create_member
-  get    '/members/:id',           to: 'members#show',           as: :show_member
-  get    '/me/:id',                to: 'members#edit',           as: :edit_member
-  match  '/me/:id',                to: 'members#update',         as: :update_member, via: [:patch, :put]
-  get    '/edit_email',            to: 'members#edit_email',     as: :edit_member_email
-  match  '/edit_email',            to: 'members#update_email',   as: :update_member_email, via: [:patch, :put]
-  get    '/dash',                  to: 'members#dash',           as: :member_dashboard
-  delete '/membership/cancel/:id', to: 'members#destroy',        as: :destroy_member
-  get    '/membership/cancel',     to: 'members#confirm_delete', as: :last_chance
+  get    '/register',                to: 'members#new',            as: :new_member
+  post   '/register',                to: 'members#create',         as: :create_member
+  get    '/members/:id',             to: 'members#show',           as: :show_member
+  get    '/me/:id',                  to: 'members#edit',           as: :edit_member
+  match  '/me/:id',                  to: 'members#update',         as: :update_member, via: [:patch, :put]
+  get    '/edit_email',              to: 'members#edit_email',     as: :edit_member_email
+  match  '/edit_email',              to: 'members#update_email',   as: :update_member_email, via: [:patch, :put]
+  get    '/dash',                    to: 'members#dash',           as: :member_dashboard
+  delete '/membership/cancel/:id',   to: 'members#destroy',        as: :destroy_member
+  get    '/membership/cancel',       to: 'members#confirm_delete', as: :last_chance
+  get    '/member/reconfirm/:token', to: 'members#reconfirm',      as: :reconfirmation
 
   # Settings for members
   get    '/setup',    to: 'settings#new',    as: :setup
