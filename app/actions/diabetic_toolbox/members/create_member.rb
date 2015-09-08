@@ -38,7 +38,9 @@ module DiabeticToolbox
     end
 
     def _after_call
-      # TODO: Must implement the mailer here to confirm the member.
+      if call_result.success?
+        # TODO: Must implement the mailer here to confirm the member.
+      end
     end
   end
 end
