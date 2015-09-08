@@ -7,7 +7,7 @@ module DiabeticToolbox
       sequence(:email) { |n| Faker::Internet.email "#{Faker::Name.first_name}#{n}" }
       member.first_name Faker::Name.first_name
       member.last_name Faker::Name.last_name
-      member.username Faker::Name.name
+      member.username "#{Faker::Name.first_name} #{Faker::Name.last_name}"
       member.accepted_tos true
       member.password password
       member.password_confirmation password
