@@ -80,7 +80,7 @@ module DiabeticToolbox
     def update_email
       DiabeticToolbox.from :members, require: %w(change_member_email)
 
-      result = ChangeMemberEmail.new( current_member.id, member_params ).call
+      result = ChangeMemberEmail.new( current_member.id, change_email_params ).call
 
       respond_to do |format|
         format.html do
@@ -136,6 +136,10 @@ module DiabeticToolbox
     private
       def member_params
         params.require(:member).permit(:first_name, :last_name, :username, :email, :password, :password_confirmation, :dob, :gender, :accepted_tos)
+      end
+
+      def change_email_params
+        params.require(:member).permit(:unconfirmed_email, :unconfirmed_email_confirmation)
       end
 
       def set_member

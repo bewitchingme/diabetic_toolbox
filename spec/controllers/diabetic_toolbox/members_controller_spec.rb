@@ -44,6 +44,26 @@ module DiabeticToolbox
           expect(assigns(:member)).to be_a Member
         end
 
+        it 'should have 200 HTTP status for :edit_email' do
+          sign_in_member member
+
+          get :edit_email
+
+          expect(response).to have_http_status 200
+          expect(assigns(:member)).to be_a Member
+        end
+
+        it 'should have 302 HTTP status for :update_email' do
+          sign_in_member member
+
+          put :update_email, member: {unconfirmed_email: 'test@example.com', unconfirmed_email_confirmation: 'test@example.com'}
+          updated_member = Member.find member.slug
+
+          expect(response).to have_http_status 302
+          expect(response).to redirect_to edit_member_path member
+          expect(updated_member.unconfirmed_email).to eq 'test@example.com'
+        end
+
         it 'should have 200 HTTP status for :confirm_delete' do
           sign_in_member member
 
