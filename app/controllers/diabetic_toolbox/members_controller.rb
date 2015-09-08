@@ -53,6 +53,10 @@ module DiabeticToolbox
 
     def edit_email
     end
+
+    def reconfirm
+
+    end
     #endregion
 
     #region Mutation
