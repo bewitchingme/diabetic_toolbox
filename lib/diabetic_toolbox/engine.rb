@@ -32,4 +32,10 @@ module DiabeticToolbox
       member.session_token
     end
   end
+
+  mattr_accessor :mailer_from_address
+
+  def self.config
+    yield self
+  end
 end
