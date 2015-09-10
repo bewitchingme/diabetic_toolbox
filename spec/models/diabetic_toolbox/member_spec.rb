@@ -10,6 +10,7 @@ module DiabeticToolbox
     let(:create_success_message) { 'Member Frodo Created' }
     let(:create_failure_message) { 'Create Member Failed' }
     let(:safe_model_data) { { first_name: 'Frodo', last_name: 'Baggins', username: 'Ring Bearer', slug: 'ring-bearer' } }
+    let(:unconfirmed_email) { { unconfirmed_email: 'sample@example.com', unconfirmed_email_confirmation: 'sample@example.com'} }
     let(:validations_password_empty) { { password: ['Required', 'Between 8 and 64 characters'] } }
     let(:validations_password_length) { { password: ['Between 8 and 64 characters'] } }
     let(:validations_password_mismatch) { { password_confirmation: ['Passwords must match'] } }
@@ -379,6 +380,45 @@ module DiabeticToolbox
           expect(result.response).to eq ['Error: Email Unchanged', {unconfirmed_email_confirmation: ['Emails must match']}, safe]
           expect(result.success?).to eq false
           expect(updated.email).to eq member.email
+        end
+        #endregion
+      end
+    end
+
+    describe 'a member reconfirming their email' do
+      DiabeticToolbox.from :members, require: %w(change_member_email reconfirm_member)
+      context 'using action class' do
+        #region Success Conditions
+        it 'should successfully perform the exchange with the appropriate token' do
+          member = create(:member)
+
+          change_result = ChangeMemberEmail.new( member.id, unconfirmed_email ).call
+          member.reload
+
+          reconfirm_result = ReconfirmMember.new( member.confirmation_token ).call
+          member.reload
+
+          expect(change_result.success?).to eq true
+          expect(reconfirm_result.success?).to eq true
+          expect(member.confirmation_token).to eq nil
+          expect(member.unconfirmed_email).to eq nil
+          expect(member.confirmed_at.utc.to_i).to eq Time.now.utc.to_i
+          expect(member.confirmation_sent_at).to eq nil
+          expect(member.email).to eq unconfirmed_email[:unconfirmed_email]
+        end
+        #endregion
+
+        #region Failure
+        it 'should fail when trying to perform the exchange with inappropriate token' do
+          reconfirm_result = ReconfirmMember.new( 'bad_token' ).call
+
+          expect(reconfirm_result.success?).to eq false
+        end
+
+        it 'should fail when trying to perform the exchange with a nil token' do
+          reconfirm_result = ReconfirmMember.new( nil ).call
+
+          expect(reconfirm_result.success?).to eq false
         end
         #endregion
       end
