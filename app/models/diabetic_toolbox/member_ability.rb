@@ -29,11 +29,19 @@ module DiabeticToolbox
 
     #region Authenticatable
     def authenticated
-      can :destroy, :member_session
+      can [
+        :destroy, :reconfirm,
+        :edit_email, :update_email
+      ], :member_session
     end
 
     def visiting
-      can [:new, :create, :password_recovery, :send_recovery_kit], :member_session
+      actions = [
+        :new, :create,
+        :password_recovery,
+        :send_recovery_kit
+      ]
+      can actions, :member_session
     end
     #endregion
     #endregion

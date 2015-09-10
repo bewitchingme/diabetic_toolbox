@@ -50,26 +50,6 @@ module DiabeticToolbox
 
     def confirm_delete
     end
-
-    def edit_email
-    end
-    #endregion
-
-    #region Special Account Changes
-    def reconfirm
-      DiabeticToolbox.from :members, require: %w(reconfirm_member)
-      sign_out
-
-      result = DiabeticToolbox::ReconfirmMember.new( params[:token] ).call
-
-      if result.success?
-        flash[:success] = result.flash
-        redirect_to sign_in_path
-      else
-        flash[:danger] = result.flash
-        redirect_to sign_in_path
-      end
-    end
     #endregion
 
     #region Mutation
@@ -87,27 +67,6 @@ module DiabeticToolbox
             @member         = result.actual
             flash[:warning] = result.flash
             render :edit
-          end
-        end
-
-        format.json { render json: result.response }
-      end
-    end
-
-    def update_email
-      DiabeticToolbox.from :members, require: %w(change_member_email)
-
-      result = ChangeMemberEmail.new( current_member.id, change_email_params ).call
-
-      respond_to do |format|
-        format.html do
-          if result.success?
-            flash[:info] = result.flash
-            redirect_to edit_member_path result.actual
-          else
-            @member         = result.actual
-            flash[:warning] = result.flash
-            render :edit_email
           end
         end
 
@@ -153,10 +112,6 @@ module DiabeticToolbox
     private
       def member_params
         params.require(:member).permit(:first_name, :last_name, :username, :email, :password, :password_confirmation, :dob, :gender, :accepted_tos)
-      end
-
-      def change_email_params
-        params.require(:member).permit(:unconfirmed_email, :unconfirmed_email_confirmation)
       end
 
       def set_member
