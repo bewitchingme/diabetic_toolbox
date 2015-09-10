@@ -26,7 +26,7 @@ module DiabeticToolbox
         expect(response).to have_http_status 200
       end
 
-      it 'should be redirected to root_path when posting to send_recovery_kit' do
+      it 'should be redirected to root_path when posting to :send_recovery_kit' do
         post :send_recovery_kit
 
         expect(response).to have_http_status 302
@@ -54,6 +54,51 @@ module DiabeticToolbox
 
           expect(response).to have_http_status 302
           expect(response).to redirect_to root_path
+        end
+      end
+
+      context 'who is authenticated' do
+        it 'should be redirected to sign_in_path from :reconfirm' do
+          DiabeticToolbox.from :members, require: ['change_member_email']
+
+          member.save
+
+          change_params = {
+              unconfirmed_email:              'unconfirmed@example.com',
+              unconfirmed_email_confirmation: 'unconfirmed@example.com'
+          }
+
+          result = ChangeMemberEmail.new( member.id, change_params ).call
+
+          sign_in_member member
+
+          updated_member = Member.find member.id
+
+          get :reconfirm, token: updated_member.confirmation_token
+
+          expect(result.success?).to eq true
+          expect(response).to have_http_status 302
+          expect(response).to redirect_to sign_in_path
+        end
+
+        it 'should have 200 HTTP status for :edit_email' do
+          sign_in_member member
+
+          get :edit_email
+
+          expect(response).to have_http_status 200
+          expect(assigns(:member)).to be_a Member
+        end
+
+        it 'should have 302 HTTP status for :update_email' do
+          sign_in_member member
+
+          put :update_email, member: {unconfirmed_email: 'test@example.com', unconfirmed_email_confirmation: 'test@example.com'}
+          updated_member = Member.find member.slug
+
+          expect(response).to have_http_status 302
+          expect(response).to redirect_to edit_member_path member
+          expect(updated_member.unconfirmed_email).to eq 'test@example.com'
         end
       end
     end
