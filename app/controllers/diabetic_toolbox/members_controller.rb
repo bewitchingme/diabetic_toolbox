@@ -53,9 +53,22 @@ module DiabeticToolbox
 
     def edit_email
     end
+    #endregion
 
+    #region Special Account Changes
     def reconfirm
+      DiabeticToolbox.from :members, require: %w(reconfirm_member)
+      sign_out
 
+      result = DiabeticToolbox::ReconfirmMember.new( params[:token] ).call
+
+      if result.success?
+        flash[:success] = result.flash
+        redirect_to sign_in_path
+      else
+        flash[:danger] = result.flash
+        redirect_to sign_in_path
+      end
     end
     #endregion
 
