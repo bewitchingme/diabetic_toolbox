@@ -6,11 +6,14 @@ DiabeticToolbox::Engine.routes.draw do
   get '/about', to: 'welcome#about', as: :about
 
   # Authentication routes
-  get    '/member/sign_in',  to: 'member_sessions#new',               as: :sign_in
-  post   '/member/sign_in',  to: 'member_sessions#create',            as: :begin_session
-  delete '/member/sign_out', to: 'member_sessions#destroy',           as: :sign_out
-  get    '/member/recover',  to: 'member_sessions#password_recovery', as: :password_recovery
-  post   '/member/recover',  to: 'member_sessions#send_recovery_kit', as: :recovery_kit
+  get    '/member/sign_in',          to: 'member_sessions#new',               as: :sign_in
+  post   '/member/sign_in',          to: 'member_sessions#create',            as: :begin_session
+  delete '/member/sign_out',         to: 'member_sessions#destroy',           as: :sign_out
+  get    '/member/recover',          to: 'member_sessions#password_recovery', as: :password_recovery
+  post   '/member/recover',          to: 'member_sessions#send_recovery_kit', as: :recovery_kit
+  get    '/change_email',            to: 'member_sessions#edit_email',        as: :edit_member_email
+  match  '/change_email',            to: 'member_sessions#update_email',      as: :update_member_email, via: [:patch, :put]
+  get    '/member/reconfirm/:token', to: 'member_sessions#reconfirm',         as: :reconfirmation
 
   # Members self-management
   get    '/register',                to: 'members#new',            as: :new_member
@@ -18,12 +21,9 @@ DiabeticToolbox::Engine.routes.draw do
   get    '/members/:id',             to: 'members#show',           as: :show_member
   get    '/me/:id',                  to: 'members#edit',           as: :edit_member
   match  '/me/:id',                  to: 'members#update',         as: :update_member, via: [:patch, :put]
-  get    '/edit_email',              to: 'members#edit_email',     as: :edit_member_email
-  match  '/edit_email',              to: 'members#update_email',   as: :update_member_email, via: [:patch, :put]
   get    '/dash',                    to: 'members#dash',           as: :member_dashboard
   delete '/membership/cancel/:id',   to: 'members#destroy',        as: :destroy_member
   get    '/membership/cancel',       to: 'members#confirm_delete', as: :last_chance
-  get    '/member/reconfirm/:token', to: 'members#reconfirm',      as: :reconfirmation
 
   # Settings for members
   get    '/setup',    to: 'settings#new',    as: :setup
