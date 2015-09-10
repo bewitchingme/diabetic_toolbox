@@ -13,7 +13,7 @@ module DiabeticToolbox
 
     #region Settings & Enums
     has_karma 'DiabeticToolbox::Recipe', as: :member, weight: 0.25
-    enum gender: [:male, :female]
+    enum gender: { male: 0, female: 1 }
     friendly_id :username, use: [:slugged, :finders]
     #endregion
 
