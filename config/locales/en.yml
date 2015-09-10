@@ -140,8 +140,12 @@ en:
         success: Account Deleted
         failure: 'Error: Could Not Delete'
       updated_email:
+        taken: Email in use by another member
         failure: 'Error: Email Unchanged'
         success: Confirmation Sent
+      reconfirm:
+        failure: 'Error: Confirmation Failed'
+        success: Email Changed - Please Sign In
     setting:
       created:
         success: Setup Complete
