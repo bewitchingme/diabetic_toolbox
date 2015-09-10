@@ -329,6 +329,8 @@ module DiabeticToolbox
           expect(result.success?).to eq true
           expect(result.actual.unconfirmed_email).to eq 'some@example.com'
           expect(updated.unconfirmed_email).to eq 'some@example.com'
+          expect(updated.confirmation_token).not_to be_empty
+          expect(updated.confirmation_sent_at.utc.to_i).to eq Time.now.utc.to_i
         end
         #endregion
 
