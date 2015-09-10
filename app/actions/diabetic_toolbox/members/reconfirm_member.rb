@@ -4,24 +4,34 @@ module DiabeticToolbox
   class ReconfirmMember < Action
     #region Init
     def initialize(token)
-      @member = Member.find_by_confirmation_token token
+      if token.blank?
+        @member = nil
+      else
+        @member = Member.find_by_confirmation_token token
+      end
     end
     #endregion
 
     #region Protected
     protected
     def _call
-      exchanged = false
-      exchanged = exchange unless email_in_use?
+      if @member.present?
+        exchanged = false
+        exchanged = exchange unless email_in_use?
 
-      if exchanged
-        success do |option|
-          option.subject = @member
-          option.message = I18n.t('flash.member.reconfirm.success')
+        if exchanged
+          success do |option|
+            option.subject = @member
+            option.message = I18n.t('flash.member.reconfirm.success')
+          end
+        else
+          failure do |option|
+            option.subject = @member
+            option.message = I18n.t('flash.member.reconfirm.failure')
+          end
         end
       else
         failure do |option|
-          option.subject = @member
           option.message = I18n.t('flash.member.reconfirm.failure')
         end
       end
