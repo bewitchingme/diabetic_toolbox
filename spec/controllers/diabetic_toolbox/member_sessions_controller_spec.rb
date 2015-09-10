@@ -19,6 +19,19 @@ module DiabeticToolbox
       it 'should be denied when trying to DELETE :destroy' do
         expect { delete :destroy }.to raise_error CanCan::AccessDenied
       end
+
+      it 'should be able to GET :password_recovery' do
+        get :password_recovery
+
+        expect(response).to have_http_status 200
+      end
+
+      it 'should be redirected to root_path when posting to send_recovery_kit' do
+        post :send_recovery_kit
+
+        expect(response).to have_http_status 302
+        expect(response).to redirect_to root_path
+      end
     end
     #endregion
 

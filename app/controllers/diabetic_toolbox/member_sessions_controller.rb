@@ -2,7 +2,7 @@ require_dependency 'diabetic_toolbox/application_controller'
 
 module DiabeticToolbox
   class MemberSessionsController < ApplicationController
-    load_and_authorize_resource class: 'DiabeticToolbox::Member'
+    authorize_resource class: false
     respond_to :html, :json
 
     def new
@@ -33,10 +33,12 @@ module DiabeticToolbox
 
     def password_recovery
       there_can_be_only_one
+      @member = Member.new
     end
 
     # TODO: Must create a mailer to send the recovery kit to the member.
     def send_recovery_kit
+      redirect_to sign_in_path
     end
 
     private
@@ -59,7 +61,7 @@ module DiabeticToolbox
     def redirect_when_signed_in
       if member_signed_in?
         redirect_to member_dashboard_path if current_member.configured?
-        redirect_to setup_path if !current_member.configured?
+        redirect_to setup_path unless current_member.configured?
       end
     end
   end
