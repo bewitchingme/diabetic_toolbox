@@ -39,7 +39,8 @@ module DiabeticToolbox
       actions = [
         :new, :create,
         :password_recovery,
-        :send_recovery_kit
+        :send_recovery_kit,
+        :recover, :release
       ]
       can actions, :member_session
     end
