@@ -45,8 +45,16 @@ module DiabeticToolbox
 
 
     def send_recovery_kit
-      # TODO: Must create a mailer to send the recovery kit to the member.
-      redirect_to sign_in_path
+      DiabeticToolbox.from :members, require: %w(recover_member_password)
+
+      result       = RecoverMemberPassword.new(recovery_params).call
+      flash[:info] = result.flash
+
+      if result.success?
+        redirect_to root_path
+      else
+        render :password_recovery
+      end
     end
     #endregion
 
@@ -103,7 +111,11 @@ module DiabeticToolbox
     end
 
     def change_email_params
-      params.require(:member).permit(:unconfirmed_email, :unconfirmed_email_confirmation)
+      params.require(:member).permit :unconfirmed_email, :unconfirmed_email_confirmation
+    end
+
+    def recovery_params
+      params.require(:member).permit :email
     end
 
     def there_can_be_only_one
