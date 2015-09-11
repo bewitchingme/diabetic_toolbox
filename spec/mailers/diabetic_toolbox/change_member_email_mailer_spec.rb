@@ -12,7 +12,7 @@ module DiabeticToolbox
 
       @member = build(:member)
       @member.unconfirmed_email    = 'test@example.com'
-      @member.confirmation_token   = DiabeticToolbox::ChangeMemberEmail.create_token
+      @member.confirmation_token   = ChangeMemberEmail.create_token
       @member.confirmation_sent_at = Time.now
       @member.save
 
