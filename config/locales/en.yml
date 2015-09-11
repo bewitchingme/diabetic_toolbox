@@ -5,7 +5,10 @@ en:
   mailers:
     change_member_email:
       primer: To confirm this email change, please click on the link below.
-      subject: 'Email Change Request'
+      subject: Email Change Request
+    recovery_kit:
+      primer: To recover the membership account associated with this email address, click on the link below.
+      subject: Password Recovery Kit
   recaptcha:
     errors:
       verification_failed: Please Verify Sentience
@@ -140,6 +143,9 @@ en:
     authenticatable:
       send_recovery_kit:
         ambiguous_response: Request Received
+      release:
+        success: Membership Recovered!
+        failure: 'Error: Could Not Recover'
     member:
       created:
         success: "Member %{first_name} Created"
