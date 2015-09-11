@@ -2,6 +2,10 @@ en:
   diabetic_toolbox:
     result:
       blank: Empty Result - Please Specify :message
+  mailers:
+    change_member_email:
+      primer: To confirm this email change, please click on the link below.
+      subject: 'Email Change Request'
   recaptcha:
     errors:
       verification_failed: Please Verify Sentience
