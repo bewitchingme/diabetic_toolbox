@@ -48,7 +48,7 @@ module DiabeticToolbox
 
     def _after_call
       if call_result.success?
-        # TODO: Mailer here
+        ChangeMemberEmailMailer.send_confirmation_link(@member).deliver_now
       end
     end
     #endregion
