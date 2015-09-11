@@ -33,6 +33,32 @@ module DiabeticToolbox
         expect(response).to have_http_status 302
         expect(response).to redirect_to root_path
       end
+
+      it 'should be able to GET :recover with token' do
+        DiabeticToolbox.from :members, require: %w(recover_member_password)
+        member.reset_password_token   = RecoverMemberPassword.create_token
+        member.reset_password_sent_at = Time.now
+        member.save
+
+        get :recover, token: member.reset_password_token
+
+        expect(response).to have_http_status 200
+      end
+
+      it 'should be able to POST :release with token' do
+        DiabeticToolbox.from :members, require: %w(recover_member_password)
+        member.reset_password_token   = RecoverMemberPassword.create_token
+        member.reset_password_sent_at = Time.now
+        member.save
+
+        post :release, token: member.reset_password_token, member: {password: 'password', password_confirmation: 'password'}
+        updated_member = Member.find member.id
+
+        expect(updated_member.reset_password_token).to eq nil
+        expect(updated_member.reset_password_sent_at).to eq nil
+        expect(response).to have_http_status 302
+        expect(response).to redirect_to sign_in_path
+      end
     end
     #endregion
 
