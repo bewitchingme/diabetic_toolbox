@@ -30,7 +30,7 @@ module DiabeticToolbox
     def _call
       @params.merge! confirmation_values
       change_request_successful = false
-      change_request_successful = @member.update @params unless email_in_use?
+      change_request_successful = @member.update( @params ) unless email_in_use?
 
       if change_request_successful
         success do |option|
