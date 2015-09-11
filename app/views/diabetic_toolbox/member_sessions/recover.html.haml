@@ -1,0 +1,19 @@
+.container-fluid
+  .row
+    .content-member-form
+      %h3 Set Password
+  .row
+    .content-member-form
+      %p
+        Please enter the password you wish to use.
+  .row
+    .content-member-form
+      = form_for @member, url: release_membership_path(params[:token]) do |f|
+        .form-group
+          = f.label :password, class: 'control-label'
+          = f.password_field :password, class: 'form-control'
+        .form-group
+          = f.label :password_confirmation, class: 'control-label'
+          = f.password_field :password_confirmation, class: 'form-control'
+        .text-center
+          = f.submit 'Finish', class: 'btn btn-default'
