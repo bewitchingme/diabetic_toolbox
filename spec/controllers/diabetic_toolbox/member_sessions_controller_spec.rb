@@ -27,7 +27,8 @@ module DiabeticToolbox
       end
 
       it 'should be redirected to root_path when posting to :send_recovery_kit' do
-        post :send_recovery_kit
+        member.save
+        post :send_recovery_kit, member: {email: member.email}
 
         expect(response).to have_http_status 302
         expect(response).to redirect_to root_path
