@@ -1,8 +1,8 @@
-require 'mail'
-
 module DiabeticToolbox
   class ChangeMemberEmailMailer < ApplicationMailer
-    #region Payload
+    require 'mail'
+
+    #region Mailmen
     def send_confirmation_link(member)
       @member = member
       if @member.present?
