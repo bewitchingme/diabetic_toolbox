@@ -73,6 +73,26 @@ module DiabeticToolbox
         redirect_to sign_in_path
       end
     end
+
+    def recover
+      sign_out
+      @member  = Member.new
+    end
+
+    def release
+      DiabeticToolbox.from :members, require: %w(release_member)
+
+      result = ReleaseMember.new( params[:token], release_params ).call
+
+      if result.success?
+        flash[:success] = result.flash
+        redirect_to sign_in_path
+      else
+        @member = result.actual
+        flash[:danger] = result.flash
+        render :recover
+      end
+    end
     #endregion
 
     #region Change Email
@@ -116,6 +136,10 @@ module DiabeticToolbox
 
     def recovery_params
       params.require(:member).permit :email
+    end
+
+    def release_params
+      params.require(:member).permit :password, :password_confirmation
     end
 
     def there_can_be_only_one
