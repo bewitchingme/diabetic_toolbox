@@ -1,1 +1,3 @@
-<%= reconfirmation_path @member.confirmation_token %>
+<%= t('mailers.change_member_email.primer') %>
+
+<%= reconfirmation_url @member.confirmation_token %>

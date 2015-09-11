@@ -1,2 +1,2 @@
-%p
-  %a{href: reconfirmation_path(@member.confirmation_token)}
+%p= t('mailers.change_member_email.primer')
+%p= link_to reconfirmation_url(@member.confirmation_token), reconfirmation_url(@member.confirmation_token)
