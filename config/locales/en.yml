@@ -111,6 +111,10 @@ en:
       messages:
         login_failure: Sign In Failed
         login_success: Welcome Back!
+      password_recovery:
+        heading: Account Recovery
+        recover: Recover
+        primer: Please provide us with the email address used to create the account so that we can send a recovery kit to you.
     settings:
       primer: >
         Before you begin, you must set the parameters to be used as outlined in your treatment plan.
@@ -133,6 +137,9 @@ en:
       root: Galleries
       new: New
   flash:
+    authenticatable:
+      send_recovery_kit:
+        ambiguous_response: Request Received
     member:
       created:
         success: "Member %{first_name} Created"
