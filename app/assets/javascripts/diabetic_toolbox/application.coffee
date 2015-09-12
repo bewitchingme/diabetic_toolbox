@@ -4,3 +4,6 @@
 #= require moment
 #= require bootstrap-datetimepicker
 #= require_tree .
+
+$ ->
+  $('[data-toggle="tooltip"]').tooltip()

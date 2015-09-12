@@ -29,11 +29,30 @@
 
 //endregion
 
+//region Error Messages
+.container-flash
+{
+  margin-bottom: 0px;
+  padding-bottom: 0px;
+}
+.alert-flash
+{
+  padding-top: 5px;
+  padding-bottom: 5px;
+  margin-bottom: 0px;
+}
+//endregion
+
 //region Content classes
 .content-document
 {
   @include column(12, 10, 10, 10);
   @include column-offsets(0, 1, 1, 1);
+}
+.content-flash
+{
+  @include column(12, 8, 6, 6);
+  @include column-offsets(0, 2, 3, 3);
 }
 .content-nav
 {
