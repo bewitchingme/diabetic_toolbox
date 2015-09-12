@@ -118,7 +118,13 @@ module DiabeticToolbox
             failed_attempts:          nil
         }
 
+        if @params.has_key? 'remember_me'
+          updates[:remembered_at]     = Time.now
+          updates[:remembrance_token] = new_token
+        end
+
         @member.update_columns updates
+        @member.reload
       end
     end
 
