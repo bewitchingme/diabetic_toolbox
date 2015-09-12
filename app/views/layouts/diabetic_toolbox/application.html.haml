@@ -37,4 +37,5 @@
                   %li= link_to( t('navigation.register'), new_member_path ) unless @ensure_cohesion.present?
                   %li= link_to t('navigation.authentication.common.sign_in'), sign_in_path unless @ensure_cohesion.present?
     #Application
+      = flash_messages
       = yield
