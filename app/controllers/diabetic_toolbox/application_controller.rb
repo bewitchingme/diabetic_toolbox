@@ -24,6 +24,7 @@ module DiabeticToolbox
     end
 
     def sign_out(scope = :diabetic_toolbox__member)
+      cookies.delete :remembrance_token
       request.env['warden'].logout scope
     end
 
@@ -65,8 +66,16 @@ module DiabeticToolbox
     private
     #region Authentication
     def initialize_member_session
+      recall_member
       @current_member  ||= request.env['warden'].user :diabetic_toolbox__member
       @current_ability = MemberAbility.new @current_member
+    end
+
+    def recall_member
+      if cookies.has_key? :remembrance_token
+        @current_member = Member.find_by_remembrance_token cookies[:remembrance_token]
+        begin_arbitrary_session @current_member if @current_member.present?
+      end
     end
     #endregion
 
