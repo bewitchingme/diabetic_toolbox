@@ -5,7 +5,11 @@ Warden::Strategies.add(:member) do
   end
 
   def authenticate!
-    member = DiabeticToolbox::MemberSession.new( env['REMOTE_ADDR'], params['member']).create
-    member.nil? ? fail!("Could not log in") : success!(member)
+    member_session = DiabeticToolbox::MemberSession.new( env['REMOTE_ADDR'], params['member'] )
+    member         = member_session.create
+
+    session[:result_message] = member_session.result_message unless member_session.in_progress?
+
+    member_session.in_progress? ? success!(member) : fail!('Could not log in')
   end
 end

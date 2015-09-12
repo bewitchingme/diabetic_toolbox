@@ -14,7 +14,10 @@ module DiabeticToolbox
 
     def respond
       unless request.get?
-        flash[:danger] = I18n.t('views.member_sessions.messages.login_failure')
+        if session.has_key? :result_message
+          flash[:danger] = session[:result_message]
+          session.delete :result_message
+        end
       end
 
       redirect_to sign_in_path
