@@ -12,5 +12,9 @@
               = f.label :password
               = f.password_field :password
             .form-group
+              %label
+                = check_box_tag 'member[remember_me]'
+                Remember me in the future
+            .form-group
               = f.submit t('navigation.authentication.common.sign_in')
               = link_to t('navigation.authentication.common.forgot_password'), password_recovery_path, class: 'btn btn-info btn-sm pull-right'
