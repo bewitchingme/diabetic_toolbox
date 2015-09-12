@@ -31,7 +31,7 @@ module DiabeticToolbox
 
     def _after_call
       if call_result.success?
-        # TODO: Implement a mailer here
+        DiabeticToolbox::RecoveryKitMailer.send_forgot_password_kit(@member).deliver_now
       end
     end
     #endregion
