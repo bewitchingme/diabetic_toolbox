@@ -11,6 +11,7 @@ require 'database_cleaner'
 require 'factory_girl_rails'
 require 'faker'
 require 'digest'
+require 'show_me_the_cookies'
 
 Warden.test_mode!
 
@@ -25,6 +26,8 @@ DatabaseCleaner.strategy = :truncation
 
 RSpec.configure do |config|
   config.include Warden::Test::ControllerHelpers, type: :controller
+  config.include ShowMeTheCookies,                type: :feature
+
   config.include DiabeticToolbox::Engine.routes.url_helpers
   config.mock_with :rspec
   config.use_transactional_fixtures = true
