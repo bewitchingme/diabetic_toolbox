@@ -7,8 +7,8 @@ module DiabeticToolbox
         email: 'frodo.baggins@example.com', username: 'Ring Bearer',
         password: 'password', password_confirmation: 'password',
         accepted_tos: true } }
-    let(:create_success_message) { 'Member Frodo Created' }
-    let(:create_failure_message) { 'Create Member Failed' }
+    let(:create_success_message) { 'Membership for Frodo created' }
+    let(:create_failure_message) { 'Membership registration failed' }
     let(:safe_model_data) { { first_name: 'Frodo', last_name: 'Baggins', username: 'Ring Bearer', slug: 'ring-bearer' } }
     let(:unconfirmed_email) { { unconfirmed_email: 'sample@example.com', unconfirmed_email_confirmation: 'sample@example.com'} }
     let(:validations_password_empty) { { password: ['Required', 'Between 8 and 64 characters'] } }
@@ -31,7 +31,7 @@ module DiabeticToolbox
 
           expect(create_member.actual.slug).to eq safe_model_data[:slug]
           expect(create_member.success?).to eq true
-          expect(create_member.actual.authenticate!(member_params[:password])).to eq true
+          expect(create_member.actual.authenticate(member_params[:password])).to eq true
           expect(create_member.response).to eq [create_success_message, {}, safe_model_data]
         end
         #endregion
