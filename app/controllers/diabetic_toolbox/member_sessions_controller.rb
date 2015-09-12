@@ -18,6 +18,10 @@ module DiabeticToolbox
       redirect_when_signed_in
       @member = sign_in!
 
+      if sign_in_params.has_key? :remember_me
+        cookies[:remembrance_token] = { value: @member.remembrance_token, expires: DiabeticToolbox.remember_for }
+      end
+
       if authenticated?
         flash[:success] = I18n.t('views.member_sessions.messages.login_success')
         redirect_to login_successful_path
@@ -126,8 +130,8 @@ module DiabeticToolbox
 
     #region Private
     private
-    def member_params
-      params.require(:member).permit :email, :password
+    def sign_in_params
+      params.require(:member).permit :email, :password, :remember_me
     end
 
     def change_email_params
