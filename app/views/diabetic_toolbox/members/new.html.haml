@@ -6,7 +6,7 @@
         %p
           %span.glyphicon.glyphicon-info-sign
           = t('views.members.new.primer')
-= form_for @member, url: create_member_url do |f|
+= form_for @member, url: create_member_url, builder: DiabeticToolbox::StandardFormBuilder do |f|
   .container-fluid
     .row
       .content-member-form.smooth
@@ -15,43 +15,43 @@
             = t('views.members.form.labels.your_name')
             %span.glyphicon.glyphicon-asterisk.asterisk
           .form-group
-            = f.text_field :first_name, class: 'form-control input-sm', autofocus: true, placeholder: t('views.members.form.placeholders.first_name'), tabindex: 1
+            = f.text_field :first_name, autofocus: true, placeholder: t('views.members.form.placeholders.first_name'), tabindex: 1
           .form-group
-            = f.text_field :last_name, class: 'form-control input-sm', placeholder: t('views.members.form.placeholders.last_name'), tabindex: 2
+            = f.text_field :last_name, placeholder: t('views.members.form.placeholders.last_name'), tabindex: 2
         .half.smooth
           %h4
             = t('views.members.form.labels.account')
             %span.glyphicon.glyphicon-asterisk.asterisk
           .form-group
             .input-group
-              = f.text_field :email, class: 'form-control input-sm', placeholder: t('views.members.form.placeholders.email'), tabindex: 3
+              = f.text_field :email, placeholder: t('views.members.form.placeholders.email'), tabindex: 3
               %span.input-group-addon
                 .glyphicon.glyphicon-envelope
           .form-group
             .input-group
-              = f.text_field :username, class: 'form-control input-sm', placeholder: t('views.members.form.placeholders.username'), tabindex: 4
+              = f.text_field :username, placeholder: t('views.members.form.placeholders.username'), tabindex: 4
               %span.input-group-addon
                 .glyphicon.glyphicon-user
           .form-group
             .input-group
-              = f.password_field :password, class: 'form-control input-sm', placeholder: t('views.members.form.placeholders.password'), tabindex: 5
+              = f.password_field :password, placeholder: t('views.members.form.placeholders.password'), tabindex: 5
               %span.input-group-addon
                 .glyphicon.glyphicon-lock
           .form-group
-            = f.password_field :password_confirmation, class: 'form-control input-sm', placeholder: t('views.members.form.placeholders.confirm'), tabindex: 6
+            = f.password_field :password_confirmation, placeholder: t('views.members.form.placeholders.confirm'), tabindex: 6
     .row
       .content-member-form.smooth
         .half.smooth
           %h4= t('views.members.form.labels.dob')
           .form-group
             #dob-picker.input-group
-              = f.text_field :dob, class: 'form-control input-sm', placeholder: t('views.members.form.placeholders.dob'), tabindex: 8
+              = f.text_field :dob, placeholder: t('views.members.form.placeholders.dob'), tabindex: 8
               %span#dob-addon.input-group-addon
                 %span.glyphicon.glyphicon-calendar
         .half.smooth
           %h4= t('views.members.form.labels.gender')
           .form-group
-            = f.select :gender, DiabeticToolbox::Member.gender_options, { include_blank: true }, {class: 'form-control input-sm', tabindex: 9}
+            = f.select :gender, DiabeticToolbox::Member.gender_options, { include_blank: true }, {tabindex: 9}
     .row
       .content-member-form.smooth
         .form-group
@@ -62,7 +62,7 @@
     .row
       .content-member-form.text-center.smooth
         .form-group
-          = f.submit t('views.members.new.register'), class: 'btn btn-default btn-sm'
+          = f.submit t('views.members.new.register')
 
 #terms.modal.fade{role: :dialog, 'aria-labelledby': t('views.members.new.tos')}
   .modal-dialog.modal-lg{role: :document}

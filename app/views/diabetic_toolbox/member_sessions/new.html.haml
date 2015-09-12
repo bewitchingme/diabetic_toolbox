@@ -4,13 +4,13 @@
       .panel.panel-default
         .panel-heading.panel-title= t('navigation.authentication.common.title')
         .panel-body
-          = form_for @member, url: begin_session_path do |f|
+          = form_for @member, url: begin_session_path, builder: DiabeticToolbox::StandardFormBuilder do |f|
             .form-group
-              = f.label :email, class: 'control-label'
-              = f.text_field :email, class: 'form-control input-sm', autofocus: true
+              = f.label :email
+              = f.text_field :email, autofocus: true
             .form-group
-              = f.label :password, class: 'control-label'
-              = f.password_field :password, class: 'form-control input-sm'
+              = f.label :password
+              = f.password_field :password
             .form-group
-              = f.submit t('navigation.authentication.common.sign_in'), class: 'btn btn-default btn-sm'
+              = f.submit t('navigation.authentication.common.sign_in')
               = link_to t('navigation.authentication.common.forgot_password'), password_recovery_path, class: 'btn btn-info btn-sm pull-right'

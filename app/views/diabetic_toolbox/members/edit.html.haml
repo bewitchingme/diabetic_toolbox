@@ -7,7 +7,7 @@
         .pull-right
           = @member.email
           = link_to content_tag(:span, '', class: 'fa fa-edit'), edit_member_email_path
-= form_for @member, url: update_member_url(@member) do |f|
+= form_for @member, url: update_member_url(@member), builder: DiabeticToolbox::StandardFormBuilder do |f|
   .container-fluid
     .row
       .content-member-form.smooth
@@ -15,22 +15,22 @@
           %h4= t('views.members.form.labels.about_you')
           .form-group
             #dob-picker.input-group
-              = f.text_field :dob, class: 'form-control input-sm', placeholder: t('views.members.form.placeholders.dob')
+              = f.text_field :dob, placeholder: t('views.members.form.placeholders.dob')
               %span#dob-addon.input-group-addon
                 %span.glyphicon.glyphicon-calendar
           .form-group
-            = f.select :gender, DiabeticToolbox::Member.gender_options, { include_blank: true }, {class: 'form-control input-sm'}
+            = f.select :gender, DiabeticToolbox::Member.gender_options, { include_blank: true }
         .half.smooth
           %h4
             = t('views.members.form.labels.change_password')
           .form-group
             .input-group
-              = f.password_field :password, class: 'form-control input-sm', placeholder: t('views.members.form.placeholders.password')
+              = f.password_field :password, placeholder: t('views.members.form.placeholders.password')
               %span.input-group-addon
                 .glyphicon.glyphicon-lock
           .form-group
-            = f.password_field :password_confirmation, class: 'form-control input-sm', placeholder: t('views.members.form.placeholders.confirm')
+            = f.password_field :password_confirmation, placeholder: t('views.members.form.placeholders.confirm')
     .row
       .content-member-form.text-center.smooth
         .form-group
-          = f.submit t('views.members.update.save'), class: 'btn btn-default btn-sm'
+          = f.submit t('views.members.update.save')

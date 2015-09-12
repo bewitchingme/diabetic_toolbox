@@ -1,11 +1,11 @@
 .container-fluid
   .row
     .content-member-form
-      = form_for @member, url: update_member_email_path do |f|
+      = form_for @member, url: update_member_email_path, builder: DiabeticToolbox::StandardFormBuilder do |f|
         .form-group
-          = f.label :unconfirmed_email, class: 'control-label'
-          = f.text_field :unconfirmed_email, class: 'form-control', autofocus: true, value: nil, placeholder: 'New Email'
+          = f.label :unconfirmed_email
+          = f.text_field :unconfirmed_email, autofocus: true, placeholder: t('views.member_sessions.edit_email.placeholders.new_email')
         .form-group
-          = f.label :unconfirmed_email_confirmation, class: 'control-label'
-          = f.text_field :unconfirmed_email_confirmation, class: 'form-control', placeholder: 'Confirmed New Email'
-        .text-center= f.submit 'Change', class: 'btn btn-default'
+          = f.label :unconfirmed_email_confirmation
+          = f.text_field :unconfirmed_email_confirmation, placeholder: t('views.member_sessions.edit_email.placeholders.confirmed_new_email')
+        .text-center= f.submit t('views.member_sessions.edit_email.change')

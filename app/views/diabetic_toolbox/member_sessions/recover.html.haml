@@ -1,19 +1,18 @@
 .container-fluid
   .row
     .content-member-form
-      %h3 Set Password
+      %h3= t('views.member_sessions.recover.set_password')
   .row
     .content-member-form
-      %p
-        Please enter the password you wish to use.
+      %p= t('views.member_sessions.recover.primer')
   .row
     .content-member-form
-      = form_for @member, url: release_membership_path(params[:token]) do |f|
+      = form_for @member, url: release_membership_path(params[:token]), builder: DiabeticToolbox::StandardFormBuilder do |f|
         .form-group
-          = f.label :password, class: 'control-label'
-          = f.password_field :password, class: 'form-control'
+          = f.label :password
+          = f.password_field :password
         .form-group
-          = f.label :password_confirmation, class: 'control-label'
-          = f.password_field :password_confirmation, class: 'form-control'
+          = f.label :password_confirmation
+          = f.password_field :password_confirmation
         .text-center
-          = f.submit 'Finish', class: 'btn btn-default'
+          = f.submit t('views.member_sessions.recover.finish')
