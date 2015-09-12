@@ -237,6 +237,8 @@ GEM
     sexp_processor (4.6.0)
     shoulda-matchers (2.8.0)
       activesupport (>= 3.0.0)
+    show_me_the_cookies (3.0.0)
+      capybara (~> 2.0)
     slop (3.6.0)
     sprockets (3.3.3)
       rack (~> 1.0)
@@ -271,4 +273,5 @@ DEPENDENCIES
   rdoc-generator-fivefish
   rspec-rails
   shoulda-matchers
+  show_me_the_cookies
   warden-rspec-rails
