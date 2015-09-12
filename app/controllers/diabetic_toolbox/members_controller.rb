@@ -31,7 +31,7 @@ module DiabeticToolbox
             redirect_to setup_path
           else
             @member         = result.actual
-            flash[:warning] = result.flash
+            flash[:danger] = result.flash
             render :new
           end
         end
@@ -65,7 +65,7 @@ module DiabeticToolbox
             redirect_to edit_member_path result.actual
           else
             @member         = result.actual
-            flash[:warning] = result.flash
+            flash[:danger] = result.flash
             render :edit
           end
         end
