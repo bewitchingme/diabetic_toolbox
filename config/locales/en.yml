@@ -112,12 +112,22 @@ en:
         overview: Overview
     member_sessions:
       messages:
+        account_locked: Account Locked
         login_failure: Sign In Failed
         login_success: Welcome Back!
       password_recovery:
         heading: Account Recovery
         recover: Recover
         primer: Please provide us with the email address used to create the account so that we can send a recovery kit to you.
+      edit_email:
+        placeholders:
+          new_email: New Email
+          confirmed_new_email: Confirmed New Email
+        change: Change
+      recover:
+        primer: After setting a new password here you will be asked to sign in to your account before proceeding.
+        finish: Finish
+        set_password: Set Password
     settings:
       primer: >
         Before you begin, you must set the parameters to be used as outlined in your treatment plan.
@@ -131,6 +141,7 @@ en:
       mg: mg/dL
       carbohydrates: grams of carbs
       calories: calories
+      save: Save
       titles:
         measurements: Measurement Systems
         settings: Treatment Values
@@ -148,8 +159,8 @@ en:
         failure: 'Error: Could Not Recover'
     member:
       created:
-        success: "Member %{first_name} Created"
-        failure: Create Member Failed
+        success: "Membership for %{first_name} created"
+        failure: Membership registration failed
       updated:
         success: Saved
         failure: 'Error: Record Unsaved'
