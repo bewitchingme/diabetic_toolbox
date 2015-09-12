@@ -17,5 +17,11 @@ module DiabeticToolbox
       end
       link_to t('navigation.brand'), default_path, class: 'navbar-brand'
     end
+
+    def flash_messages
+      return '' if flash.count.eql? 0
+
+      render partial: 'common/flash'
+    end
   end
 end
