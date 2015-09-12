@@ -30,13 +30,6 @@ module DiabeticToolbox
   @@safe = {
       member: [:first_name, :last_name, :username, :slug]
   }
-  @@attempts_before_lock = 3
-  #endregion
-
-  #region Security Methods
-  def self.max_attempts
-    @@attempts_before_lock
-  end
   #endregion
 
   #region Data Response Safeties

@@ -33,7 +33,7 @@ module DiabeticToolbox
     end
   end
 
-  mattr_accessor :mailer_from_address
+  mattr_accessor :mailer_from_address, :max_attempts, :remember_for
 
   def self.config
     yield self
