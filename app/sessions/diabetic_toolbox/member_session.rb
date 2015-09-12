@@ -34,20 +34,18 @@ module DiabeticToolbox
     #endregion
 
     #region Init
-    def initialize(remote_user_ip_address, params)
-      @ip      = remote_user_ip_address
+    def initialize(remote_addr, params)
+      @ip      = remote_addr
       @params  = params
-      @member  = nil
+      @member  = Member.find_by_email @params['email']
       @success = false
+      check_the_lock
     end
     #endregion
 
     #region Instance Methods
     def create
-      @member = DiabeticToolbox::Member.find_by_email @params['email']
-
-      if @member.present?
-        @success = true
+      if @member.present? && unlocked?
         return @member if authenticates?(@params['password']) && housekeeping?
       end
     end
@@ -60,8 +58,20 @@ module DiabeticToolbox
       if in_progress?
         I18n.t('views.member_sessions.messages.login_success')
       else
-        I18n.t('views.member_sessions.messages.login_failure')
+        if unlocked?
+          I18n.t('views.member_sessions.messages.login_failure')
+        else
+          I18n.t('views.member_sessions.messages.account_locked')
+        end
       end
+    end
+
+    def locked?
+      @locked.eql? true
+    end
+
+    def unlocked?
+      @locked.eql? false
     end
     #endregion
 
@@ -79,24 +89,63 @@ module DiabeticToolbox
 
     #region Private
     private
+    def check_the_lock
+      @locked = false
+
+      if @member.present? && @member.last_locked_at.present? && @member.unlock_token.present?
+        @locked = true
+      end
+    end
 
     def authenticates?(password)
-      @member && @member.authenticate!(password)
+      if unlocked? && @member.authenticate(password)
+        @success = true
+      else
+        log_failed_attempt
+      end
+
+      @success
     end
 
     def housekeeping?
-      updates = {
-          last_session_began_at:    @member.current_session_began_at,
-          last_session_ip:          @member.current_session_ip,
-          session_token:            new_session_token,
-          current_session_began_at: Time.now,
-          current_session_ip:       @ip
-      }
+      if @success
+        updates = {
+            last_session_began_at:    @member.current_session_began_at,
+            last_session_ip:          @member.current_session_ip,
+            session_token:            new_token,
+            current_session_began_at: Time.now,
+            current_session_ip:       @ip,
+            failed_attempts:          nil
+        }
 
-      @member.update_attributes updates
+        @member.update_columns updates
+      end
     end
 
-    def new_session_token
+    def log_failed_attempt
+      if last_attempt_before_lock?
+        lock!
+      else
+        Member.increment_counter :failed_attempts, @member.id
+      end
+    end
+
+    def lock!
+      @locked = true
+      updates = {
+        unlock_token: new_token,
+        last_locked_at: Time.now,
+        failed_attempts: DiabeticToolbox.max_attempts
+      }
+
+      @member.update_columns updates
+    end
+
+    def last_attempt_before_lock?
+      (@member.failed_attempts.to_i + 1) >= DiabeticToolbox.max_attempts
+    end
+
+    def new_token
       return Digest::SHA2.hexdigest( Time.now.to_f.to_s )
     end
 
