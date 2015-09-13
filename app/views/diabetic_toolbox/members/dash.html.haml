@@ -9,7 +9,7 @@
           .row
             .content-quickies.smooth
               .quickies-item= render_member_overview
-              .quickies-item= link_to t('views.members.dash.record'), '#', class: 'btn btn-default btn-sm btn-block'
+              .quickies-item= link_to t('views.members.dash.record'), record_reading_path, class: 'btn btn-default btn-sm btn-block'
               .quickies-item= link_to t('views.members.dash.report'), '#', class: 'btn btn-default btn-sm btn-block'
             .content-history.smooth
               #chartkick.panel-body
