@@ -23,6 +23,7 @@ module DiabeticToolbox
     def self_manage
       can [:manage, :dash, :confirm_delete], Member,  id:        @member.id
       can [:manage],                         Setting, member_id: @member.id
+      can [:manage],                         Reading, member_id: @member.id
       authenticated
     end
     #endregion
