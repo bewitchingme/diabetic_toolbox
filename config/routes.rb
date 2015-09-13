@@ -36,4 +36,10 @@ DiabeticToolbox::Engine.routes.draw do
   get    '/settings', to: 'settings#edit',   as: :settings
   match  '/settings', to: 'settings#update', as: :update_settings, via: [:patch, :put]
   #endregion
+
+  #region Readings for members
+  get  '/readings', to: 'readings#index',  as: :list_readings
+  get  '/record',   to: 'readings#new',    as: :record_reading
+  post '/record',   to: 'readings#create', as: :create_reading
+  #endregion
 end
