@@ -89,6 +89,11 @@
   @include column(10, 10, 8, 8);
   @include column-offsets(1, 1, 2, 2);
 }
+.content-readings
+{
+  @include column(12, 8, 6, 6);
+  @include column-offsets(0, 2, 3, 3);
+}
 .content-history
 {
   @include column(12, 12, 6, 6);
