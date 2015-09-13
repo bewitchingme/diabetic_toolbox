@@ -145,6 +145,8 @@ en:
       titles:
         measurements: Measurement Systems
         settings: Treatment Values
+    readings:
+      record: Record
   crumbs:
     root: Home
     model:
@@ -181,6 +183,10 @@ en:
       updated:
         success: Saved
         failure: Oops
+    reading:
+      created:
+        success: Your reading was successfully recorded
+        failure: Sorry, your reading could not be recorded
   activerecord:
     options:
       diabetic_toolbox/setting:
