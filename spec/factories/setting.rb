@@ -1,5 +1,3 @@
-require 'faker'
-
 module DiabeticToolbox
   FactoryGirl.define do
     # This factory is only for use with a member when we don't care
