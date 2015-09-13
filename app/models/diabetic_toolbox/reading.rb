@@ -15,5 +15,23 @@ module DiabeticToolbox
          before_bedtime:   6
     }
     #endregion
+
+    #region Validations
+    validates :glucometer_value, presence: { message: I18n.t('activerecord.validations.common.required') }
+    validates :test_time, presence: { message: I18n.t('activerecord.validations.common.required') }
+    validates :meal, presence: { message: I18n.t('activerecord.validations.common.required') },
+              inclusion: { in: self.meals, message: I18n.t('activerecord.validations.common.illegal_value') }
+    validates :intake, presence: { message: I18n.t('activerecord.validations.common.required') }
+    #endregion
+
+    #region Select Options
+    def self.meal_options
+      options = []
+      self.meals.each do |k,v|
+        options.push [k.to_s.titlecase, k]
+      end
+      options
+    end
+    #endregion
   end
 end
