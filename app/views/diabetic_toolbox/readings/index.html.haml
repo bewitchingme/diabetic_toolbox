@@ -1,7 +1,10 @@
 .container-fluid
   .row
     .content-readings
-      - if current_member.readings.size > 0
+      - if current_member.has_no_readings?
+        .text-center
+          No Readings Recorded
+      - else
         %table.table.table-condensed.table-striped
           %thead
             %tr
@@ -14,6 +17,3 @@
                 %td= @reading.glucometer_value
                 %td= @reading.meal.to_s.titlecase
                 %td= @reading.intake
-      - else
-        .text-center
-          No Readings Recorded
