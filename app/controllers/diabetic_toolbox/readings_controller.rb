@@ -9,6 +9,8 @@ module DiabeticToolbox
 
     #region Before Action
     before_action :set_reading, only: [:new]
+    before_action :set_current_setting
+    before_action :deploy_member_tabs, only: [:index, :new]
     #endregion
 
     #region Read
@@ -44,6 +46,10 @@ module DiabeticToolbox
 
     def set_reading
       @reading = current_member.readings.build
+    end
+
+    def set_current_setting
+      @current_setting = current_member.settings.last
     end
     #endregion
   end
