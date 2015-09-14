@@ -1,3 +1,3 @@
 module DiabeticToolbox
-  VERSION = '0.0.62'
+  VERSION = '0.1.34'
 end
