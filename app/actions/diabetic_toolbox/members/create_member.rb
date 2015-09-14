@@ -16,10 +16,13 @@ module DiabeticToolbox
   #
   class CreateMember < Action
     # :enddoc:
+    #region Init
     def initialize(member_params)
       super member_params
     end
+    #endregion
 
+    #region Protected
     protected
     def _call
       @member = Member.new @params
@@ -42,5 +45,6 @@ module DiabeticToolbox
         # TODO: Must implement the mailer here to confirm the member.
       end
     end
+    #endregion
   end
 end
