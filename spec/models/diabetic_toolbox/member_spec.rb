@@ -402,7 +402,7 @@ module DiabeticToolbox
           expect(reconfirm_result.success?).to eq true
           expect(member.confirmation_token).to eq nil
           expect(member.unconfirmed_email).to eq nil
-          expect(member.confirmed_at.utc.to_i).to eq Time.now.utc.to_i
+          expect(member.confirmed_at).not_to eq nil
           expect(member.confirmation_sent_at).to eq nil
           expect(member.email).to eq unconfirmed_email[:unconfirmed_email]
         end
