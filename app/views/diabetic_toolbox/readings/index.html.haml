@@ -1,8 +1,14 @@
 .container-fluid
   .row
-    #dashboard.content-dashboard
+    #dashboard.content-dashboard.smooth
       .separator
       .text-center= render_member_navigation :readings
+      .separator
+      .text-center
+        #reading-actions.list-group.list-group-horizontal
+          %a.list-group-item.active{href: list_readings_path} History
+          %a.list-group-item{href: record_reading_path} Record
+      .separator
       - if current_member.has_no_readings?
         .text-center
           No Readings Recorded
@@ -12,14 +18,16 @@
             %tr
               %th Reading
               %th When
-              %th Intake
+              %th.hidden-xs Intake
               %th.text-right On
           %tbody
             - current_member.readings.each do |reading|
               %tr
-                %td= reading.glucometer_value.to_s
+                %td
+                  = reading.glucometer_value
+                  %span.hidden-xs= glucometer_type @current_setting
                 %td= reading.meal.to_s.titlecase
-                %td= reading.intake.to_s
+                %td.hidden-xs= "#{reading.intake.to_s} #{intake_type(@current_setting)}"
                 %td.text-right
                   %span.hidden-xs.hidden-sm= "#{time_ago_in_words( reading.created_at.localtime )} ago"
                   %span.hidden-xs.hidden-sm= "(#{reading.created_at.localtime.strftime('%D')})"

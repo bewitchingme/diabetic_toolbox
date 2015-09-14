@@ -4,7 +4,12 @@
       .separator
       .text-center= render_member_navigation :readings
       .separator
-      .content-readings
+      .text-center
+        #reading-actions.list-group.list-group-horizontal
+          %a.list-group-item{href: list_readings_path} History
+          %a.list-group-item.active{href: record_reading_path} Record
+      .separator
+      .content-readings.smooth
         = form_for @reading, url: create_reading_path, builder: DiabeticToolbox::StandardFormBuilder do |f|
           .half
             .form-group
@@ -12,7 +17,7 @@
               .input-group
                 = f.text_field :glucometer_value, autofocus: true, tabindex: 1, placeholder: '5.5'
                 %span.input-group-addon
-                  = bootstrap_addon_glucometer @current_setting
+                  = glucometer_type @current_setting
             .form-group
               = f.label :test_time
               #test-time-picker.input-group
@@ -25,7 +30,7 @@
               .input-group
                 = f.text_field :intake, tabindex: 3, placeholder: 'Qty.'
                 %span.input-group-addon
-                  = bootstrap_addon_intake @current_setting
+                  = intake_type @current_setting
             .form-group
               = f.label :meal
               = f.select :meal, meal_options, {}, {tabindex: 4}
