@@ -1,7 +1,7 @@
-%nav
-  %ul#member_nav.nav.nav-tabs.nav-justified.responsive
-    - @tabs.each do |tab,anchor|
-      %li{role: :presentation, class: "#{'active' if active.eql?(tab)}"}
-        %a.pill{href: anchor[2], rel: :relativeanchor, alt: anchor[0], title: anchor[0]}
+.row
+  .content-member
+    #dashboard_tabs.list-group.list-group-horizontal
+      - @tabs.each do |tab,anchor|
+        %a{class: "list-group-item #{tab.to_s} #{'active' if active.eql?(tab)}", href: anchor[2], rel: :relativeanchor, alt: anchor[0], title: anchor[0]}
           %span{ class: "fa fa-#{anchor[1]}" }
           .hidden-xs.hidden-sm= anchor[0]
