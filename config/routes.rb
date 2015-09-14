@@ -38,8 +38,8 @@ DiabeticToolbox::Engine.routes.draw do
   #endregion
 
   #region Readings for members
-  get  '/readings', to: 'readings#index',  as: :list_readings
-  get  '/record',   to: 'readings#new',    as: :record_reading
-  post '/record',   to: 'readings#create', as: :create_reading
+  get  '/dash/readings', to: 'readings#index',  as: :list_readings
+  get  '/dash/record',   to: 'readings#new',    as: :record_reading
+  post '/dash/record',   to: 'readings#create', as: :create_reading
   #endregion
 end
