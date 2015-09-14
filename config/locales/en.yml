@@ -216,6 +216,11 @@ en:
         correction_begins_at: Corrections start at...
         increments_per: 1 unit correction for every...
         ll_units_per_day: '# units long-lasting insulin'
+      diabetic_toolbox/reading:
+        glucometer_value: Reading
+        intake: Meal Quantity
+        test_time: Taken At
+        meal: Reading Taken...
     validations:
       common:
         required: Required
