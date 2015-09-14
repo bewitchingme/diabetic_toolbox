@@ -23,20 +23,20 @@
               = f.label :intake_ratio
               .input-group
                 = f.text_field :intake_ratio
-                #intake_measurement_addon.input-group-addon= bootstrap_addon_intake(@setting)
+                #intake_measurement_addon.input-group-addon= intake_type(@setting)
           .half.smooth
             .form-group
               = f.label :correction_begins_at
               .input-group
                 = f.text_field :correction_begins_at
-                #correction_begins_at_addon.input-group-addon= bootstrap_addon_glucometer(@setting)
+                #correction_begins_at_addon.input-group-addon= glucometer_type(@setting)
         .row
           .half.smooth
             .form-group
               = f.label :increments_per
               .input-group
                 = f.text_field :increments_per
-                #increments_per_addon.input-group-addon= bootstrap_addon_glucometer(@setting, true)
+                #increments_per_addon.input-group-addon= glucometer_type(@setting, true)
           .half.smooth
             .form-group
               = f.label :ll_units_per_day
