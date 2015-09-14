@@ -109,6 +109,17 @@
 }
 //endregion
 
+//region Pagination
+.pagination-previous, .pagination-next
+{
+  @include column(2, 2, 2, 2);
+}
+.pagination-entries
+{
+  @include column(8, 8, 8, 8);
+}
+//endregion
+
 //region Dashboard
 .dashboard-summary-item
 {
