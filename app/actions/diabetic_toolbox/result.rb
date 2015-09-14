@@ -1,5 +1,36 @@
 module DiabeticToolbox
+  # = Result
+  #
+  # This module is used to spawn either a success or failure result object
+  # specifically with respect to interactions with ActiveRecord models.  They
+  # are configured with the an object of the model itself (the subject) and
+  # a message (intended to be used as a flash message.)  An example:
+  #
+  #   @user = User.new params
+  #   if @user.save
+  #     result = Result.success do |option|
+  #       option.subject = @user
+  #       option.message = 'User Saved'
+  #     end
+  #   end
+  #
+  # The process for creating a Failure result would be, similarly:
+  #
+  #   @user = User.new params
+  #   if @user.save
+  #     result = Result.success do |option|
+  #       option.subject = @user
+  #       option.message = 'User Saved'
+  #     end
+  #   else
+  #     result = Result.failure do |option|
+  #       option.subject = @user
+  #       option.message = 'Error!'
+  #     end
+  #   end
+  #
   module Result
+    # :enddoc:
     #region Options
     class Options
       attr_accessor :subject, :message
