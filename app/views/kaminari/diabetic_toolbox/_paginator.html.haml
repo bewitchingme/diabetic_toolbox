@@ -1,0 +1,8 @@
+= paginator.render do
+  .pagination-previous.text-left
+    = first_page_tag
+    = prev_page_tag
+  .pagination-entries.text-center= page_entries_info subject if subject.present?
+  .pagination-next.text-right
+    = next_page_tag
+    = last_page_tag
