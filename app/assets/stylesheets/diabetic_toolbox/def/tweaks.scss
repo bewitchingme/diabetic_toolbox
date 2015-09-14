@@ -91,8 +91,8 @@
 }
 .content-readings
 {
-  @include column(12, 8, 6, 6);
-  @include column-offsets(0, 2, 3, 3);
+  @include column(12, 10, 8, 6);
+  @include column-offsets(0, 1, 2, 3);
 }
 .content-history
 {
@@ -110,6 +110,53 @@
 //endregion
 
 //region Dashboard
+.dashboard-summary-item
+{
+  @include column(2, 2, 2, 2);
+  @include column-offsets(1, 1, 1, 1);
+}
+.dashboard-nav-item
+{
+  @include column(2, 2, 2, 2);
+}
+#dashboard
+{
+}
+#dashboard_tabs a.readings
+{
+  border-left-width: 0px;
+  border-right-width: 0px;
+}
+#dashboard_tabs a.reports
+{
+  border-right-width: 0px;
+}
+#dashboard_tabs a.recipes
+{
+  border-right-width: 0px;
+}
+.separator
+{
+  margin-top: 5px;
+  margin-bottom: 5px;
+  @include column(12, 12, 12, 12);
+}
+.list-group-horizontal .list-group-item {
+  display: inline-block;
+}
+.list-group-horizontal .list-group-item {
+  margin-bottom: 0;
+  margin-left:-4px;
+  margin-right: 0;
+}
+.list-group-horizontal .list-group-item:first-child {
+  border-top-right-radius:0;
+  border-bottom-left-radius:4px;
+}
+.list-group-horizontal .list-group-item:last-child {
+  border-top-right-radius:4px;
+  border-bottom-left-radius:0;
+}
 .quickies-item
 {
   display: block;
@@ -243,6 +290,17 @@ UL#member_nav > LI > A
         }
       }
     }
+  }
+}
+//endregion
+
+//region Readings
+#reading-actions.list-group.list-group-horizontal .list-group-item
+{
+  padding: 5px 8px;
+  &:last-child
+  {
+    border-left-width: 0px;
   }
 }
 //endregion
