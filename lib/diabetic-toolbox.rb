@@ -3,7 +3,7 @@
 require 'warden'
 require 'diabetic_toolbox/engine'
 require 'sessions/session'
-require 'diabetic_toolbox/nutritional_facts'
+require 'diabetic_toolbox/intake_nutrition'
 require 'diabetic_toolbox/reference_standard'
 require 'paperclip'
 require 'haml'
@@ -58,8 +58,8 @@ module DiabeticToolbox
 
   #region Calculations
   # http://www.wikihow.com/Convert-Grams-to-Calories
-  def grams_to_calories(intake_nutrition)
-    (intake_nutrition.protein * 4) + (intake_nutrition.carbohydrate * 4) + (intake_nutrition.fat * 9)
+  def self.grams_to_calories(intake_nutrition)
+    (intake_nutrition.for(:protein) * 4) + (intake_nutrition.for(:carbohydrate) * 4) + (intake_nutrition.for(:fat) * 9)
   end
   #endregion
 end
