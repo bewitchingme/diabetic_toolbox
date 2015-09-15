@@ -50,6 +50,10 @@ module DiabeticToolbox
       protein:      {value: 51,   unit: :grams}
     }
 
+    def self.valid_nutrient?(nutrient)
+      true if @nutrients.keys.include? nutrient
+    end
+
     def self.get(nutrient)
       @nutrients[nutrient]
     end
