@@ -1,6 +1,13 @@
 .container-fluid
   .row
     .content-member-form
+      %h3 Change Email
+      .take-notice
+        %p
+          %span.glyphicon.glyphicon-info-sign
+          = t('views.member_sessions.edit_email.primer')
+  .row
+    .content-member-form
       = form_for @member, url: update_member_email_path, builder: DiabeticToolbox::StandardFormBuilder do |f|
         .form-group
           = f.label :unconfirmed_email

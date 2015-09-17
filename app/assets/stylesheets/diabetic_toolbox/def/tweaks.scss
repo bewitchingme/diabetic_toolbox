@@ -18,6 +18,15 @@
   margin-bottom: 8px;
   color: $brand-info;
 }
+.take-notice
+{
+  padding-top: 10px;
+  padding-bottom: 3px;
+  padding-left: 10px;
+  color: $brand-info;
+  font-weight: 500;
+  letter-spacing: 1.2px;
+}
 //endregion
 
 //region Authentication
@@ -262,15 +271,6 @@ UL#member_nav > LI > A
 //endregion
 
 //region Members
-#member-welcome
-{
-  padding-top: 10px;
-  padding-bottom: 3px;
-  padding-left: 10px;
-  color: $brand-info;
-  font-weight: 500;
-  letter-spacing: 1.2px;
-}
 .asterisk
 {
   font-size: floor($font-size-base * 0.92);
