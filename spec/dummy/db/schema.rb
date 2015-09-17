@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150822224023) do
+ActiveRecord::Schema.define(version: 20150917033554) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -81,6 +81,17 @@ ActiveRecord::Schema.define(version: 20150822224023) do
   add_index "diabetic_toolbox_members", ["slug"], name: "index_diabetic_toolbox_members_on_slug", unique: true, using: :btree
   add_index "diabetic_toolbox_members", ["unlock_token"], name: "index_diabetic_toolbox_members_on_unlock_token", unique: true, using: :btree
 
+  create_table "diabetic_toolbox_nutritional_facts", force: :cascade do |t|
+    t.integer  "recipe_id"
+    t.string   "nutrient"
+    t.float    "quantity"
+    t.boolean  "verified",   default: false, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "diabetic_toolbox_nutritional_facts", ["recipe_id"], name: "index_diabetic_toolbox_nutritional_facts_on_recipe_id", using: :btree
+
   create_table "diabetic_toolbox_readings", force: :cascade do |t|
     t.integer  "member_id"
     t.float    "glucometer_value"
@@ -100,15 +111,14 @@ ActiveRecord::Schema.define(version: 20150822224023) do
     t.integer  "member_id"
     t.string   "name"
     t.integer  "servings"
-    t.integer  "grams_carbohydrate_per_serving"
-    t.integer  "calories_per_serving"
-    t.integer  "grams_fat_per_serving"
-    t.integer  "grams_protein_per_serving"
-    t.datetime "created_at",                     null: false
-    t.datetime "updated_at",                     null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.boolean  "published"
   end
 
   add_index "diabetic_toolbox_recipes", ["member_id"], name: "index_diabetic_toolbox_recipes_on_member_id", using: :btree
+  add_index "diabetic_toolbox_recipes", ["published"], name: "index_diabetic_toolbox_recipes_on_published", using: :btree
+  add_index "diabetic_toolbox_recipes", ["servings"], name: "index_diabetic_toolbox_recipes_on_servings", using: :btree
 
   create_table "diabetic_toolbox_report_configurations", force: :cascade do |t|
     t.integer  "member_id"
@@ -176,18 +186,5 @@ ActiveRecord::Schema.define(version: 20150822224023) do
   add_index "diabetic_toolbox_votes", ["voteable_id", "voteable_type"], name: "index_diabetic_toolbox_votes_on_voteable_id_and_voteable_type", using: :btree
   add_index "diabetic_toolbox_votes", ["voter_id", "voter_type", "voteable_id", "voteable_type"], name: "fk_one_vote_per_member", unique: true, using: :btree
   add_index "diabetic_toolbox_votes", ["voter_id", "voter_type"], name: "index_diabetic_toolbox_votes_on_voter_id_and_voter_type", using: :btree
-
-  create_table "friendly_id_slugs", force: :cascade do |t|
-    t.string   "slug",                      null: false
-    t.integer  "sluggable_id",              null: false
-    t.string   "sluggable_type", limit: 50
-    t.string   "scope"
-    t.datetime "created_at"
-  end
-
-  add_index "friendly_id_slugs", ["slug", "sluggable_type", "scope"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope", unique: true, using: :btree
-  add_index "friendly_id_slugs", ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type", using: :btree
-  add_index "friendly_id_slugs", ["sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_id", using: :btree
-  add_index "friendly_id_slugs", ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type", using: :btree
 
 end
