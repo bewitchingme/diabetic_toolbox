@@ -14,7 +14,7 @@ module DiabeticToolbox
       if @recipe.save
         success do |option|
           option.subject = @recipe
-          option.message = I18n.t('flash.recipe.created.success', @recipe.name)
+          option.message = I18n.t('flash.recipe.created.success', recipe_name: @recipe.name)
         end
       else
         failure do |option|
