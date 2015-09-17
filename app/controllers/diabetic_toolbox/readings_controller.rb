@@ -32,6 +32,7 @@ module DiabeticToolbox
         flash[:success] = result.flash
         redirect_to list_readings_path
       else
+        deploy_member_tabs
         @reading       = result.actual
         flash[:danger] = result.flash
         render :new
