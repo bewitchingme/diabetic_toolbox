@@ -187,6 +187,10 @@ en:
       created:
         success: Your reading was successfully recorded
         failure: Sorry, your reading could not be recorded
+    recipe:
+      created:
+        success: "Recipe %{recipe_name} created"
+        failure: Sorry, your recipe could not be saved
   activerecord:
     options:
       diabetic_toolbox/setting:
