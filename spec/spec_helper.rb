@@ -43,4 +43,8 @@ RSpec.configure do |config|
     member.save if member.new_record?
     warden.set_user member, scope: :diabetic_toolbox__member
   end
+
+  def random_string(length)
+    (0...length).map { ('a'..'z').to_a[rand(26)] }.join
+  end
 end
