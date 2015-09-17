@@ -120,6 +120,10 @@ en:
         recover: Recover
         primer: Please provide us with the email address used to create the account so that we can send a recovery kit to you.
       edit_email:
+        header: Change Email
+        primer: >
+          In order to change your email address, you will have to confirm that you are the account holder of the new
+          address.  Instructions will be emailed to you after you specify the new address.
         placeholders:
           new_email: New Email
           confirmed_new_email: Confirmed New Email
