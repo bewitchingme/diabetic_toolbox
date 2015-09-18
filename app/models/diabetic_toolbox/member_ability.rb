@@ -17,6 +17,7 @@ module DiabeticToolbox
     def show_interest
       can [:new, :create],  Member
       can [:start, :about], :welcome
+      can [:show],           Recipe
       visiting
     end
 
@@ -24,6 +25,7 @@ module DiabeticToolbox
       can [:manage, :dash, :confirm_delete], Member,  id:        @member.id
       can [:manage],                         Setting, member_id: @member.id
       can [:manage],                         Reading, member_id: @member.id
+      can [:manage],                         Recipe,  member_id: @member.id
       authenticated
     end
     #endregion
