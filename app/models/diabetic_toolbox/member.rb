@@ -14,6 +14,7 @@ module DiabeticToolbox
     #region Settings & Enums
     has_karma 'DiabeticToolbox::Recipe', as: :member, weight: 0.25
     enum gender: { male: 0, female: 1 }
+    enum locale: { en: 0 }
     friendly_id :username, use: [:slugged, :finders]
     #endregion
 
@@ -69,6 +70,12 @@ module DiabeticToolbox
       [
         [I18n.t('activerecord.options.diabetic_toolbox/member.male'),   :male],
         [I18n.t('activerecord.options.diabetic_toolbox/member.female'), :female]
+      ]
+    end
+
+    def self.locale_options
+      [
+          [I18n.t('activerecord.options.diabetic_toolbox/member.locales.en'),  :en]
       ]
     end
     #endregion
