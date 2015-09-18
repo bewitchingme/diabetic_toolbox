@@ -177,7 +177,7 @@ module DiabeticToolbox
           member = build(:member)
           member.save
 
-          result  = UpdateMember.new( member.id, {first_name: 'Roy'} ).call
+          result  = UpdateMember.new( member.id, {first_name: 'Roy', time_zone: 'Eastern Time (US & Canada)'} ).call
           updated = Member.find(member.id)
 
           expect(result.flash).to eq 'Saved'
