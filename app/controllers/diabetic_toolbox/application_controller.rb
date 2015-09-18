@@ -49,7 +49,7 @@ module DiabeticToolbox
           :summary    => [I18n.t('navigation.members.summary'),    'thumb-tack', member_dashboard_path],
           :readings   => [I18n.t('navigation.members.readings'),   'book',       list_readings_path],
           :reports    => [I18n.t('navigation.members.reports'),    'bar-chart',  '#'],
-          :recipes    => [I18n.t('navigation.members.recipes'),    'list',       '#'],
+          :recipes    => [I18n.t('navigation.members.recipes'),    'list',       recipes_path],
           :meal_plans => [I18n.t('navigation.members.meal_plans'), 'road',       '#']
       }
     end
