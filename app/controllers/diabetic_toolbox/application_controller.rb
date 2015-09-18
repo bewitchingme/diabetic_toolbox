@@ -81,7 +81,8 @@ module DiabeticToolbox
 
     #region Member
     def current_setting
-      current_member.settings.last
+      @current_setting ||= current_member.settings.last
+      @current_setting
     end
     #endregion
 
