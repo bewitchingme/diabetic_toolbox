@@ -5,29 +5,28 @@
       .text-center= render_member_navigation :readings
       .text-center
         #reading-actions.list-group.list-group-horizontal
-          %a.list-group-item.active{href: list_readings_path} History
-          %a.list-group-item{href: record_reading_path} Record
+          %a.list-group-item.active{href: list_readings_path}= I18n.t('views.readings.index.history')
+          %a.list-group-item{href: record_reading_path}= I18n.t('views.readings.common.record')
       - if current_member.has_no_readings?
-        .text-center
-          No Readings Recorded
+        .text-center= I18n.t('views.readings.index.no_readings')
       - else
         %table.table.table-condensed.table-striped
           %thead
             %tr
-              %th Reading
-              %th When
-              %th.hidden-xs Intake
-              %th.text-right On
+              %th= I18n.t('views.readings.index.columns.reading')
+              %th= I18n.t('views.readings.index.columns.when')
+              %th.hidden-xs= I18n.t('views.readings.index.columns.intake')
+              %th.text-right= I18n.t('views.readings.index.columns.test_time')
           %tbody
             - @readings.each do |reading|
               %tr
                 %td
                   = reading.glucometer_value
                   %span.hidden-xs= glucometer_type current_setting
-                %td= reading.meal.to_s.titlecase
+                %td= t "views.readings.common.meal_options.#{reading.meal.to_s}"
                 %td.hidden-xs= "#{reading.intake.to_s} #{intake_type(current_setting)}"
                 %td.text-right
-                  %span.hidden-xs.hidden-sm= "#{time_ago_in_words( reading.created_at.localtime )} ago"
-                  %span.hidden-xs.hidden-sm= "(#{reading.created_at.localtime.strftime('%D')})"
-                  %span.hidden-md.hidden-lg.hidden-desktop= reading.created_at.localtime.strftime('%D')
+                  %span.hidden-xs.hidden-sm= "#{time_ago_in_words( Time.zone.parse(reading.test_time.to_s) )} ago"
+                  %span.hidden-xs.hidden-sm= "(#{Time.zone.parse(reading.test_time.to_s).strftime('%D')})"
+                  %span.hidden-md.hidden-lg.hidden-desktop= Time.zone.parse(reading.test_time.to_s).strftime('%D')
         = paginate @readings, theme: 'diabetic_toolbox', subject: @readings
