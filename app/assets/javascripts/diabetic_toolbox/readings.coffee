@@ -4,7 +4,7 @@
 
 $ ->
   if $('#test-time-picker').length
-    $('#test-time-picker').datetimepicker format: 'LT'
+    $('#test-time-picker').datetimepicker format: 'YYYY-MM-DD hh:mm A'
     $('#test-time-picker, #test-time-addon').on 'click', () ->
       $('#test-time-picker').data('DateTimePicker').toggle()
       true
