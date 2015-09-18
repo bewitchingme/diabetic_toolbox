@@ -77,7 +77,7 @@ module DiabeticToolbox
     def destroy
       DiabeticToolbox.from :members, require: %w(destroy_member)
 
-      result = DestroyMember.new( params[:id] ).call
+      result = DestroyMember.new( current_member.id ).call
 
       sign_out if result.success?
 
