@@ -7,6 +7,7 @@ module DiabeticToolbox
     let(:recipe_create_failure_flash) { 'Sorry, your recipe could not be saved' }
     #endregion
 
+    #region Stories
     describe 'a recipe' do
       #region Creation
       DiabeticToolbox.from :recipes, require: %w(create_recipe)
@@ -31,7 +32,7 @@ module DiabeticToolbox
           member = create(:member)
 
           recipe_params = {
-              name:     random_string(64),
+              name:     random_string(65),
               servings: recipe.servings
           }
 
@@ -75,5 +76,6 @@ module DiabeticToolbox
       end
       #endregion
     end
+    #endregion
   end
 end
