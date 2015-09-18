@@ -217,6 +217,9 @@ en:
       created:
         success: "Recipe %{recipe_name} created"
         failure: Sorry, your recipe could not be saved
+      published:
+        success: Recipe has been published
+        failure: Recipe could not be published
   activerecord:
     options:
       diabetic_toolbox/setting:
