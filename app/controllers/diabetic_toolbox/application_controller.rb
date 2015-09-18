@@ -1,11 +1,11 @@
 module DiabeticToolbox
   class ApplicationController < ActionController::Base
     #region Session
-    before_action :initialize_member_session
+    before_filter :initialize_member_session, :set_locale, :set_user_tz
     #endregion
 
     #region Helpers
-    helper_method :current_member, :member_signed_in?
+    helper_method :current_member, :current_setting, :member_signed_in?
     #endregion
 
     #region Protected
@@ -79,9 +79,23 @@ module DiabeticToolbox
     end
     #endregion
 
-    #region Locale
+    #region Member
+    def current_setting
+      current_member.settings.last
+    end
+    #endregion
+
+    #region Locale & Time
     def set_locale
       I18n.default_locale = :en
+    end
+
+    def set_user_tz
+      if member_signed_in?
+        Time.zone = ActiveSupport::TimeZone.new(current_member.time_zone)
+      else
+        Time.zone = ActiveSupport::TimeZone.new('UTC')
+      end
     end
     #endregion
     #endregion
