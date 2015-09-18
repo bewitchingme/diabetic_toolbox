@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150917205438) do
+ActiveRecord::Schema.define(version: 20150918053055) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -72,6 +72,7 @@ ActiveRecord::Schema.define(version: 20150917205438) do
     t.integer  "gender"
     t.boolean  "accepted_tos",             default: false, null: false
     t.string   "time_zone",                default: "UTC", null: false
+    t.integer  "locale",                   default: 0,     null: false
   end
 
   add_index "diabetic_toolbox_members", ["confirmation_token"], name: "index_diabetic_toolbox_members_on_confirmation_token", unique: true, using: :btree
