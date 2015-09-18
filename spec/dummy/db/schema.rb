@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150917033554) do
+ActiveRecord::Schema.define(version: 20150917205438) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -39,18 +39,18 @@ ActiveRecord::Schema.define(version: 20150917033554) do
   add_index "diabetic_toolbox_ingredients", ["recipe_id"], name: "index_diabetic_toolbox_ingredients_on_recipe_id", using: :btree
 
   create_table "diabetic_toolbox_members", force: :cascade do |t|
-    t.string   "first_name",               default: "",    null: false
-    t.string   "last_name",                default: "",    null: false
-    t.string   "username",                 default: "",    null: false
-    t.string   "slug",                     default: "",    null: false
-    t.string   "email",                    default: "",    null: false
-    t.string   "encrypted_password",       default: "",    null: false
-    t.string   "encryption_salt",          default: "",    null: false
+    t.string   "first_name",               default: "",        null: false
+    t.string   "last_name",                default: "",        null: false
+    t.string   "username",                 default: "",        null: false
+    t.string   "slug",                     default: "",        null: false
+    t.string   "email",                    default: "",        null: false
+    t.string   "encrypted_password",       default: "",        null: false
+    t.string   "encryption_salt",          default: "",        null: false
     t.string   "session_token"
-    t.integer  "recipes_count",            default: 0,     null: false
-    t.integer  "achievements_count",       default: 0,     null: false
-    t.integer  "settings_count",           default: 0,     null: false
-    t.integer  "readings_count",           default: 0,     null: false
+    t.integer  "recipes_count",            default: 0,         null: false
+    t.integer  "achievements_count",       default: 0,         null: false
+    t.integer  "settings_count",           default: 0,         null: false
+    t.integer  "readings_count",           default: 0,         null: false
     t.date     "dob"
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
@@ -67,10 +67,11 @@ ActiveRecord::Schema.define(version: 20150917033554) do
     t.integer  "failed_attempts"
     t.string   "unlock_token"
     t.datetime "last_locked_at"
-    t.datetime "created_at",                               null: false
-    t.datetime "updated_at",                               null: false
+    t.datetime "created_at",                                   null: false
+    t.datetime "updated_at",                                   null: false
     t.integer  "gender"
-    t.boolean  "accepted_tos",             default: false, null: false
+    t.boolean  "accepted_tos",             default: false,     null: false
+    t.string   "time_zone",                default: "UTC",     null: false
   end
 
   add_index "diabetic_toolbox_members", ["confirmation_token"], name: "index_diabetic_toolbox_members_on_confirmation_token", unique: true, using: :btree
@@ -86,8 +87,8 @@ ActiveRecord::Schema.define(version: 20150917033554) do
     t.string   "nutrient"
     t.float    "quantity"
     t.boolean  "verified",   default: false, null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
   end
 
   add_index "diabetic_toolbox_nutritional_facts", ["recipe_id"], name: "index_diabetic_toolbox_nutritional_facts_on_recipe_id", using: :btree
