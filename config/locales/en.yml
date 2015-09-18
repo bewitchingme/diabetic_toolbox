@@ -110,6 +110,11 @@ en:
         record: New Reading
         report: Run Report
         overview: Overview
+      edit:
+        cancel_membership: Cancel Membership
+      confirm_delete:
+        confirm: Yes, cancel my membership
+        cancel: Cancel
     member_sessions:
       messages:
         account_locked: Account Locked
