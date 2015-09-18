@@ -28,7 +28,12 @@ module DiabeticToolbox
   #region Module Fields
   @@me   = :diabetic_toolbox
   @@safe = {
-      member: [:first_name, :last_name, :username, :slug]
+      member: [:first_name, :last_name, :username, :slug],
+      reading: [],
+      recipe: [:name, :servings],
+      ingredient: [:name, :volume, :unit],
+      step: [:description, :order],
+      nutritional_fact: [:nutrient, :quantity, :verified]
   }
   #endregion
 
