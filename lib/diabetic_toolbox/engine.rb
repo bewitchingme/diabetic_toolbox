@@ -13,7 +13,7 @@ module DiabeticToolbox
       g.javascript_engine   :coffee
     end
 
-    %w( members member_sessions settings welcome readings ).each do |controller|
+    %w( members member_sessions settings welcome readings recipes ).each do |controller|
       config.assets.precompile += ["diabetic_toolbox/#{controller}.css"]
     end
 
