@@ -205,6 +205,9 @@ en:
       diabetic_toolbox/member:
         male: Male
         female: Female
+        locales:
+          en: English
+          fr: Français
     attributes:
       diabetic_toolbox/member:
         first_name: First Name
