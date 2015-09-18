@@ -24,7 +24,7 @@
                   = reading.glucometer_value
                   %span.hidden-xs= glucometer_type current_setting
                 %td= t "views.readings.common.meal_options.#{reading.meal.to_s}"
-                %td.hidden-xs= "#{reading.intake.to_s} #{intake_type(current_setting)}"
+                %td.hidden-xs= "#{reading.intake} #{intake_type(current_setting)}"
                 %td.text-right
                   %span.hidden-xs.hidden-sm= "#{time_ago_in_words( Time.zone.parse(reading.test_time.to_s) )} ago"
                   %span.hidden-xs.hidden-sm= "(#{Time.zone.parse(reading.test_time.to_s).strftime('%D')})"
