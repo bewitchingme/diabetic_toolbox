@@ -114,7 +114,7 @@ en:
         cancel_membership: Cancel Membership
       confirm_delete:
         confirm: Yes, cancel my membership
-        cancel: Cancel
+        cancel: Wait, go back!
     member_sessions:
       messages:
         account_locked: Account Locked
