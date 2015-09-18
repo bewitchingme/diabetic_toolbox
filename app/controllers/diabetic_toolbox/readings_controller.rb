@@ -9,8 +9,8 @@ module DiabeticToolbox
 
     #region Before Action
     before_action :set_reading, only: [:new]
-    before_action :set_current_setting
     before_action :deploy_member_tabs, only: [:index, :new]
+    helper_method :initial_test_time
     #endregion
 
     #region Read
@@ -50,8 +50,8 @@ module DiabeticToolbox
       @reading = current_member.readings.build
     end
 
-    def set_current_setting
-      @current_setting = current_member.settings.last
+    def initial_test_time
+      Time.current.strftime('%Y-%m-%d %I:%M %p')
     end
     #endregion
   end
