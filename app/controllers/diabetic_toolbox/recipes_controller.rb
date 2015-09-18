@@ -9,6 +9,7 @@ module DiabeticToolbox
 
     #region Before Action
     before_action :set_recipe, only: [:edit, :show, :update, :destroy]
+    before_action :deploy_member_tabs, only: [:index, :new, :edit, :show]
     #endregion
 
     #region Read
