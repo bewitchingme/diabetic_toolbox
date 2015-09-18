@@ -36,3 +36,4 @@
       .content-member-form.text-center.smooth
         .form-group
           = f.submit t('views.members.update.save')
+          = link_to I18n.t('views.members.edit.cancel_membership'), last_chance_path, class: 'btn btn-warning btn-sm'

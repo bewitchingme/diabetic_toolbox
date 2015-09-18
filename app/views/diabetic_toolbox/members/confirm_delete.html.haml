@@ -1,5 +1,7 @@
 .container-fluid
   .row
-    .content-member.smooth
+    .content-member-form.smooth
       %h3.brand-primary Last Chance!
       %p Are you sure you wish to cancel your membership and delete your account?
+      = link_to I18n.t('views.members.confirm_delete.confirm'), destroy_member_path(current_member), method: :delete, class: 'btn btn-danger'
+      = link_to I18n.t('views.members.confirm_delete.cancel'), edit_member_path(current_member), class: 'btn btn-info'
