@@ -23,9 +23,9 @@
               %tr
                 %td
                   = reading.glucometer_value
-                  %span.hidden-xs= glucometer_type @current_setting
+                  %span.hidden-xs= glucometer_type current_setting
                 %td= reading.meal.to_s.titlecase
-                %td.hidden-xs= "#{reading.intake.to_s} #{intake_type(@current_setting)}"
+                %td.hidden-xs= "#{reading.intake.to_s} #{intake_type(current_setting)}"
                 %td.text-right
                   %span.hidden-xs.hidden-sm= "#{time_ago_in_words( reading.created_at.localtime )} ago"
                   %span.hidden-xs.hidden-sm= "(#{reading.created_at.localtime.strftime('%D')})"
