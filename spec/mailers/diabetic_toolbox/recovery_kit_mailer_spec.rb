@@ -26,15 +26,15 @@ module DiabeticToolbox
     #region Tests
     describe 'a visitor trying to recover their account' do
       it 'should receive an email with a recovery kit' do
-        ActionMailer::Base.deliveries.count.should == 1
+        expect(ActionMailer::Base.deliveries.count).to eq 1
       end
 
       it 'will receive an email at the account email address' do
-        ActionMailer::Base.deliveries.first.to.should == [@member.email]
+        expect(ActionMailer::Base.deliveries.first.to).to eq [@member.email]
       end
 
       it 'should receive an email from the appropriate email address' do
-        ActionMailer::Base.deliveries.first.from.should == [DiabeticToolbox.mailer_from_address]
+        expect(ActionMailer::Base.deliveries.first.from).to eq [DiabeticToolbox.mailer_from_address]
       end
     end
     #endregion

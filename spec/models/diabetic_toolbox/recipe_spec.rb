@@ -75,6 +75,30 @@ module DiabeticToolbox
         #endregion
       end
       #endregion
+
+      #region Mutation
+      context 'being updated using action class' do
+        DiabeticToolbox.from :recipes, require: %w(create_recipe publish_recipe)
+
+        it 'should be published by the creating member' do
+          member = create(:member)
+          recipe_params = {
+              name: recipe.name,
+              servings: recipe.servings
+          }
+
+          create_result = CreateRecipe.new( member, recipe_params ).call
+          recipe_to_publish = create_result.actual
+
+          publish_result = PublishRecipe.new( member, recipe_to_publish.id ).call
+
+          expect(publish_result.success?).to eq true
+          expect(publish_result.flash).to eq 'Recipe has been published'
+          expect(publish_result.response).to eq ['Recipe has been published', {}, {name: recipe_to_publish.name, servings: recipe_to_publish.servings}]
+          expect(publish_result.actual.published).to eq true
+        end
+      end
+      #endregion
     end
     #endregion
   end

@@ -27,15 +27,15 @@ module DiabeticToolbox
     #region Tests
     describe 'a member changing their email' do
       it 'should receive an email with a reconfirmation link' do
-        ActionMailer::Base.deliveries.count.should == 1
+        expect(ActionMailer::Base.deliveries.count).to eq 1
       end
 
       it 'should be the recipient of the reconfirmation email' do
-        ActionMailer::Base.deliveries.first.to.should == [@member.unconfirmed_email]
+        expect(ActionMailer::Base.deliveries.first.to).to eq [@member.unconfirmed_email]
       end
 
       it 'should receive an email from the appropriate email address' do
-        ActionMailer::Base.deliveries.first.from.should == [DiabeticToolbox.mailer_from_address]
+        expect(ActionMailer::Base.deliveries.first.from).to eq [DiabeticToolbox.mailer_from_address]
       end
     end
     #endregion
