@@ -67,7 +67,7 @@ module DiabeticToolbox
         it 'should have 302 HTTP status for :destroy' do
           sign_in_member member
 
-          delete :destroy, id: member.slug
+          delete :destroy
 
           expect { Member.find member.slug }.to raise_error ActiveRecord::RecordNotFound
 
@@ -126,7 +126,7 @@ module DiabeticToolbox
         member = build(:member)
         member.save
 
-        expect { delete :destroy, id: member.slug }.to raise_error CanCan::AccessDenied
+        expect { delete :destroy }.to raise_error CanCan::AccessDenied
       end
 
       it 'should be denied when visiting :confirm_delete' do
