@@ -87,7 +87,12 @@ module DiabeticToolbox
 
     #region Locale & Time
     def set_locale
-      I18n.default_locale = :en
+      if member_signed_in?
+        I18n.default_locale = current_member.locale
+      else
+        I18n.default_locale = :en
+      end
+
     end
 
     def set_user_tz
