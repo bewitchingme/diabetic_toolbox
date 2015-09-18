@@ -245,6 +245,8 @@ en:
         last_name_format: Only letters and hyphens allowed
         username_format: Only letters, spaces and numbers allowed
         username_uniqueness: Username Already Exists
+      diabetic_toolbox/recipe:
+        servings_value: Must be greater than 0
   errors:
     format: "%{attribute} %{message}"
     messages:
