@@ -20,6 +20,8 @@
                 %span.glyphicon.glyphicon-calendar
           .form-group
             = f.select :gender, DiabeticToolbox::Member.gender_options, { include_blank: true }
+          .form-group
+            = f.select :time_zone, time_zone_options_for_select(@member.time_zone)
         .half.smooth
           %h4
             = t('views.members.form.labels.change_password')
