@@ -1,0 +1,71 @@
+require_dependency "diabetic_toolbox/application_controller"
+
+module DiabeticToolbox
+  class RecipesController < ApplicationController
+    #region Class Methods
+    load_and_authorize_resource
+    respond_to :json, :html
+    #endregion
+
+    #region Before Action
+    before_action :set_recipe, only: [:edit, :show, :update, :destroy]
+    #endregion
+
+    #region Read
+    def index
+      @recipes = Recipe.where(member_id: current_member.id).page( params[:page] )
+    end
+
+    def new
+      @recipe = Recipe.new
+    end
+
+    def edit
+    end
+
+    def show
+    end
+    #endregion
+
+    #region Creation
+    def create
+      DiabeticToolbox.from :recipes, require: %w(create_recipe)
+
+      result = CreateRecipe.new(current_member, recipe_params).call
+
+      if result.success?
+        flash[:success] = result.flash
+        redirect_to edit_recipe_path(result.actual)
+      else
+        @recipe = result.actual
+        flash[:warning] = result.flash
+        render :new
+      end
+    end
+    #endregion
+
+    #region Mutation
+    def update
+
+    end
+
+    def finalize
+
+    end
+
+    def destroy
+
+    end
+    #endregion
+
+    #region Private
+    def recipe_params
+      params.require(:recipe).permit(:name, :servings)
+    end
+
+    def set_recipe
+      @recipe = Recipe.find params[:id]
+    end
+    #endregion
+  end
+end
