@@ -14,7 +14,11 @@ module DiabeticToolbox
 
     #region Read
     def index
-      @recipes = Recipe.where(member_id: current_member.id).page( params[:page] )
+      if member_signed_in?
+        @recipes = Recipe.where(member_id: current_member.id).page( params[:page] )
+      else
+        @recipes = Recipe.order(:created_at)
+      end
     end
 
     def new
