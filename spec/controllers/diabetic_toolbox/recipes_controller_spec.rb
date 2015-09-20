@@ -88,6 +88,23 @@ module DiabeticToolbox
     #endregion
 
     #region Visitor
+    describe 'a visitor' do
+      it 'should be able to GET to :index' do
+        get :index
+
+        expect(response).to have_http_status 200
+        expect(assigns(:recipes)).to be_a ActiveRecord::Relation
+      end
+
+      it 'should be able to GET to :show' do
+        recipe.save
+
+        get :show, id: recipe.id
+
+        expect(response).to have_http_status 200
+        expect(assigns(:recipe)).to be_a Recipe
+      end
+    end
     #endregion
   end
 end
