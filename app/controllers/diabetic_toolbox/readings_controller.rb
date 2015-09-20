@@ -15,7 +15,7 @@ module DiabeticToolbox
 
     #region Read
     def index
-      @readings = Reading.where(member_id: current_member.id).page params[:page]
+      @readings = Reading.where(member_id: current_member.id).order(test_time: :desc).page params[:page]
     end
 
     def new
