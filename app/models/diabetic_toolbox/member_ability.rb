@@ -17,7 +17,7 @@ module DiabeticToolbox
     def show_interest
       can [:new, :create],  Member
       can [:start, :about], :welcome
-      can [:show],           Recipe
+      can [:read],          Recipe
       visiting
     end
 
