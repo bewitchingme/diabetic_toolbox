@@ -46,8 +46,9 @@ DiabeticToolbox::Engine.routes.draw do
   #region Recipes
   get    '/dash/recipes',             to: 'recipes#index',    as: :recipes
   get    '/dash/recipes/add',         to: 'recipes#new',      as: :new_recipe
-  post   '/dash/recipes/add',         to: 'recipes#create',   as: :create_recipe
   get    '/dash/recipe/:id',          to: 'recipes#edit',     as: :edit_recipe
+  get    '/recipes/:id',              to: 'recipes#show',     as: :show_recipe
+  post   '/dash/recipes/add',         to: 'recipes#create',   as: :create_recipe
   match  '/dash/recipe/:id',          to: 'recipes#update',   as: :update_recipe,   via: [:patch, :put]
   match  '/dash/recipe/:id/finalize', to: 'recipes#finalize', as: :finalize_recipe, via: [:patch, :put]
   delete '/dash/recipe/:id/delete',   to: 'recipes#destroy',  as: :delete_recipe
