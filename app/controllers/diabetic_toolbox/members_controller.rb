@@ -9,7 +9,7 @@ module DiabeticToolbox
 
     #region Before Action
     before_action :deploy_member_tabs,    only: :dash
-    before_action :set_member,            only: [:show, :edit, :edit_email]
+    before_action :set_member,            only: :show
     before_action :there_can_be_only_one, only: :new
     #endregion
 
@@ -46,6 +46,7 @@ module DiabeticToolbox
     end
 
     def edit
+      @member = current_member
     end
 
     def confirm_delete
@@ -56,7 +57,7 @@ module DiabeticToolbox
     def update
       DiabeticToolbox.from :members, require: %w(update_member)
 
-      result = UpdateMember.new( params[:id], member_params ).call
+      result = UpdateMember.new( current_member.id, member_params ).call
 
       respond_to do |format|
         format.html do
@@ -115,7 +116,7 @@ module DiabeticToolbox
       end
 
       def set_member
-        @member = current_member
+        @member = Member.find params[:id]
       end
 
       def there_can_be_only_one
