@@ -146,11 +146,11 @@ HTML,BODY
 //region Pagination
 .pagination-previous, .pagination-next
 {
-  @include column(2, 2, 2, 2);
+  @include column(4, 4, 4, 4);
 }
 .pagination-entries
 {
-  @include column(8, 8, 8, 8);
+  @include column(4, 4, 4, 4);
 }
 //endregion
 
