@@ -1,6 +1,7 @@
 
 #region Requirements
 require 'warden'
+require 'kaminari'
 require 'diabetic_toolbox/engine'
 require 'sessions/session'
 require 'diabetic_toolbox/intake_nutrition'
@@ -10,7 +11,6 @@ require 'haml'
 require 'haml-rails'
 require 'bootstrap-sass'
 require 'cancancan'
-require 'kaminari'
 require 'bcrypt'
 require 'responders'
 require 'font-awesome-sass'
