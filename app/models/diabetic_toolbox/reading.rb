@@ -28,7 +28,7 @@ module DiabeticToolbox
     def self.meal_options
       options = []
       self.meals.each do |k,v|
-        options.push [I18n.t("views.readings.common.meal_options.#{k.to_s}"), k]
+        options.push [I18n.t("activerecord.options.diabetic_toolbox/reading.#{k.to_s}"), k]
       end
       options
     end
