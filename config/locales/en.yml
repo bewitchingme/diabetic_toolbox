@@ -155,14 +155,6 @@ en:
     readings:
       common:
         record: Record
-        meal_options:
-          before_breakfast: Before Breakfast
-          after_breakfast: After Breakfast
-          before_lunch: Before Lunch
-          after_lunch: After Lunch
-          before_dinner: Before Dinner
-          after_dinner: After Dinner
-          before_bedtime: Before Bedtime
       index:
         history: History
         no_readings: No Readings Recorded
@@ -231,6 +223,14 @@ en:
         locales:
           en: English
           fr: Français
+      diabetic_toolbox/reading:
+        before_breakfast: Before Breakfast
+        after_breakfast: After Breakfast
+        before_lunch: Before Lunch
+        after_lunch: After Lunch
+        before_dinner: Before Dinner
+        after_dinner: After Dinner
+        before_bedtime: Before Bedtime
     attributes:
       diabetic_toolbox/member:
         first_name: First Name
