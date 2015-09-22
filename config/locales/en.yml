@@ -33,23 +33,15 @@ en:
       not_acceptable_message: Sorry, this type is not acceptable.
       not_implemented: '501: Not Implemented'
       not_implemented_message: Sorry, this feature does not exist.
-  paginator:
-    views:
-      pagination:
-        first: Start
-        last: End
-        previous: Previous
-        next: Next
-        truncate: "&hellip;"
-    helpers:
-      page_entries_info:
-        one_page:
-          display_entries:
-            zero: "No %{entry_name} found"
-            one: "Displaying <b>1</b> %{entry_name}"
-            other: "Displaying <b>all %{count}</b> %{entry_name}"
-        more_pages:
-          display_entries: "Displaying %{entry_name} <b>%{first}&nbsp;-&nbsp;%{last}</b> of <b>%{total}</b> in total"  # UI for buttons; crud titles contain more verbosity.
+  helpers:
+    page_entries_info:
+      one_page:
+        display_entries:
+          zero: "No %{entry_name} found"
+          one: "Displaying <b>1</b> %{entry_name}"
+          other: "Displaying <b>all %{count}</b> %{entry_name}"
+      more_pages:
+        display_entries: "Displaying %{entry_name} <b>%{first}&nbsp;-&nbsp;%{last}</b> of <b>%{total}</b> in total"  # UI for buttons; crud titles contain more verbosity.
   navigation:
     brand: Diabetic Toolbox
     sr_only: Toggle navigation
@@ -70,6 +62,12 @@ en:
       me: Account
       settings: Settings
   views:
+    pagination:
+      first: Start
+      last: End
+      previous: Previous
+      next: Next
+      truncate: "&hellip;"
     modal:
       close: Close
       cancel: Cancel
