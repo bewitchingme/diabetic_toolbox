@@ -51,7 +51,18 @@ module DiabeticToolbox
 
     #region Mutation
     def update
+      DiabeticToolbox.from :recipes, require: %w(update_recipe)
 
+      result = UpdateRecipe.new( current_member, @recipe, recipe_params ).call
+
+      if result.success?
+        flash[:success] = result.flash
+        redirect_to edit_recipe_path(result.actual)
+      else
+        @recipe = result.actual
+        flash[:danger] = result.flash
+        render :edit
+      end
     end
 
     def finalize
