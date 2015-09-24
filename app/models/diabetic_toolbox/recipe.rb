@@ -17,5 +17,12 @@ module DiabeticToolbox
     has_many   :steps,             class_name: 'DiabeticToolbox::Step'
     has_many   :nutritional_facts, class_name: 'DiabeticToolbox::NutritionalFact'
     #endregion
+
+    #region Truth or Dare
+    def owned_by?(member)
+      return true if member_id == member.id
+      false
+    end
+    #endregion
   end
 end
