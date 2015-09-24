@@ -6,7 +6,45 @@ module DiabeticToolbox
     end
 
     def self.chartkick_library
-      { fontName: 'Merriweather', title: "60 Day History", hAxis: {title: "Date", gridlines: { count: 3, color: "#DDD" } }, vAxis: {title: "Reading" } }
+      {
+        lineWidth: 2,
+        curveType: 'function',
+        backgroundColor: '#333',
+        fontName: 'Merriweather',
+        title: "60 Day History",
+        titleTextStyle: {
+          color: '#CACACA'
+        },
+        tooltip: {
+          backgroundColor: '#222',
+          color: '#CACACA'
+        },
+        colors: ['#4dc8df'],
+        hAxis: {
+          baselineColor: '#CACACA',
+          titleTextStyle: {
+            color: '#CACACA'
+          },
+          title: "Date",
+          gridlines: {
+            count: 6,
+            color: "#5A5A5A"
+          }
+        },
+        vAxis: {
+          textStyle: {
+            color: '#CACACA'
+          },
+          titleTextStyle: {
+            color: '#CACACA'
+          },
+          title: "Reading",
+          gridlines: {
+              count: 4,
+              color: "#5A5A5A"
+          }
+        }
+      }
     end
   end
 end
