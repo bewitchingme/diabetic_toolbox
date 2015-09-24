@@ -41,3 +41,9 @@
       = flash_messages
       = yield
     #footer
+      .container-fluid
+        .separator
+        .row
+          .text-center.content-nav.smooth= "#{t('navigation.brand')} v. #{DiabeticToolbox::VERSION}"
+        .row
+          .text-center.content-nav.smooth= link_to 'Project on Github', 'https://github.com/bewitchingme/diabetic_toolbox', target: '_blank'
