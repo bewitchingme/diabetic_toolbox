@@ -78,7 +78,7 @@ module DiabeticToolbox
 
       #region Mutation
       context 'being updated using action class' do
-        DiabeticToolbox.from :recipes, require: %w(create_recipe publish_recipe)
+        DiabeticToolbox.from :recipes, require: %w(create_recipe publish_recipe update_recipe)
 
         it 'should be published by the creating member' do
           member = create(:member)
@@ -96,6 +96,62 @@ module DiabeticToolbox
           expect(publish_result.flash).to eq 'Recipe has been published'
           expect(publish_result.response).to eq ['Recipe has been published', {}, {name: recipe_to_publish.name, servings: recipe_to_publish.servings}]
           expect(publish_result.actual.published).to eq true
+        end
+
+        it 'should be updated by the creating member when the recipe is not published' do
+          member           = create(:member)
+          recipe.member_id = member.id
+
+          recipe.save
+
+          recipe_params = {
+              name: 'John\'s Tubers',
+              servings: recipe.servings
+          }
+
+          result = UpdateRecipe.new( member, recipe, recipe_params ).call
+
+          expect(result.success?).to eq true
+          expect(result.flash).to eq 'Recipe has been saved'
+          expect(result.response).to eq ['Recipe has been saved', {}, {name: 'John\'s Tubers', servings: recipe.servings}]
+        end
+
+        it 'should not be updated by the creating member when the recipe is published' do
+          member           = create(:member)
+          recipe.member_id = member.id
+          recipe.published = true
+
+          recipe.save
+
+          recipe_params = {
+              name: 'John\'s Tubers',
+              servings: recipe.servings
+          }
+
+          result = UpdateRecipe.new( member, recipe, recipe_params ).call
+
+          expect(result.success?).to eq false
+          expect(result.flash).to eq 'Sorry, this recipe is published and cannot be changed'
+          expect(result.response).to eq ['Sorry, this recipe is published and cannot be changed', {}, {name: recipe.name, servings: recipe.servings}]
+        end
+
+        it 'should not be updated if the recipe is owned by another member' do
+          member           = create(:member)
+          updating_member  = create(:member)
+          recipe.member_id = member.id
+
+          recipe.save
+
+          recipe_params = {
+              name: 'John\'s Tubers',
+              servings: recipe.servings
+          }
+
+          result = UpdateRecipe.new( updating_member, recipe, recipe_params ).call
+
+          expect(result.success?).to eq false
+          expect(result.flash).to eq 'Sorry, you must own the recipe to do that'
+          expect(result.response).to eq ['Sorry, you must own the recipe to do that', {}, {name: recipe.name, servings: recipe.servings}]
         end
       end
       #endregion
