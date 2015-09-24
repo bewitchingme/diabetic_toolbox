@@ -207,6 +207,11 @@ en:
       created:
         success: "Recipe %{recipe_name} created"
         failure: Sorry, your recipe could not be saved
+      updated:
+        not_allowed: Sorry, you must own the recipe to do that
+        already_published: Sorry, this recipe is published and cannot be changed
+        success: Recipe has been saved
+        failure: Recipe could not be changed due to an error
       published:
         success: Recipe has been published
         failure: Recipe could not be published
