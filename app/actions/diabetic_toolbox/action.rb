@@ -58,6 +58,10 @@ module DiabeticToolbox
       @result
     end
 
+    def call_params
+      @params
+    end
+
     def success(&block)
       @result = Result.success &block
     end
