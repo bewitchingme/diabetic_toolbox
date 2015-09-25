@@ -20,7 +20,7 @@ module DiabeticToolbox
 
     #region Truth or Dare
     def owned_by?(member)
-      return true if member_id == member.id
+      return true if self.member.eql? member
       false
     end
     #endregion
