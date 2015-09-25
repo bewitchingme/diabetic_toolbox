@@ -3,26 +3,26 @@ module DiabeticToolbox
 
   class PublishRecipe < Action
     #region Init
-    def initialize(member, recipe_id)
-      super recipe_id
+    def initialize(member, recipe)
+      super nil
+      @recipe = recipe
       @member = member
     end
     #endregion
 
     #region Protected
     def _call
-      recipe  = Recipe.find @params
       updated = false
-      updated = recipe.update_column(:published, true) if recipe.member.eql? @member
+      updated = @recipe.update_column(:published, true) if @recipe.owned_by? @member
 
       if updated
         success do |option|
-          option.subject = recipe
+          option.subject = @recipe
           option.message = I18n.t('flash.recipe.published.success')
         end
       else
         failure do |option|
-          option.subject = recipe
+          option.subject = @recipe
           option.message = I18n.t('flash.recipe.published.failure')
         end
       end

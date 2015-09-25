@@ -13,7 +13,6 @@ module DiabeticToolbox
     #region Protected
     protected
     def _call
-
       if can_update?
         if @recipe.update call_params
           success do |option|
@@ -27,25 +26,25 @@ module DiabeticToolbox
           end
         end
       else
-        not_allowed unless member_owns_recipe?
-        already_published unless recipe_not_published?
+        not_allowed! unless member_owns_recipe?
+        already_published! unless recipe_not_published?
       end
     end
     #endregion
 
     #region Private
     private
-    def not_allowed
+    def not_allowed!
       failure do |option|
         option.subject = @recipe
-        option.message = I18n.t('flash.recipe.updated.not_allowed')
+        option.message = I18n.t('flash.recipe.common.not_allowed')
       end
     end
 
-    def already_published
+    def already_published!
       failure do |option|
         option.subject = @recipe
-        option.message = I18n.t('flash.recipe.updated.already_published')
+        option.message = I18n.t('flash.recipe.common.already_published')
       end
     end
 
