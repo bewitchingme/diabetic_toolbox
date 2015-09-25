@@ -7,8 +7,8 @@ module DiabeticToolbox
     #endregion
 
     #region Scopes
-    scope :males,   -> { where(:gender => self.genders[:male]  ) }
-    scope :females, -> { where(:gender => self.genders[:female]) }
+    scope :males,   -> { where(gender: self.genders[:male]  ) }
+    scope :females, -> { where(gender: self.genders[:female]) }
     #endregion
 
     #region Settings & Enums
