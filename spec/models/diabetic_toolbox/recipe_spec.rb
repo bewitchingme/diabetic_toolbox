@@ -90,7 +90,7 @@ module DiabeticToolbox
           create_result = CreateRecipe.new( member, recipe_params ).call
           recipe_to_publish = create_result.actual
 
-          publish_result = PublishRecipe.new( member, recipe_to_publish.id ).call
+          publish_result = PublishRecipe.new( member, recipe_to_publish ).call
 
           expect(publish_result.success?).to eq true
           expect(publish_result.flash).to eq 'Recipe has been published'
@@ -152,6 +152,48 @@ module DiabeticToolbox
           expect(result.success?).to eq false
           expect(result.flash).to eq 'Sorry, you must own the recipe to do that'
           expect(result.response).to eq ['Sorry, you must own the recipe to do that', {}, {name: recipe.name, servings: recipe.servings}]
+        end
+      end
+      #endregion
+
+      #region Destruction
+      context 'being destroyed using action class' do
+        DiabeticToolbox.from :recipes, require: %w(destroy_recipe)
+        it 'should be destroyed if the recipe is not published' do
+          member           = create(:member)
+          recipe.member_id = member.id
+          recipe.save
+
+          result = DestroyRecipe.new( member, recipe ).call
+
+          expect(result.success?).to eq true
+          expect(result.flash).to eq 'Your recipe has been deleted'
+        end
+
+        it 'should not be destroyed if the recipe is published' do
+          member           = create(:member)
+          recipe.member_id = member.id
+          recipe.published = true
+
+          recipe.save
+
+          result = DestroyRecipe.new( member, recipe ).call
+
+          expect(result.success?).to eq false
+          expect(result.flash).to eq 'Sorry, this recipe is published and cannot be changed'
+        end
+
+        it 'should not be destroyed if it is member is not the owner' do
+          member             = create(:member)
+          destructive_member = create(:member)
+
+          recipe.member_id = member.id
+          recipe.save
+
+          result = DestroyRecipe.new( destructive_member, recipe ).call
+
+          expect(result.success?).to eq false
+          expect(result.flash).to eq 'Sorry, you must own the recipe to do that'
         end
       end
       #endregion
