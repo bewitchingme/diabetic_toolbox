@@ -8,7 +8,7 @@ module DiabeticToolbox
     #endregion
 
     #region Before Action
-    before_action :set_recipe, only: [:edit, :show, :update, :destroy]
+    before_action :set_recipe, only: [:edit, :show, :update, :destroy, :finalize]
     before_action :deploy_member_tabs, only: [:index, :new, :edit, :show]
     #endregion
 
@@ -66,11 +66,32 @@ module DiabeticToolbox
     end
 
     def finalize
+      DiabeticToolbox.from :recipes, require: %w(publish_recipe)
 
+      result = PublishRecipe.new( current_member, @recipe ).call
+
+      if result.success?
+        flash[:success] = result.flash
+        redirect_to show_recipe_path(result.actual)
+      else
+        @recipe = result.actual
+        flash[:danger] = result.flash
+        render :edit
+      end
     end
 
     def destroy
+      DiabeticToolbox.from :recipes, require: %w(destroy_recipe)
 
+      result = DestroyRecipe.new( current_member, @recipe ).call
+
+      if result.success?
+        flash[:success] = result.flash
+        redirect_to recipes_path
+      else
+        flash[:warning] = result.flash
+        redirect_to edit_recipe_path(result.actual)
+      end
     end
     #endregion
 
