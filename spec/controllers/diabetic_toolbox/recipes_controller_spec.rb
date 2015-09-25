@@ -68,7 +68,7 @@ module DiabeticToolbox
 
         delete :destroy, id: recipe.id
 
-        expect(response).to have have_http_status 302
+        expect(response).to have_http_status 302
         expect(response).to redirect_to recipes_path
       end
 
@@ -81,7 +81,7 @@ module DiabeticToolbox
         recipe.reload
 
         expect(response).to have_http_status 302
-        expect(response).to redirect_to edit_recipe_path(recipe)
+        expect(response).to redirect_to show_recipe_path(recipe)
         expect(recipe.published?).to eq true
       end
     end
