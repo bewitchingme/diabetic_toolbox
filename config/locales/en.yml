@@ -219,6 +219,10 @@ en:
       published:
         success: Recipe has been published
         failure: Recipe could not be published
+    nutritional_fact:
+      created:
+        success: Fact Added
+        failure: 'Error: Could not save nutritional fact'
   activerecord:
     options:
       diabetic_toolbox/setting:
@@ -282,6 +286,9 @@ en:
         username_uniqueness: Username Already Exists
       diabetic_toolbox/recipe:
         servings_value: Must be greater than 0
+      diabetic_toolbox/nutritional_fact:
+        quantity_non_zero: Must be a non-zero value
+        verified_positive_on_create: Cannot be verified when created
   errors:
     format: "%{attribute} %{message}"
     messages:
