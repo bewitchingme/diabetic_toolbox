@@ -21,6 +21,26 @@ module DiabeticToolbox
       member.accepted_tos true
       member.password 'password'
       member.password_confirmation 'password'
+
+      factory :member_with_a_recipe do
+        transient do
+          recipes_count 1
+        end
+
+        after(:create) do |member, evaluator|
+          create_list(:recipe, evaluator.recipes_count, member: member)
+        end
+      end
+
+      factory :member_with_a_published_recipe do
+        transient do
+          recipes_count 1
+        end
+
+        after(:create) do |member, evaluator|
+          create_list(:published_recipe, evaluator.recipes_count, member: member)
+        end
+      end
     end
   end
 end

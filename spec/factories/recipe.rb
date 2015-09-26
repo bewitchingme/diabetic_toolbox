@@ -10,6 +10,10 @@ module DiabeticToolbox
       recipe.sequence(:name) { |n| "Foody Food#{n}" }
       recipe.servings Random.rand(1..4)
       recipe.published false
+
+      factory :published_recipe do
+        published true
+      end
     end
   end
 end
