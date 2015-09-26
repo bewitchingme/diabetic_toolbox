@@ -94,7 +94,7 @@ module DiabeticToolbox
       end
 
       def subject_safe_identity
-        @options.subject.class.name.split('::').last.downcase.to_sym
+        @options.subject.class.name.split('::').last.underscore.to_sym
       end
 
       def error_count
