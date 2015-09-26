@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150918053055) do
+ActiveRecord::Schema.define(version: 20150926051642) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -113,9 +113,12 @@ ActiveRecord::Schema.define(version: 20150918053055) do
     t.integer  "member_id"
     t.string   "name"
     t.integer  "servings"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
     t.boolean  "published"
+    t.integer  "steps_count",             default: 0, null: false
+    t.integer  "ingredients_count",       default: 0, null: false
+    t.integer  "nutritional_facts_count", default: 0, null: false
   end
 
   add_index "diabetic_toolbox_recipes", ["member_id"], name: "index_diabetic_toolbox_recipes_on_member_id", using: :btree
