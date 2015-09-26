@@ -99,17 +99,14 @@ module DiabeticToolbox
         end
 
         it 'should be updated by the creating member when the recipe is not published' do
-          member           = create(:member)
-          recipe.member_id = member.id
-
-          recipe.save
+          member           = create(:member_with_a_recipe)
 
           recipe_params = {
               name: 'John\'s Tubers',
               servings: recipe.servings
           }
 
-          result = UpdateRecipe.new( member, recipe, recipe_params ).call
+          result = UpdateRecipe.new( member, member.recipes.first, recipe_params ).call
 
           expect(result.success?).to eq true
           expect(result.flash).to eq 'Recipe has been saved'
@@ -117,41 +114,33 @@ module DiabeticToolbox
         end
 
         it 'should not be updated by the creating member when the recipe is published' do
-          member           = create(:member)
-          recipe.member_id = member.id
-          recipe.published = true
-
-          recipe.save
+          member           = create(:member_with_a_published_recipe)
 
           recipe_params = {
               name: 'John\'s Tubers',
               servings: recipe.servings
           }
 
-          result = UpdateRecipe.new( member, recipe, recipe_params ).call
+          result = UpdateRecipe.new( member, member.recipes.first, recipe_params ).call
 
           expect(result.success?).to eq false
           expect(result.flash).to eq 'Sorry, this recipe is published and cannot be changed'
-          expect(result.response).to eq ['Sorry, this recipe is published and cannot be changed', {}, {name: recipe.name, servings: recipe.servings}]
+          expect(result.response).to eq ['Sorry, this recipe is published and cannot be changed', {}, {name: member.recipes.first.name, servings: recipe.servings}]
         end
 
         it 'should not be updated if the recipe is owned by another member' do
-          member           = create(:member)
-          updating_member  = create(:member)
-          recipe.member_id = member.id
-
-          recipe.save
-
-          recipe_params = {
+          member          = create(:member_with_a_recipe)
+          updating_member = create(:member)
+          recipe_params   = {
               name: 'John\'s Tubers',
               servings: recipe.servings
           }
 
-          result = UpdateRecipe.new( updating_member, recipe, recipe_params ).call
+          result = UpdateRecipe.new( updating_member, member.recipes.first, recipe_params ).call
 
           expect(result.success?).to eq false
           expect(result.flash).to eq 'Sorry, you must own the recipe to do that'
-          expect(result.response).to eq ['Sorry, you must own the recipe to do that', {}, {name: recipe.name, servings: recipe.servings}]
+          expect(result.response).to eq ['Sorry, you must own the recipe to do that', {}, {}]
         end
       end
       #endregion
@@ -160,40 +149,32 @@ module DiabeticToolbox
       context 'being destroyed using action class' do
         DiabeticToolbox.from :recipes, require: %w(destroy_recipe)
         it 'should be destroyed if the recipe is not published' do
-          member           = create(:member)
-          recipe.member_id = member.id
-          recipe.save
+          member           = create(:member_with_a_recipe)
 
-          result = DestroyRecipe.new( member, recipe ).call
+          result = DestroyRecipe.new( member, member.recipes.first ).call
 
           expect(result.success?).to eq true
           expect(result.flash).to eq 'Your recipe has been deleted'
         end
 
         it 'should not be destroyed if the recipe is published' do
-          member           = create(:member)
-          recipe.member_id = member.id
-          recipe.published = true
+          member           = create(:member_with_a_published_recipe)
 
-          recipe.save
-
-          result = DestroyRecipe.new( member, recipe ).call
+          result = DestroyRecipe.new( member, member.recipes.first ).call
 
           expect(result.success?).to eq false
           expect(result.flash).to eq 'Sorry, this recipe is published and cannot be changed'
         end
 
-        it 'should not be destroyed if it is member is not the owner' do
-          member             = create(:member)
+        it 'should not be destroyed if the recipe is owned by another member' do
+          member             = create(:member_with_a_recipe)
           destructive_member = create(:member)
 
-          recipe.member_id = member.id
-          recipe.save
-
-          result = DestroyRecipe.new( destructive_member, recipe ).call
+          result = DestroyRecipe.new( destructive_member, member.recipes.first ).call
 
           expect(result.success?).to eq false
           expect(result.flash).to eq 'Sorry, you must own the recipe to do that'
+          expect(result.response).to eq ['Sorry, you must own the recipe to do that', {}, {}]
         end
       end
       #endregion
