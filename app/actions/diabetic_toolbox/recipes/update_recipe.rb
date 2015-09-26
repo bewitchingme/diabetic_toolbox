@@ -38,6 +38,7 @@ module DiabeticToolbox
       failure do |option|
         option.subject = @recipe
         option.message = I18n.t('flash.recipe.common.not_allowed')
+        option.unsafe!
       end
     end
 
