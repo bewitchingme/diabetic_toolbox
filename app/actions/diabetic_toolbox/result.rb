@@ -33,7 +33,16 @@ module DiabeticToolbox
     # :enddoc:
     #region Options
     class Options
-      attr_accessor :subject, :message
+      attr_accessor :subject, :message, :security_risk
+      @security_risk = false
+
+      def unsafe!
+        @security_risk = true
+      end
+
+      def unsafe?
+        @security_risk
+      end
     end
     private_constant :Options
     #endregion
@@ -86,10 +95,12 @@ module DiabeticToolbox
       #region Private
       private
       def _safe
-        Hash[ DiabeticToolbox.safe(subject_safe_identity).each.map { |n| [n, @options.subject[n]] } ] if can_generate_safe?
+        return Hash[ DiabeticToolbox.safe(subject_safe_identity).each.map { |n| [n, @options.subject[n]] } ] if can_generate_safe?
+        {}
       end
 
       def can_generate_safe?
+        return false if @options.unsafe?
         DiabeticToolbox.safe(subject_safe_identity).length > 0 && @options.subject.present?
       end
 
