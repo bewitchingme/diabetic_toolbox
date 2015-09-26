@@ -23,8 +23,39 @@ require 'prawn-rails'
 require 'jquery-rails'
 #endregion
 
-#region DiabeticToolbox
+# = DiabeticToolbox
+#
+# DiabeticToolbox provides some methods to make it simple to require
+# each class we want to work with given an individual action and also
+# a way to handle dependencies for children implementing DiabeticToolbox::Action
+#
+#   DiabeticToolbox.from :members, require: %w(create_member) # DiabeticToolbox::CreateMember is required
+#   DiabeticToolbox.rely_on :action                           # DiabeticToolbox::Action is required
+#
+# To ensure that only the fields we want are returned in our responses:
+#
+#   DiabeticToolbox.safe :model # [:field_one, :field_two]
+#
+# And a method to calculate the total number of calories given a DiabeticToolbox::IntakeNutrition object:
+#
+#   intake_nutrition = DiabeticToolbox::IntakeNutrition.new do
+#     add :fat, 5
+#     add :protein, 5
+#     add :carbohydrate, 10
+#   end
+#
+#   DiabeticToolbox.total_calories(intake_nutrition) # => 105
+#
+# An initializer should be created to set the following values:
+#
+#   DiabeticToolbox.config do |config|
+#     config.mailer_from_address = 'from@example.com' # From address for ActionMailer
+#     config.max_attempts        = 3                  # Maximum failed login attempts before lock
+#     config.remember_for        = 3.months           # Period of time that 'Remember Me' lasts for
+#   end
+#
 module DiabeticToolbox
+  #:enddoc:
   #region Module Fields
   @@me   = :diabetic_toolbox
   @@safe = {
@@ -63,9 +94,8 @@ module DiabeticToolbox
 
   #region Calculations
   # http://www.wikihow.com/Convert-Grams-to-Calories
-  def self.grams_to_calories(intake_nutrition)
+  def self.total_calories(intake_nutrition)
     (intake_nutrition.for(:protein) * 4) + (intake_nutrition.for(:carbohydrate) * 4) + (intake_nutrition.for(:fat) * 9)
   end
   #endregion
 end
-#endregion

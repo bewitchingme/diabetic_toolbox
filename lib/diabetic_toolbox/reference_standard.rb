@@ -9,46 +9,52 @@ module DiabeticToolbox
   # It is assumed that these values are shared in
   # nutritional circles widely.  The following is the usage:
   #
-  #   DiabeticToolbox::ReferenceStandard.get(:trans_fat)       # => {:value=>20, :unit=>:grams}
-  #   DiabeticToolbox::ReferenceStandard.value_for(:trans_fat) # => 20
-  #   DiabeticToolbox::ReferenceStandard.units_for(:trans_fat) # => :grams
+  #   DiabeticToolbox::ReferenceStandard.get(:trans_fat)            # => {:value=>20, :unit=>:gram}
+  #   DiabeticToolbox::ReferenceStandard.value_for(:trans_fat)      # => 20
+  #   DiabeticToolbox::ReferenceStandard.units_for(:trans_fat)      # => :gram
+  #   DiabeticToolbox::ReferenceStandard.valid_nutrient? :trans_fat # => true
+  #   DiabeticToolbox::ReferenceStandard.nutrients                  # => [:fat, :trans_fat, ...]
   #
   module ReferenceStandard
     #:enddoc:
     @nutrients = {
-      fat:          {value: 65,   unit: :grams},
-      trans_fat:    {value: 20,   unit: :grams},
-      cholesterol:  {value: 300,  unit: :milligrams},
-      carbohydrate: {value: 300,  unit: :grams},
-      fibre:        {value: 25,   unit: :grams},
-      sodium:       {value: 2400, unit: :milligrams},
-      vitamin_a:    {value: 1000, unit: :retinol_equivalents},
-      vitamin_d:    {value: 5,    unit: :micrograms},
-      vitamin_e:    {value: 10,   unit: :milligrams},
-      vitamin_c:    {value: 60,   unit: :milligrams},
-      vitamin_b1:   {value: 1.3,  unit: :milligrams},
-      vitamin_b2:   {value: 1.6,  unit: :milligrams},
-      niacin:       {value: 23,   unit: :niacin_equivalents},
-      vitamin_b6:   {value: 1.8,  unit: :milligrams},
-      folate:       {value: 220,  unit: :micrograms},
-      vitamin_b12:  {value: 2,    unit: :micrograms},
-      pantothenate: {value: 7,    unit: :milligrams},
-      vitamin_k:    {value: 80,   unit: :micrograms},
-      biotin:       {value: 30,   unit: :micrograms},
-      calcium:      {value: 1100, unit: :milligrams},
-      phosphorus:   {value: 1100, unit: :milligrams},
-      magnesium:    {value: 250,  unit: :milligrams},
-      iron:         {value: 14,   unit: :milligrams},
-      zinc:         {value: 9,    unit: :milligrams},
-      iodide:       {value: 160,  unit: :micrograms},
-      selenium:     {value: 50,   unit: :micrograms},
-      copper:       {value: 2,    unit: :milligrams},
-      manganese:    {value: 2,    unit: :milligrams},
-      chromium:     {value: 120,  unit: :micrograms},
-      molybdenum:   {value: 75,   unit: :micrograms},
-      chloride:     {value: 3400, unit: :milligrams},
-      protein:      {value: 51,   unit: :grams}
+      fat:          {value: 65,   unit: :gram},
+      trans_fat:    {value: 20,   unit: :gram},
+      cholesterol:  {value: 300,  unit: :milligram},
+      carbohydrate: {value: 300,  unit: :gram},
+      fibre:        {value: 25,   unit: :gram},
+      sodium:       {value: 2400, unit: :milligram},
+      vitamin_a:    {value: 1000, unit: :retinol_equivalent},
+      vitamin_d:    {value: 5,    unit: :microgram},
+      vitamin_e:    {value: 10,   unit: :milligram},
+      vitamin_c:    {value: 60,   unit: :milligram},
+      vitamin_b1:   {value: 1.3,  unit: :milligram},
+      vitamin_b2:   {value: 1.6,  unit: :milligram},
+      niacin:       {value: 23,   unit: :niacin_equivalent},
+      vitamin_b6:   {value: 1.8,  unit: :milligram},
+      folate:       {value: 220,  unit: :microgram},
+      vitamin_b12:  {value: 2,    unit: :microgram},
+      pantothenate: {value: 7,    unit: :milligram},
+      vitamin_k:    {value: 80,   unit: :microgram},
+      biotin:       {value: 30,   unit: :microgram},
+      calcium:      {value: 1100, unit: :milligram},
+      phosphorus:   {value: 1100, unit: :milligram},
+      magnesium:    {value: 250,  unit: :milligram},
+      iron:         {value: 14,   unit: :milligram},
+      zinc:         {value: 9,    unit: :milligram},
+      iodide:       {value: 160,  unit: :microgram},
+      selenium:     {value: 50,   unit: :microgram},
+      copper:       {value: 2,    unit: :milligram},
+      manganese:    {value: 2,    unit: :milligram},
+      chromium:     {value: 120,  unit: :microgram},
+      molybdenum:   {value: 75,   unit: :microgram},
+      chloride:     {value: 3400, unit: :milligram},
+      protein:      {value: 51,   unit: :gram}
     }
+
+    def self.nutrients
+      @nutrients
+    end
 
     def self.valid_nutrient?(nutrient)
       true if @nutrients.keys.include? nutrient
