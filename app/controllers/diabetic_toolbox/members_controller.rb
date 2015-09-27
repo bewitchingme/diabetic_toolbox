@@ -21,7 +21,7 @@ module DiabeticToolbox
     def create
       DiabeticToolbox.from :members, require: %w(create_member)
 
-      result  = CreateMember.new( member_params ).call
+      result  = CreateMember.new( creation_params ).call
 
       respond_to do |format|
         format.html do
@@ -57,7 +57,7 @@ module DiabeticToolbox
     def update
       DiabeticToolbox.from :members, require: %w(update_member)
 
-      result = UpdateMember.new( current_member.id, member_params ).call
+      result = UpdateMember.new( current_member.id, update_params ).call
 
       respond_to do |format|
         format.html do
@@ -111,8 +111,12 @@ module DiabeticToolbox
 
     #region Private
     private
-      def member_params
+      def creation_params
         params.require(:member).permit(:first_name, :last_name, :username, :email, :password, :password_confirmation, :dob, :gender, :accepted_tos)
+      end
+
+      def update_params
+        params.require(:member).permit(:password, :password_confirmation, :dob, :gender, :time_zone)
       end
 
       def set_member
