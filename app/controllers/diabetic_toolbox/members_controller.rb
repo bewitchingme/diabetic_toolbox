@@ -128,7 +128,7 @@ module DiabeticToolbox
       end
 
       def sign_in_new_member
-        session = DiabeticToolbox::MemberSession.new( request.env['REMOTE_ADDR'], {'email' => member_params[:email], 'password' => member_params[:password]} )
+        session = DiabeticToolbox::MemberSession.new( request.env['REMOTE_ADDR'], {'email' => creation_params[:email], 'password' => creation_params[:password]} )
         member  = session.create
 
         begin_arbitrary_session(member) if session.in_progress?
