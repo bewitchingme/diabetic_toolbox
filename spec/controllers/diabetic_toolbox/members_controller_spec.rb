@@ -55,13 +55,13 @@ module DiabeticToolbox
         it 'should have 302 HTTP status for :update' do
           sign_in_member member
 
-          put :update, id: member.slug, member: {first_name: 'Doris'}
+          put :update, id: member.slug, member: {gender: :female}
 
           updated_member = Member.find member.slug
 
           expect(response).to have_http_status 302
           expect(response).to redirect_to edit_member_path member
-          expect(updated_member.first_name).to eq 'Doris'
+          expect(updated_member.gender).to eq 'female'
         end
 
         it 'should have 302 HTTP status for :destroy' do

@@ -45,13 +45,13 @@ module DiabeticToolbox
         expect(response).to have_http_status 200
       end
 
-      it 'should be able to POST :release with token' do
+      it 'should be able to PATCH :release with token' do
         DiabeticToolbox.from :members, require: %w(recover_member_password)
         member.reset_password_token   = RecoverMemberPassword.create_token
         member.reset_password_sent_at = Time.now
         member.save
 
-        post :release, token: member.reset_password_token, member: {password: 'password', password_confirmation: 'password'}
+        patch :release, token: member.reset_password_token, member: {password: 'password', password_confirmation: 'password'}
         updated_member = Member.find member.id
 
         expect(updated_member.reset_password_token).to eq nil
