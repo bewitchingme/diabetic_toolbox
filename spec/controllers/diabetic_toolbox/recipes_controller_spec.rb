@@ -5,7 +5,7 @@ module DiabeticToolbox
     routes { DiabeticToolbox::Engine.routes }
 
     #region Definitions
-    let(:member) { create(:member) }
+    let(:member) { create(:member_with_a_recipe) }
     let(:recipe) { build(:recipe)  }
     #endregion
 
@@ -40,49 +40,41 @@ module DiabeticToolbox
       end
 
       it 'should be able to GET to :edit' do
-        recipe.member_id = member.id
-        recipe.save
         sign_in_member member
 
-        get :edit, id: recipe.id
+        get :edit, id: member.recipes.first.id
 
         expect(response).to have_http_status 200
         expect(assigns(:recipe)).to be_a Recipe
       end
 
       it 'should be able to PATCH to :update' do
-        recipe.member_id = member.id
-        recipe.save
         sign_in_member member
 
-        patch :update, id: recipe.id, recipe: { name: "#{recipe.name}1" }
+        patch :update, id: member.recipes.first.id, recipe: { name: "#{member.recipes.first.name}1" }
 
         expect(response).to have_http_status 302
-        expect(response).to redirect_to edit_recipe_path(recipe)
+        expect(response).to redirect_to edit_recipe_path(member.recipes.first)
       end
 
       it 'should be able to DELETE to :destroy' do
-        recipe.member_id = member.id
-        recipe.save
         sign_in_member member
 
-        delete :destroy, id: recipe.id
+        delete :destroy, id: member.recipes.first.id
 
         expect(response).to have_http_status 302
         expect(response).to redirect_to recipes_path
       end
 
       it 'should be able to PATCH to :finalize' do
-        recipe.member_id = member.id
-        recipe.save
         sign_in_member member
 
-        patch :finalize, id: recipe.id
-        recipe.reload
+        patch :finalize, id: member.recipes.first.id
+        member.recipes.first.reload
 
         expect(response).to have_http_status 302
-        expect(response).to redirect_to show_recipe_path(recipe)
-        expect(recipe.published?).to eq true
+        expect(response).to redirect_to show_recipe_path(member.recipes.first)
+        expect(member.recipes.first.published?).to eq true
       end
     end
     #endregion
