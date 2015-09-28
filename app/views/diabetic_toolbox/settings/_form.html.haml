@@ -1,4 +1,4 @@
-= form_for @setting, url: (@setting.new_record? ? create_setting_path : update_settings_path), builder: DiabeticToolbox::StandardFormBuilder do |f|
+= form_for @setting, url: (@setting.new_record? ? create_setting_path : update_settings_path) do |f|
   .panel.panel-default
     .panel-heading.panel-title
       = t('views.settings.titles.measurements')

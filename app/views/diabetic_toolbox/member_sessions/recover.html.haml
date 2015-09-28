@@ -7,7 +7,7 @@
       %p= t('views.member_sessions.recover.primer')
   .row
     .content-member-form
-      = form_for @member, url: release_membership_path(params[:token]), builder: DiabeticToolbox::StandardFormBuilder do |f|
+      = form_for @member, url: release_membership_path(params[:token]), method: :patch do |f|
         .form-group
           = f.label :password
           = f.password_field :password

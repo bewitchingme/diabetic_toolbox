@@ -7,7 +7,7 @@
         .pull-right
           = @member.email
           = link_to content_tag(:span, '', class: 'fa fa-edit'), edit_member_email_path
-= form_for @member, url: update_member_url, builder: DiabeticToolbox::StandardFormBuilder do |f|
+= form_for @member, url: update_member_url do |f|
   .container-fluid
     .row
       .content-member-form.smooth

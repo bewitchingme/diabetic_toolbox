@@ -6,7 +6,7 @@
         %p
           %span.glyphicon.glyphicon-info-sign
           = t('views.members.new.primer')
-= form_for @member, url: create_member_url, builder: DiabeticToolbox::StandardFormBuilder do |f|
+= form_for @member, url: create_member_url do |f|
   .container-fluid
     .row
       .content-member-form.smooth

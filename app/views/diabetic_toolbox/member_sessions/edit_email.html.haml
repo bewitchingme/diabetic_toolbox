@@ -8,7 +8,7 @@
           = t('views.member_sessions.edit_email.primer')
   .row
     .content-member-form
-      = form_for @member, url: update_member_email_path, builder: DiabeticToolbox::StandardFormBuilder do |f|
+      = form_for @member, url: update_member_email_path do |f|
         .form-group
           = f.label :unconfirmed_email
           = f.text_field :unconfirmed_email, autofocus: true, placeholder: t('views.member_sessions.edit_email.placeholders.new_email')

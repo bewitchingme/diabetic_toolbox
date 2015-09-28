@@ -4,7 +4,7 @@
       .panel.panel-default
         .panel-heading.panel-title= t('navigation.authentication.common.title')
         .panel-body
-          = form_for @member, url: begin_session_path, builder: DiabeticToolbox::StandardFormBuilder do |f|
+          = form_for @member, url: begin_session_path do |f|
             .form-group
               = f.label :email
               = f.text_field :email, autofocus: true

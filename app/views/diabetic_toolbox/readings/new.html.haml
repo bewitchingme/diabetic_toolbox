@@ -9,7 +9,7 @@
           %a.list-group-item.active{href: record_reading_path} Record
       .separator
       .content-readings.smooth
-        = form_for @reading, url: create_reading_path, builder: DiabeticToolbox::StandardFormBuilder, html: {id: 'record-reading'} do |f|
+        = form_for @reading, url: create_reading_path, html: {id: 'record-reading'} do |f|
           .half
             .form-group
               = f.label :glucometer_value
