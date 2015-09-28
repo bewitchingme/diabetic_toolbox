@@ -13,7 +13,7 @@ DiabeticToolbox::Engine.routes.draw do
   get    '/request_recovery', to: 'member_sessions#password_recovery', as: :password_recovery
   post   '/request_recovery', to: 'member_sessions#send_recovery_kit', as: :recovery_kit
   get    '/recover/:token',   to: 'member_sessions#recover',           as: :recover_membership
-  post   '/recover/:token',   to: 'member_sessions#release',           as: :release_membership
+  match  '/recover/:token',   to: 'member_sessions#release',           as: :release_membership,  via: [:patch, :put]
   get    '/change_email',     to: 'member_sessions#edit_email',        as: :edit_member_email
   match  '/change_email',     to: 'member_sessions#update_email',      as: :update_member_email, via: [:patch, :put]
   get    '/reconfirm/:token', to: 'member_sessions#reconfirm',         as: :reconfirmation
