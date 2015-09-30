@@ -1,0 +1,16 @@
+.container-fluid
+  .row
+    #dashboard.content-dashboard.smooth
+      .separator
+      .text-center= render_member_navigation :recipes
+  .row
+    .content-recipe-form
+      %h3 New Recipe
+      = form_for @recipe, url: create_recipe_path do |f|
+        .form-group
+          = f.label :name
+          = f.text_field :name, autofocus: true
+        .form-group
+          = f.label :servings
+          = f.text_field :servings
+        .text-center= f.submit 'Save'
