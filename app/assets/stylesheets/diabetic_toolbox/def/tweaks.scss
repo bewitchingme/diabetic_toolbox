@@ -117,6 +117,11 @@ HTML,BODY
   @include column(12, 10, 8, 6);
   @include column-offsets(0, 1, 2, 3);
 }
+.content-recipe-form
+{
+  @include column(12, 10, 8, 6);
+  @include column-offsets(0, 1, 2, 3);
+}
 .content-login
 {
   @include column(12, 8, 6, 4);
