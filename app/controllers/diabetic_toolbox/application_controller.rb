@@ -44,14 +44,17 @@ module DiabeticToolbox
     #endregion
 
     #region Navigation
-    def deploy_member_tabs
-      @tabs = {
-          :summary    => [I18n.t('navigation.members.summary'),    'thumb-tack', member_dashboard_path],
-          :readings   => [I18n.t('navigation.members.readings'),   'book',       list_readings_path],
-          :reports    => [I18n.t('navigation.members.reports'),    'bar-chart',  '#'],
-          :recipes    => [I18n.t('navigation.members.recipes'),    'list',       recipes_path],
-          :meal_plans => [I18n.t('navigation.members.meal_plans'), 'road',       '#']
-      }
+    def deploy_member_navigation
+      Navigator.chart :dashboard do |pathway|
+        pathway.waypoint :summary,  I18n.t('navigation.members.summary'),  'thumb-tack', member_dashboard_path
+        pathway.waypoint :readings, I18n.t('navigation.members.readings'), 'book', list_readings_path do |stop|
+          stop.attraction :readings_history, 'History', list_readings_path
+          stop.attraction :readings_record, 'Record', record_reading_path
+        end
+        pathway.waypoint :reports, I18n.t('navigation.members.reports'), 'bar-chart', '#'
+        pathway.waypoint :recipes, I18n.t('navigation.members.recipes'), 'list', recipes_path
+        pathway.waypoint :meal_plans, I18n.t('navigation.members.meal_plans'), 'road', '#'
+      end
     end
     #endregion
 
