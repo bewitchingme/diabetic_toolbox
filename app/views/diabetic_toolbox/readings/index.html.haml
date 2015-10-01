@@ -1,12 +1,7 @@
 .container-fluid
   .row
-    #dashboard.content-dashboard.smooth
-      .separator
-      .text-center= render_member_navigation :readings
-      .text-center
-        #reading-actions.list-group.list-group-horizontal
-          %a.list-group-item.active{href: list_readings_path}= I18n.t('views.readings.index.history')
-          %a.list-group-item{href: record_reading_path}= I18n.t('views.readings.common.record')
+    .text-center= render_member_navigation :readings, :readings_history
+    .content-member
       - if current_member.has_no_readings?
         .text-center= I18n.t('views.readings.index.no_readings')
       - else

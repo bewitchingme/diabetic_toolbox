@@ -1,38 +1,31 @@
 .container-fluid
   .row
-    #dashboard.content-dashboard
-      .separator
-      .text-center= render_member_navigation :readings
-      .text-center
-        #reading-actions.list-group.list-group-horizontal
-          %a.list-group-item{href: list_readings_path} History
-          %a.list-group-item.active{href: record_reading_path} Record
-      .separator
-      .content-readings.smooth
-        = form_for @reading, url: create_reading_path, html: {id: 'record-reading'} do |f|
-          .half
-            .form-group
-              = f.label :glucometer_value
-              .input-group
-                = f.text_field :glucometer_value, autofocus: true, tabindex: 1, placeholder: '5.5'
-                %span.input-group-addon
-                  = glucometer_type current_setting
-            .form-group
-              = f.label :test_time
-              #test-time-picker.input-group
-                = f.text_field :test_time, tabindex: 2, placeholder: initial_test_time, value: initial_test_time
-                %span#test-time-addon.input-group-addon
-                  %span.glyphicon.glyphicon-time
-          .half
-            .form-group
-              = f.label :intake
-              .input-group
-                = f.text_field :intake, tabindex: 3, placeholder: 'Qty.'
-                %span.input-group-addon
-                  = intake_type current_setting
-            .form-group
-              = f.label :meal
-              = f.select :meal, meal_options, {}, {tabindex: 4}
-          .text-center
-            = f.submit t('views.readings.common.record'), tabindex: 5
-      .separator
+    = render_member_navigation :readings, :readings_record
+    .content-readings.smooth
+      = form_for @reading, url: create_reading_path, html: {id: 'record-reading'} do |f|
+        .half
+          .form-group
+            = f.label :glucometer_value
+            .input-group
+              = f.text_field :glucometer_value, autofocus: true, tabindex: 1, placeholder: '5.5'
+              %span.input-group-addon
+                = glucometer_type current_setting
+          .form-group
+            = f.label :test_time
+            #test-time-picker.input-group
+              = f.text_field :test_time, tabindex: 2, placeholder: initial_test_time, value: initial_test_time
+              %span#test-time-addon.input-group-addon
+                %span.glyphicon.glyphicon-time
+        .half
+          .form-group
+            = f.label :intake
+            .input-group
+              = f.text_field :intake, tabindex: 3, placeholder: 'Qty.'
+              %span.input-group-addon
+                = intake_type current_setting
+          .form-group
+            = f.label :meal
+            = f.select :meal, meal_options, {}, {tabindex: 4}
+        .text-center
+          = f.submit t('views.readings.common.record'), tabindex: 5
+    .separator
