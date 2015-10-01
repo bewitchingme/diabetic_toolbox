@@ -8,7 +8,7 @@ module DiabeticToolbox
     #endregion
 
     #region Before Action
-    before_action :deploy_member_tabs,    only: :dash
+    before_action :deploy_member_navigation,    only: :dash
     before_action :set_member,            only: :show
     before_action :there_can_be_only_one, only: :new
     #endregion

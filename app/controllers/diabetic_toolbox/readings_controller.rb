@@ -9,7 +9,7 @@ module DiabeticToolbox
 
     #region Before Action
     before_action :set_reading, only: [:new]
-    before_action :deploy_member_tabs, only: [:index, :new]
+    before_action :deploy_member_navigation, only: [:index, :new]
     helper_method :initial_test_time
     #endregion
 
@@ -32,7 +32,7 @@ module DiabeticToolbox
         flash[:success] = result.flash
         redirect_to list_readings_path
       else
-        deploy_member_tabs
+        deploy_member_navigation
         @reading       = result.actual
         flash[:danger] = result.flash
         render :new
