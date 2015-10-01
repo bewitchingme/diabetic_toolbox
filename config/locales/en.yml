@@ -52,6 +52,9 @@ en:
       meal_plans: Meal Plans
       me: Account
       settings: Settings
+    readings:
+      history: History
+      record: Record
   helpers:
     page_entries_info:
       one_page:

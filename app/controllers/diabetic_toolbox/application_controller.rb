@@ -48,8 +48,8 @@ module DiabeticToolbox
       Navigator.chart :dashboard do |pathway|
         pathway.waypoint :summary,  I18n.t('navigation.members.summary'),  'thumb-tack', member_dashboard_path
         pathway.waypoint :readings, I18n.t('navigation.members.readings'), 'book', list_readings_path do |stop|
-          stop.attraction :readings_history, 'History', list_readings_path
-          stop.attraction :readings_record, 'Record', record_reading_path
+          stop.attraction :readings_history, I18n.t('navigation.readings.history'), list_readings_path
+          stop.attraction :readings_record, I18n.t('navigation.readings.record'), record_reading_path
         end
         pathway.waypoint :reports, I18n.t('navigation.members.reports'), 'bar-chart', '#'
         pathway.waypoint :recipes, I18n.t('navigation.members.recipes'), 'list', recipes_path
