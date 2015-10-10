@@ -1,15 +1,13 @@
 module DiabeticToolbox
-  rely_on :result
-
-  # = Action
+  # = Exchange
   #
-  # Action is the base for each action taken in the Diabetic Toolbox.  When
-  # a class defined which inherits from Action, the child is required at minimum
-  # to redefine +_call+ which carries out the necessary work to perform the action.
+  # Exchange is the base for each data exchange performed in the Diabetic Toolbox.  When
+  # a class defined which inherits from Exchange, the child is required at minimum
+  # to redefine +_call+ which carries out the necessary work to perform the exchange.
   #
   # The following is a brief example
   #
-  #   class MyAction < Action
+  #   class MyExchange < Exchange
   #     def initialize(params)
   #       super params
   #     end
@@ -35,7 +33,7 @@ module DiabeticToolbox
   #   def _after_call
   #     # ...
   #   end
-  class Action
+  class Exchange
     #:enddoc:
 
     #region Public

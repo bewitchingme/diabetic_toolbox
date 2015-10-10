@@ -7,6 +7,9 @@ require 'sessions/session'
 require 'diabetic_toolbox/intake_nutrition'
 require 'diabetic_toolbox/reference_standard'
 require 'diabetic_toolbox/navigator'
+require 'diabetic_toolbox/result'
+require 'diabetic_toolbox/exchange'
+require 'diabetic_toolbox/list'
 require 'paperclip'
 require 'haml'
 require 'haml-rails'
@@ -79,15 +82,7 @@ module DiabeticToolbox
   def self.from(scope, options = {})
     if options.has_key? :require
       options[:require].each do |requirement|
-        require Engine.root.join 'app', 'actions', @@me.to_s, scope.to_s, requirement
-      end
-    end
-  end
-
-  def self.rely_on(*args)
-    if args.length > 0
-      args.each do |requirement|
-        require Engine.root.join 'app', 'actions', @@me.to_s, requirement.to_s
+        require Engine.root.join 'app', 'interactions', @@me.to_s, scope.to_s, requirement
       end
     end
   end
