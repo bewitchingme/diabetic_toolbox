@@ -23,7 +23,7 @@ module DiabeticToolbox
     #region Protected
     protected
     def _call
-      @member = Member.new @params
+      @member = Member.new call_params
 
       if @member.save
         success do |option|
