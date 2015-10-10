@@ -1,6 +1,4 @@
 module DiabeticToolbox
-  rely_on :action
-
   # = DestroyMember
   #
   # This action allows for the destruction of a member and is used
@@ -14,7 +12,7 @@ module DiabeticToolbox
   #     # Failure
   #   end
   #
-  class DestroyMember < Action
+  class DestroyMember < Exchange
     #:enddoc:
     def initialize(member_id)
       super nil

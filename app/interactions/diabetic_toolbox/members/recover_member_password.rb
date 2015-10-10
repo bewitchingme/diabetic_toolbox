@@ -1,7 +1,5 @@
 module DiabeticToolbox
-  rely_on :action
-
-  class RecoverMemberPassword < Action
+  class RecoverMemberPassword < Exchange
     #region Init
     def initialize(recovery_params)
       super recovery_params

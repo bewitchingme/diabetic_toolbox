@@ -1,26 +1,24 @@
 module DiabeticToolbox
-  rely_on :action
-  
-  class CreateNutritionalFact < Action
+  class DestroyRecipe < Exchange
     #region Init
-    def initialize(member, recipe, nutritional_fact_params)
-      @member, @recipe, @nutritional_fact = member, recipe, recipe.nutritional_facts.new( nutritional_fact_params )
+    def initialize(member, recipe)
+      @member = member
+      @recipe = recipe
     end
     #endregion
 
     #region Protected
-    protected
     def _call
-      if can_create?
-        if @nutritional_fact.save
+      if can_destroy?
+        if @recipe.destroy
           success do |option|
-            option.subject = @nutritional_fact
-            option.message = I18n.t('flash.nutritional_fact.created.success')
+            option.subject = @recipe
+            option.message = I18n.t('flash.recipe.destroyed.success')
           end
         else
           failure do |option|
-            option.subject = @nutritional_fact
-            option.message = I18n.t('flash.nutritional_fact.created.failure')
+            option.subject = @recipe
+            option.message = I18n.t('flash.recipe.destroyed.failure')
           end
         end
       else
@@ -31,27 +29,27 @@ module DiabeticToolbox
     #endregion
 
     #region Private
-    private
     def not_allowed!
       failure do |option|
-        option.subject = @nutritional_fact
+        option.subject = @recipe
         option.message = I18n.t('flash.recipe.common.not_allowed')
+        option.unsafe!
       end
     end
 
     def already_published!
       failure do |option|
-        option.subject = @nutritional_fact
+        option.subject = @recipe
         option.message = I18n.t('flash.recipe.common.already_published')
       end
     end
 
-    def can_create?
-      member_owns_recipe? && recipe_not_published?
+    def can_destroy?
+      return true if member_owns_recipe? && recipe_not_published?
     end
 
     def member_owns_recipe?
-      @recipe.owned_by? @member
+      @recipe.owned_by?(@member)
     end
 
     def recipe_not_published?

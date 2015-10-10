@@ -1,28 +1,24 @@
 module DiabeticToolbox
-  rely_on :action
-
-  class UpdateRecipe < Action
+  class CreateNutritionalFact < Exchange
     #region Init
-    def initialize(member, recipe, recipe_params)
-      super recipe_params
-      @member = member
-      @recipe = recipe
+    def initialize(member, recipe, nutritional_fact_params)
+      @member, @recipe, @nutritional_fact = member, recipe, recipe.nutritional_facts.new( nutritional_fact_params )
     end
     #endregion
 
     #region Protected
     protected
     def _call
-      if can_update?
-        if @recipe.update call_params
+      if can_create?
+        if @nutritional_fact.save
           success do |option|
-            option.subject = @recipe
-            option.message = I18n.t('flash.recipe.updated.success')
+            option.subject = @nutritional_fact
+            option.message = I18n.t('flash.nutritional_fact.created.success')
           end
         else
           failure do |option|
-            option.subject = @recipe
-            option.message = I18n.t('flash.recipe.updated.failure')
+            option.subject = @nutritional_fact
+            option.message = I18n.t('flash.nutritional_fact.created.failure')
           end
         end
       else
@@ -36,17 +32,20 @@ module DiabeticToolbox
     private
     def not_allowed!
       failure do |option|
-        option.subject = @recipe
+        option.subject = @nutritional_fact
         option.message = I18n.t('flash.recipe.common.not_allowed')
-        option.unsafe!
       end
     end
 
     def already_published!
       failure do |option|
-        option.subject = @recipe
+        option.subject = @nutritional_fact
         option.message = I18n.t('flash.recipe.common.already_published')
       end
+    end
+
+    def can_create?
+      member_owns_recipe? && recipe_not_published?
     end
 
     def member_owns_recipe?
@@ -55,10 +54,6 @@ module DiabeticToolbox
 
     def recipe_not_published?
       !@recipe.published?
-    end
-
-    def can_update?
-      member_owns_recipe? && recipe_not_published?
     end
     #endregion
   end

@@ -1,6 +1,4 @@
 module DiabeticToolbox
-  rely_on :action
-
   # = CreateMember
   #
   # This action allows for the creation of a new authenticatable Member.
@@ -14,7 +12,7 @@ module DiabeticToolbox
   #     # Failure
   #   end
   #
-  class CreateMember < Action
+  class CreateMember < Exchange
     # :enddoc:
     #region Init
     def initialize(member_params)

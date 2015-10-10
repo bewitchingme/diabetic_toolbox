@@ -1,7 +1,5 @@
 module DiabeticToolbox
-  rely_on :action
-
-  class PublishRecipe < Action
+  class PublishRecipe < Exchange
     #region Init
     def initialize(member, recipe)
       super nil

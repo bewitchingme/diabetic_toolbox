@@ -1,7 +1,5 @@
 module DiabeticToolbox
-  rely_on :action
-
-  class CreateRecipe < Action
+  class CreateRecipe < Exchange
     #region Init
     def initialize(member, recipe_params)
       super recipe_params

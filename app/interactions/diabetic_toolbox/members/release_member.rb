@@ -1,7 +1,5 @@
 module DiabeticToolbox
-  rely_on :action
-
-  class ReleaseMember < Action
+  class ReleaseMember < Exchange
     #region Init
     def initialize(token, release_params)
       super release_params

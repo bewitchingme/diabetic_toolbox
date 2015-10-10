@@ -1,7 +1,5 @@
 module DiabeticToolbox
-  rely_on :action
-
-  class ReconfirmMember < Action
+  class ReconfirmMember < Exchange
     #region Init
     def initialize(token)
       if token.blank?

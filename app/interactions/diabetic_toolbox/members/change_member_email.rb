@@ -1,8 +1,6 @@
 require 'digest'
 
 module DiabeticToolbox
-  rely_on :action
-
   # = ChangeMemberEmail
   #
   # This action allows for the modification of a Member email address and is used as follows:
@@ -15,7 +13,7 @@ module DiabeticToolbox
   #     # Failure
   #   end
   #
-  class ChangeMemberEmail < Action
+  class ChangeMemberEmail < Exchange
     #:enddoc:
     #region Init
     def initialize(member_id, member_params)

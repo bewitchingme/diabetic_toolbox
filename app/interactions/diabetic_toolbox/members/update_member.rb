@@ -1,6 +1,4 @@
 module DiabeticToolbox
-  rely_on :action
-
   # = UpdateMember
   #
   # This action allows for the modification of a Member and is used as follows:
@@ -13,7 +11,7 @@ module DiabeticToolbox
   #     # Failure
   #   end
   #
-  class UpdateMember < Action
+  class UpdateMember < Exchange
     #:enddoc:
     def initialize(member_id, member_params)
       super(member_params)

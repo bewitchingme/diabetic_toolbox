@@ -1,7 +1,5 @@
 module DiabeticToolbox
-  rely_on :action
-
-  class CreateMemberReading < Action
+  class CreateMemberReading < Exchange
     #region Init
     def initialize(member, reading_params)
       super reading_params
