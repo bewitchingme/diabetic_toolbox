@@ -16,7 +16,7 @@ module DiabeticToolbox
 
     #region Init
     def initialize(member = nil, page = nil)
-      set_child :member_recipes, Recipe.where(member: member) if member.present?
+      set_child :member_recipes, Recipe.where(member: member).order(published: :desc) if member.present?
       set_child :recipes,        Recipe.published.order(created_at: :desc).page( page )
     end
     #endregion
