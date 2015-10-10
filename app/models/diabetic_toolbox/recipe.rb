@@ -4,6 +4,11 @@ module DiabeticToolbox
     include DiabeticToolbox::Concerns::Voteable
     #endregion
 
+    #region Scopes
+    scope :drafts,    -> { where(published: false) }
+    scope :published, -> { where(published: true) }
+    #endregion
+
     #region Validations
     validates :name, presence: { message: I18n.t('activerecord.validations.common.required') },
               length: { in: (4..64), message: I18n.t('activerecord.validations.common.length_range', min: 4, max: 64) }
