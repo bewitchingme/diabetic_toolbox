@@ -14,11 +14,8 @@ module DiabeticToolbox
 
     #region Read
     def index
-      if member_signed_in?
-        @recipes = Recipe.where(member_id: current_member.id).page( params[:page] )
-      else
-        @recipes = Recipe.order(:created_at)
-      end
+      DiabeticToolbox.from :recipes, require: %w(recipe_list)
+      @recipe_list = RecipeList.new(current_member, params[:page])
     end
 
     def new
