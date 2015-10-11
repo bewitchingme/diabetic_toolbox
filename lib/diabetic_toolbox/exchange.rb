@@ -3,7 +3,8 @@ module DiabeticToolbox
   #
   # Exchange is the base for each data exchange performed in the Diabetic Toolbox.  When
   # a class defined which inherits from Exchange, the child is required at minimum
-  # to redefine +_call+ which carries out the necessary work to perform the exchange.
+  # to define a hook named :default, though defining no hook will simply result in no work
+  # being performed when +call+ is executed.
   #
   # The following is a brief example
   #
@@ -12,29 +13,32 @@ module DiabeticToolbox
   #       super params
   #     end
   #
-  #     protected
-  #     def _call
+  #     hook :default do
   #       # ...
   #     end
   #   end
   #
   # If there is some necessary preparation to do before the call is made,
-  # you should implement +_before_call+ as follows:
+  # you should implement the :before hook, as follows:
   #
-  #   protected
-  #   def _before_call
+  #   hook :before do
   #     # ...
   #   end
   #
   # And similarly when there is work to be performed after the call,
-  # +_after_call+ should be defined:
+  # :after should be implemented:
   #
-  #   protected
-  #   def _after_call
+  #   hook :after do
   #     # ...
   #   end
   class Exchange
     #:enddoc:
+    #region Class Methods
+    def self.hook(name, &block)
+      @hooks ||= {}
+      @hooks[name] = block
+    end
+    #endregion
 
     #region Public
     def initialize(params)
@@ -43,9 +47,9 @@ module DiabeticToolbox
     end
 
     def call
-      _before_call
-      _call
-      _after_call
+      call_hook(:before)
+      call_hook(:default)
+      call_hook(:after)
       @result
     end
     #endregion
@@ -67,12 +71,25 @@ module DiabeticToolbox
     def failure(&block)
       @result = Result.failure &block
     end
+    #endregion
 
-    def _call ; end
+    #region Private
+    private
+    def get_hook(name)
+      hooks[name] if hook_exists? name
+    end
 
-    def _before_call ; end
+    def hook_exists?(name)
+      hooks.has_key? name unless hooks.nil?
+    end
 
-    def _after_call ; end
+    def hooks
+      self.class.instance_variable_get(:@hooks)
+    end
+
+    def call_hook(name)
+      instance_eval &get_hook(name) if hook_exists? name
+    end
     #endregion
   end
 end
