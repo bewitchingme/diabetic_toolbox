@@ -2,7 +2,6 @@ module DiabeticToolbox
   class PublishRecipe < Exchange
     #region Init
     def initialize(member, recipe)
-      super nil
       @recipe = recipe
       @member = member
     end

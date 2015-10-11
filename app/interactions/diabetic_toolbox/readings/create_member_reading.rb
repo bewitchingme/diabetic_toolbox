@@ -9,7 +9,7 @@ module DiabeticToolbox
 
     #region Protected
     def _call
-      @reading = @member.readings.new @params
+      @reading = @member.readings.new call_params
 
       if @reading.save
         success do |option|

@@ -20,7 +20,7 @@ module DiabeticToolbox
     end
 
     def _call
-      if @member.update @params
+      if @member.update call_params
         success do |option|
           option.subject = @member
           option.message = I18n.t('flash.member.updated.success')

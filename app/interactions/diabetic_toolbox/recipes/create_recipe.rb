@@ -3,7 +3,7 @@ module DiabeticToolbox
     #region Init
     def initialize(member, recipe_params)
       super recipe_params
-      @recipe = member.recipes.new @params
+      @recipe = member.recipes.new call_params
     end
     #endregion
 

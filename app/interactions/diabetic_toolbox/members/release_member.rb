@@ -27,7 +27,7 @@ module DiabeticToolbox
     #region Private
     private
     def update_params
-      {password: @params[:password], password_confirmation: @params[:password_confirmation], reset_password_token: nil, reset_password_sent_at: nil}
+      {password: call_params[:password], password_confirmation: call_params[:password_confirmation], reset_password_token: nil, reset_password_sent_at: nil}
     end
     #endregion
   end

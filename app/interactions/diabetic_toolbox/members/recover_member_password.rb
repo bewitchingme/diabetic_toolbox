@@ -9,7 +9,7 @@ module DiabeticToolbox
     #region Protected
     protected
     def _call
-      @member     = Member.find_by_email @params[:email]
+      @member     = Member.find_by_email call_params[:email]
       in_recovery = false
       in_recovery = triage if @member.present?
       ambiguous   = I18n.t('flash.authenticatable.send_recovery_kit.ambiguous_response')
