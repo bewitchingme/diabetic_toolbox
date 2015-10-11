@@ -7,8 +7,8 @@ module DiabeticToolbox
     end
     #endregion
 
-    #region Protected
-    def _call
+    #region Hooks
+    hook :default do
       if @recipe.save
         success do |option|
           option.subject = @recipe

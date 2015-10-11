@@ -23,9 +23,8 @@ module DiabeticToolbox
     end
     #endregion
 
-    #region Protected
-    protected
-    def _call
+    #region Hooks
+    hook :default do
       call_params.merge! confirmation_values
       change_request_successful = false
       change_request_successful = @member.update( call_params ) unless email_in_use?
@@ -44,7 +43,7 @@ module DiabeticToolbox
       end
     end
 
-    def _after_call
+    hook :after do
       if call_result.success?
         ChangeMemberEmailMailer.send_confirmation_link(@member).deliver_now
       end

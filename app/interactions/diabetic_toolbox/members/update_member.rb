@@ -13,13 +13,16 @@ module DiabeticToolbox
   #
   class UpdateMember < Exchange
     #:enddoc:
+    #region Init
     def initialize(member_id, member_params)
       super(member_params)
 
       @member = Member.find(member_id)
     end
+    #endregion
 
-    def _call
+    #region Hooks
+    hook :default do
       if @member.update call_params
         success do |option|
           option.subject = @member
@@ -32,5 +35,6 @@ module DiabeticToolbox
         end
       end
     end
+    #endregion
   end
 end

@@ -10,9 +10,8 @@ module DiabeticToolbox
     end
     #endregion
 
-    #region Protected
-    protected
-    def _call
+    #region Hooks
+    hook :default do
       if @member.present?
         exchanged = false
         exchanged = exchange unless email_in_use?

@@ -7,8 +7,8 @@ module DiabeticToolbox
     end
     #endregion
 
-    #region Protected
-    def _call
+    #region Hooks
+    hook :default do
       if can_destroy?
         if @recipe.destroy
           success do |option|

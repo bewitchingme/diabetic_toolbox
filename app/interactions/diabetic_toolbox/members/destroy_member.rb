@@ -14,13 +14,16 @@ module DiabeticToolbox
   #
   class DestroyMember < Exchange
     #:enddoc:
+    #region Init
     def initialize(member_id)
       super nil
 
       @member = Member.find member_id
     end
+    #endregion
 
-    def _call
+    #region Hooks
+    hook :default do
       if @member.destroy
         success do |option|
           option.subject = @member
@@ -33,5 +36,6 @@ module DiabeticToolbox
         end
       end
     end
+    #endregion
   end
 end

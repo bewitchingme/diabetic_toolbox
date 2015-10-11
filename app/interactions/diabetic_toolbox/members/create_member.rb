@@ -20,9 +20,8 @@ module DiabeticToolbox
     end
     #endregion
 
-    #region Protected
-    protected
-    def _call
+    #region Hooks
+    hook :default do
       @member = Member.new call_params
 
       if @member.save
@@ -38,7 +37,7 @@ module DiabeticToolbox
       end
     end
 
-    def _after_call
+    hook :after do
       if call_result.success?
         # TODO: Must implement the mailer here to confirm the member.
       end

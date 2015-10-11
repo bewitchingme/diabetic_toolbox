@@ -8,9 +8,8 @@ module DiabeticToolbox
     end
     #endregion
 
-    #region Protected
-    protected
-    def _call
+    #region Hooks
+    hook :default do
       if can_update?
         if @recipe.update call_params
           success do |option|

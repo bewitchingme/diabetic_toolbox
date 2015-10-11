@@ -7,8 +7,8 @@ module DiabeticToolbox
     end
     #endregion
 
-    #region Protected
-    def _call
+    #region Hooks
+    hook :default do
       updated = false
       updated = @recipe.update_column(:published, true) if @recipe.owned_by? @member
 

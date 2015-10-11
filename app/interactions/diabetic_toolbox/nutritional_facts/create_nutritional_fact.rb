@@ -6,9 +6,8 @@ module DiabeticToolbox
     end
     #endregion
 
-    #region Protected
-    protected
-    def _call
+    #region Hooks
+    hook :default do
       if can_create?
         if @nutritional_fact.save
           success do |option|

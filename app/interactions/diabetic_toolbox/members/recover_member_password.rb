@@ -1,14 +1,14 @@
 module DiabeticToolbox
   class RecoverMemberPassword < Exchange
+    #:enddoc:
     #region Init
     def initialize(recovery_params)
       super recovery_params
     end
     #endregion
 
-    #region Protected
-    protected
-    def _call
+    #region Hooks
+    hook :default do
       @member     = Member.find_by_email call_params[:email]
       in_recovery = false
       in_recovery = triage if @member.present?
@@ -27,7 +27,7 @@ module DiabeticToolbox
       end
     end
 
-    def _after_call
+    hook :after do
       if call_result.success?
         DiabeticToolbox::RecoveryKitMailer.send_forgot_password_kit(@member).deliver_now
       end

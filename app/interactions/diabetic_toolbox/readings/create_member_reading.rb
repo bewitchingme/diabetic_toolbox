@@ -7,8 +7,8 @@ module DiabeticToolbox
     end
     #endregion
 
-    #region Protected
-    def _call
+    #region Hooks
+    hook :default do
       @reading = @member.readings.new call_params
 
       if @reading.save

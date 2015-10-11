@@ -7,9 +7,8 @@ module DiabeticToolbox
     end
     #endregion
 
-    #region Protected
-    protected
-    def _call
+    #region Hooks
+    hook :default do
       if @member.update update_params
         success do |option|
           option.subject = @member
