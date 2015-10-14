@@ -1,5 +1,14 @@
 module DiabeticToolbox
+  # = DestroyRecipe
+  #
+  # This class is used to destroy an unpublished recipe;
+  # it will not allow for the destruction of a recipe which
+  # has been published.  Used as follows:
+  #
+  #   result = DestroyRecipe(member, recipe).call
+  #
   class DestroyRecipe < Exchange
+    #:enddoc
     #region Init
     def initialize(member, recipe)
       @member = member

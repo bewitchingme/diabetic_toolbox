@@ -1,4 +1,5 @@
 module DiabeticToolbox
+  #:enddoc:
   module WelcomeHelper
     def about_this_toolbox
       render partial: "diabetic_toolbox/welcome/about"

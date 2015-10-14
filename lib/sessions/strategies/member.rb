@@ -1,3 +1,4 @@
+#:enddoc:
 Warden::Strategies.add(:member) do
   def valid?
     member_params = params['member']

@@ -1,4 +1,5 @@
 module DiabeticToolbox
+  #:enddoc:
   module SettingsHelper
     def glucometer_options(setting)
       options = DiabeticToolbox::Setting.glucometer_options

@@ -1,5 +1,16 @@
 module DiabeticToolbox
+  # = MemberDashboard
+  #
+  # The MemberDashboard class provides data and configuration for the
+  # chart kick library currently; ultimately anything displayed on the
+  # dashboard should have its data organized here.
+  #
+  #   MemberDashboard.history(member, period) #=> Member readings history, 60 days worth
+  #   MemberDashboard.chartkick_library       #=> Interface settings for chart kick
+  #
   class MemberDashboard
+    #:enddoc:
+    #region Static
     def self.history(member, travel = (Time.now - 60.days))
       history = member.readings.where(test_time: travel..(Time.now)).order(test_time: :asc)
       history.to_a.each_with_object({}){ |r,h| h[Time.zone.parse(r.test_time.to_s)] = r.glucometer_value }
@@ -46,5 +57,6 @@ module DiabeticToolbox
         }
       }
     end
+    #endregion
   end
 end

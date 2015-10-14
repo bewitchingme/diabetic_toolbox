@@ -1,4 +1,11 @@
 module DiabeticToolbox
+  # = RecoverMemberPassword
+  #
+  # This class provides a "forgot password" capability for
+  # members, used as follows:
+  #
+  #   result = RecoverMemberPassword.new({email: member_email}).call
+  #
   class RecoverMemberPassword < Exchange
     #:enddoc:
     #region Init

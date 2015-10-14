@@ -1,5 +1,13 @@
 module DiabeticToolbox
+  # = CreateRecipe
+  #
+  # Creates a recipe owned by the member who creates it
+  # as follows:
+  #
+  #   result = CreateRecipe.new(member, recipe_params).call
+  #
   class CreateRecipe < Exchange
+    #:enddoc:
     #region Init
     def initialize(member, recipe_params)
       super recipe_params

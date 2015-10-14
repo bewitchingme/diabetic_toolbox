@@ -1,6 +1,7 @@
 require_dependency 'diabetic_toolbox/application_controller'
 
 module DiabeticToolbox
+  #:enddoc:
   class SettingsController < ApplicationController
     load_and_authorize_resource
     before_action :set_setting, :no_settings_configured, only: [:edit, :update]

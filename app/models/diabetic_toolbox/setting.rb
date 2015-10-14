@@ -1,4 +1,5 @@
 module DiabeticToolbox
+  #:enddoc:
   class Setting < ActiveRecord::Base
     belongs_to :member, class_name: 'DiabeticToolbox::Member', counter_cache: true
 

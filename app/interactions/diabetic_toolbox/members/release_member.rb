@@ -1,5 +1,13 @@
 module DiabeticToolbox
+  # = ReleaseMember
+  #
+  # A class to release a member from recovery, where release
+  # parameters include password and password_confirmation keys.
+  #
+  #   result = ReleaseMember.new(token, release_params).call
+  #
   class ReleaseMember < Exchange
+    #:enddoc:
     #region Init
     def initialize(token, release_params)
       super release_params

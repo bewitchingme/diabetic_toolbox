@@ -1,5 +1,13 @@
 module DiabeticToolbox
+  # = ReconfirmMember
+  #
+  # This exchange allows for a member to reconfirm their email change
+  # originally initiated with ChangeMemberEmail, as follows:
+  #
+  #   result = ReconfirmMember.new(token).call
+  #
   class ReconfirmMember < Exchange
+    #:enddoc:
     #region Init
     def initialize(token)
       if token.blank?

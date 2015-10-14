@@ -1,6 +1,7 @@
 require_dependency 'diabetic_toolbox/application_controller'
 
 module DiabeticToolbox
+  #:enddoc:
   class MemberSessionsController < ApplicationController
     #region Class Methods
     authorize_resource class: false

@@ -1,5 +1,13 @@
 module DiabeticToolbox
+  # = CreateMemberReading
+  #
+  # This class is used to save a reading recorded by a Member
+  # as follows:
+  #
+  #   result = CreateMemberReading.new(member, reading_params).call
+  #
   class CreateMemberReading < Exchange
+    #:enddoc:
     #region Init
     def initialize(member, reading_params)
       super reading_params

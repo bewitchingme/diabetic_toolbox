@@ -1,4 +1,5 @@
 module DiabeticToolbox
+  #:enddoc:
   module ApplicationHelper
     def render_member_navigation(current_waypoint, stop = nil)
       render partial: 'diabetic_toolbox/members/member_navigation', locals: { pathway: DiabeticToolbox::Navigator.course(:dashboard), active: current_waypoint, stop: stop }

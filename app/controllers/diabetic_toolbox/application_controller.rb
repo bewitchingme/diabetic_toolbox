@@ -1,4 +1,5 @@
 module DiabeticToolbox
+  #:enddoc:
   class ApplicationController < ActionController::Base
     #region Session
     before_filter :initialize_member_session, :set_locale, :set_user_tz

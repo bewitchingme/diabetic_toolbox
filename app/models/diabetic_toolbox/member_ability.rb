@@ -1,4 +1,5 @@
 module DiabeticToolbox
+  #:enddoc:
   class MemberAbility
     include CanCan::Ability
 

@@ -1,4 +1,4 @@
 #:enddoc:
 module DiabeticToolbox
-  VERSION = '0.1.85'
+  VERSION = '0.2.15'
 end

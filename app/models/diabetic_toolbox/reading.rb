@@ -1,4 +1,5 @@
 module DiabeticToolbox
+  #:enddoc:
   class Reading < ActiveRecord::Base
     #region Associations
     belongs_to :member, class_name: 'DiabeticToolbox::Member', counter_cache: true

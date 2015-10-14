@@ -1,5 +1,13 @@
 module DiabeticToolbox
+  # = PublishRecipe
+  #
+  # This class is used to publish an unpublished recipe,
+  # used as follows:
+  #
+  #   result = PublishRecipe(member, recipe).call
+  #
   class PublishRecipe < Exchange
+    #:enddoc:
     #region Init
     def initialize(member, recipe)
       @recipe = recipe

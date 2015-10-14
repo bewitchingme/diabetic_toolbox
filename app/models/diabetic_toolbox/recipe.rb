@@ -1,4 +1,5 @@
 module DiabeticToolbox
+  #:enddoc:
   class Recipe < ActiveRecord::Base
     #region Includes & Extends
     include DiabeticToolbox::Concerns::Voteable

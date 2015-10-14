@@ -1,4 +1,5 @@
 module DiabeticToolbox
+  #:enddoc:
   class Member < ActiveRecord::Base
     #region Includes & Extends
     include DiabeticToolbox::Concerns::Authenticatable

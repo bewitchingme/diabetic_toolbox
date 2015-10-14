@@ -3,7 +3,7 @@ module DiabeticToolbox
   #
   # This module is used to spawn either a success or failure result object
   # specifically with respect to interactions with ActiveRecord models.  They
-  # are configured with the an object of the model itself (the subject) and
+  # are configured with an object of the model itself (the subject) and
   # a message (intended to be used as a flash message.)  An example:
   #
   #   @user = User.new params
@@ -28,6 +28,28 @@ module DiabeticToolbox
   #       option.message = 'Error!'
   #     end
   #   end
+  #
+  # In the case that it is unsafe to provide any of the data from
+  # the model in the response, you may specify that is not safe
+  # to do so:
+  #
+  #   result = Result.failure do |option|
+  #     option.subject = @user
+  #     option.message = 'You are not allowed to do this.'
+  #     option.unsafe!
+  #   end
+  #
+  # This will ensure that model data is not included in
+  # +result.response+
+  #
+  # == Public Methods
+  #
+  #   result.success? # False if result was constructed with Result.failure,
+  #                   # true otherwise.
+  #   result.flash    # Intended as a flash message for the user, a high-level
+  #                   # message intended for overall status of the interaction.
+  #   result.response # An array in the format of [flash_message, error_messages, safe_data]
+  #   result.actual   # The model as set for +option.subject+ subject.
   #
   module Result
     # :enddoc:

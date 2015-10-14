@@ -1,5 +1,13 @@
 module DiabeticToolbox
+  # = CreateNutritionalFact
+  #
+  # This class is used to create a NutritionalFact to be
+  # associated with a recipe, as follows:
+  #
+  #   result = CreateNutritionalFact.new(member, recipe, nutritional_fact_params)
+  #
   class CreateNutritionalFact < Exchange
+    #:enddoc:
     #region Init
     def initialize(member, recipe, nutritional_fact_params)
       @member, @recipe, @nutritional_fact = member, recipe, recipe.nutritional_facts.new( nutritional_fact_params )

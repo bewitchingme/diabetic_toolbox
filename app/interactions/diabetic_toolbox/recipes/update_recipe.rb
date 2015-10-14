@@ -1,5 +1,14 @@
 module DiabeticToolbox
+  # = UpdateRecipe
+  #
+  # A class allowing the member to update recipe values;
+  # cannot be called on a recipe that is already published,
+  # used as follows:
+  #
+  #   result = UpdateRecipe.new(member, recipe, recipe_params).call
+  #
   class UpdateRecipe < Exchange
+    #:enddoc:
     #region Init
     def initialize(member, recipe, recipe_params)
       super recipe_params

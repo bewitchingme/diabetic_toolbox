@@ -1,4 +1,5 @@
 module DiabeticToolbox
+  #:enddoc:
   class UnauthorizedController < ActionController::Metal
     include ActionController::UrlFor
     include ActionController::Redirecting

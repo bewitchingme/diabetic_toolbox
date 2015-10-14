@@ -1,4 +1,5 @@
 
+#:stopdoc:
 #region Requirements
 require 'warden'
 require 'kaminari'
@@ -26,6 +27,7 @@ require 'bootstrap3-datetimepicker-rails'
 require 'prawn-rails'
 require 'jquery-rails'
 #endregion
+#:startdoc:
 
 # = DiabeticToolbox
 #

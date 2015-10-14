@@ -1,4 +1,5 @@
 module DiabeticToolbox
+  #:enddoc:
   module MembersHelper
     ##
     # This tries to be as lean as possible, assigning nothing and performing

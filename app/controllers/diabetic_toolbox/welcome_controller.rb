@@ -1,6 +1,7 @@
 require_dependency 'diabetic_toolbox/application_controller'
 
 module DiabeticToolbox
+  #:enddoc:
   class WelcomeController < DiabeticToolbox::ApplicationController
     load_and_authorize_resource class: false
 

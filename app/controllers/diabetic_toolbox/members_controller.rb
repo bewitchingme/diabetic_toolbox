@@ -1,6 +1,7 @@
 require_dependency 'diabetic_toolbox/application_controller'
 
 module DiabeticToolbox
+  #:enddoc:
   class MembersController < DiabeticToolbox::ApplicationController
     #region Class methods
     load_and_authorize_resource
@@ -8,9 +9,9 @@ module DiabeticToolbox
     #endregion
 
     #region Before Action
-    before_action :deploy_member_navigation,    only: :dash
-    before_action :set_member,            only: :show
-    before_action :there_can_be_only_one, only: :new
+    before_action :deploy_member_navigation, only: :dash
+    before_action :set_member,               only: :show
+    before_action :there_can_be_only_one,    only: :new
     #endregion
 
     #region Creation
@@ -30,7 +31,7 @@ module DiabeticToolbox
             flash[:success] = result.flash
             redirect_to setup_path
           else
-            @member         = result.actual
+            @member        = result.actual
             flash[:danger] = result.flash
             render :new
           end
@@ -128,7 +129,7 @@ module DiabeticToolbox
       end
 
       def sign_in_new_member
-        session = DiabeticToolbox::MemberSession.new( request.env['REMOTE_ADDR'], {'email' => creation_params[:email], 'password' => creation_params[:password]} )
+        session = MemberSession.new( request.env['REMOTE_ADDR'], {'email' => creation_params[:email], 'password' => creation_params[:password]} )
         member  = session.create
 
         begin_arbitrary_session(member) if session.in_progress?
