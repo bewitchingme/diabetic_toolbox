@@ -72,13 +72,13 @@ module DiabeticToolbox
     #region Base
     class Base
       #region New
-      def initialize(&block)
+      def initialize
         @options         = Options.new
         @options.subject = nil
         @options.message = I18n.t('diabetic_toolbox.result.blank')
 
         if block_given?
-          block.call @options
+          yield @options
         end
 
         @messages = validation_errors

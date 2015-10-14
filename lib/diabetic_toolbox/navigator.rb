@@ -23,12 +23,12 @@ module DiabeticToolbox
   module Navigator
     #:enddoc:
     #region Module Methods
-    def self.chart(destination, &block)
+    def self.chart(destination)
       @pathways ||= {}
 
       if !@pathways.has_key? destination
         @pathways[destination] = Pathway.new
-        block.call @pathways[destination]
+        yield @pathways[destination] if block_given?
       end
     end
 
@@ -52,12 +52,12 @@ module DiabeticToolbox
         @rest_stops[name]
       end
 
-      def waypoint(name, sign, icon, route, &block)
+      def waypoint(name, sign, icon, route)
         @waypoints[name] = {sign: sign, icon: icon, route: route}
 
         if block_given?
           @rest_stops[name] ||= RestStop.new
-          block.call @rest_stops[name]
+          yield @rest_stops[name]
         end
       end
     end
