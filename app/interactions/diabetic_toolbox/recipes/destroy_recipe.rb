@@ -8,7 +8,7 @@ module DiabeticToolbox
   #   result = DestroyRecipe(member, recipe).call
   #
   class DestroyRecipe < Exchange
-    #:enddoc
+    #:enddoc:
     #region Init
     def initialize(member, recipe)
       @member = member

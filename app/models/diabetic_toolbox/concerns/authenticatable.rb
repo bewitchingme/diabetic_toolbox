@@ -1,3 +1,4 @@
+#:enddoc:
 module DiabeticToolbox::Concerns::Authenticatable
   extend ActiveSupport::Concern
 

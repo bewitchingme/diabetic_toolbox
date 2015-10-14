@@ -1,3 +1,4 @@
+#:enddoc:
 module DiabeticToolbox::Concerns::Voter
   extend ActiveSupport::Concern
 

@@ -1,3 +1,4 @@
+#:enddoc:
 module DiabeticToolbox
   class ChangeMemberEmailMailer < ApplicationMailer
     require 'mail'

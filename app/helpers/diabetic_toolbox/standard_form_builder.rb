@@ -1,3 +1,4 @@
+#:enddoc:
 module DiabeticToolbox
   class StandardFormBuilder < ActionView::Helpers::FormBuilder
     def text_field(label, *args)
