@@ -48,7 +48,6 @@ module DiabeticToolbox
       @member = Member.new
     end
 
-
     def send_recovery_kit
       DiabeticToolbox.from :members, require: %w(recover_member_password)
 
@@ -58,6 +57,7 @@ module DiabeticToolbox
       if result.success?
         redirect_to root_path
       else
+        @member = Member.new
         render :password_recovery
       end
     end
