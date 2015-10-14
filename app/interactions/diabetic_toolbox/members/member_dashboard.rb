@@ -11,7 +11,7 @@ module DiabeticToolbox
   class MemberDashboard
     #:enddoc:
     #region Static
-    def self.history(member, travel = (Time.now - 60.days))
+    def self.history(member, travel = (Time.now - 30.days))
       history = member.readings.where(test_time: travel..(Time.now)).order(test_time: :asc)
       history.to_a.each_with_object({}){ |r,h| h[Time.zone.parse(r.test_time.to_s)] = r.glucometer_value }
     end
@@ -22,7 +22,7 @@ module DiabeticToolbox
         curveType: 'function',
         backgroundColor: '#333',
         fontName: 'Merriweather',
-        title: "60 Day History",
+        title: I18n.t('diabetic_toolbox.member_dashboard.thirty_day_history'),
         titleTextStyle: {
           color: '#CACACA'
         },
@@ -36,10 +36,10 @@ module DiabeticToolbox
           titleTextStyle: {
             color: '#CACACA'
           },
-          title: "Date",
+          title: I18n.t('diabetic_toolbox.member_dashboard.date'),
           gridlines: {
             count: 6,
-            color: "#5A5A5A"
+            color: '#5A5A5A'
           }
         },
         vAxis: {
@@ -49,10 +49,10 @@ module DiabeticToolbox
           titleTextStyle: {
             color: '#CACACA'
           },
-          title: "Reading",
+          title: I18n.t('diabetic_toolbox.member_dashboard.reading'),
           gridlines: {
               count: 4,
-              color: "#5A5A5A"
+              color: '#5A5A5A'
           }
         }
       }

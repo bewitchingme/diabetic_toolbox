@@ -2,6 +2,10 @@ en:
   diabetic_toolbox:
     result:
       blank: Empty Result - Please Specify :message
+    member_dashboard:
+      thirty_day_history: 30 Day History
+      date: Date
+      reading: Reading
   mailers:
     change_member_email:
       primer: To confirm this email change, please click on the link below.
