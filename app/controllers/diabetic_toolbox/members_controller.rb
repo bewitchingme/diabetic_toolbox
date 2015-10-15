@@ -64,9 +64,9 @@ module DiabeticToolbox
         format.html do
           if result.success?
             flash[:info] = result.flash
-            redirect_to edit_member_path result.actual
+            redirect_to edit_member_path
           else
-            @member         = result.actual
+            @member        = result.actual
             flash[:danger] = result.flash
             render :edit
           end

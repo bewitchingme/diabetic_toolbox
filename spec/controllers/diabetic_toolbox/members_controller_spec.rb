@@ -60,7 +60,7 @@ module DiabeticToolbox
           updated_member = Member.find member.slug
 
           expect(response).to have_http_status 302
-          expect(response).to redirect_to edit_member_path member
+          expect(response).to redirect_to edit_member_path
           expect(updated_member.gender).to eq 'female'
         end
 
