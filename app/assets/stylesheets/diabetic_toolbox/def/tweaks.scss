@@ -26,15 +26,15 @@ HTML,BODY
   margin: 0 auto -60px;
   /* Pad bottom by footer height */
   padding: 0 0 60px;
-}
-#navigation-gap
-{
-  height: 65px;
+  .navigation-gap
+  {
+    height: 65px;
+  }
 }
 #footer
 {
   height: 60px;
-  background-color: $gray-darker;
+  background-color: darken($body-bg, 4%);
 }
 #footer > .container
 {
@@ -52,7 +52,7 @@ HTML,BODY
   padding-top: 10px;
   padding-bottom: 3px;
   padding-left: 10px;
-  color: lighten($brand-info, 25%);
+  color: darken($brand-info, 15%);
   font-weight: 500;
   letter-spacing: 1.1px;
 }

@@ -20,39 +20,43 @@ module DiabeticToolbox
       {
         lineWidth: 2,
         curveType: 'function',
-        backgroundColor: '#333',
+        backgroundColor: {
+          fill: '#EFF3F4',
+          stroke: '#608AB5',
+          strokeWidth: 1
+        },
         fontName: 'Merriweather',
         title: I18n.t('diabetic_toolbox.member_dashboard.thirty_day_history'),
         titleTextStyle: {
-          color: '#CACACA'
+          color: '#21485C'
         },
         tooltip: {
           backgroundColor: '#222',
-          color: '#CACACA'
+          color: '#21485C'
         },
-        colors: ['#4dc8df'],
+        colors: ['#5299C7'],
         hAxis: {
-          baselineColor: '#CACACA',
+          baselineColor: '#21485C',
           titleTextStyle: {
-            color: '#CACACA'
+            color: '#21485C'
           },
           title: I18n.t('diabetic_toolbox.member_dashboard.date'),
           gridlines: {
             count: 6,
-            color: '#5A5A5A'
+            color: '#21485C'
           }
         },
         vAxis: {
           textStyle: {
-            color: '#CACACA'
+            color: '#21485C'
           },
           titleTextStyle: {
-            color: '#CACACA'
+            color: '#21485C'
           },
           title: I18n.t('diabetic_toolbox.member_dashboard.reading'),
           gridlines: {
               count: 4,
-              color: '#5A5A5A'
+              color: '#21485C'
           }
         }
       }
