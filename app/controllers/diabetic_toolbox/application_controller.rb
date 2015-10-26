@@ -58,12 +58,6 @@ module DiabeticToolbox
       end
     end
     #endregion
-
-    #region Member Checks
-    def member_configured?
-      redirect_to setup_path if current_member.present? && current_member.settings.size.eql?(0)
-    end
-    #endregion
     #endregion
 
     #region Private

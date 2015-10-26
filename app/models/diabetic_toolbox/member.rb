@@ -62,7 +62,7 @@ module DiabeticToolbox
     end
 
     def configured?
-      !settings.size.eql?(0)
+      settings.size > 0
     end
     #endregion
 
