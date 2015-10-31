@@ -1,14 +1,14 @@
 #dashboard.content-dashboard
-  .separator
+  .buffer
   #dashboard_tabs.text-center.list-group.list-group-horizontal
     - pathway.waypoints.each do |waypoint,anchor|
       %a{class: "list-group-item #{waypoint.to_s} #{'active' if active.eql?(waypoint)}", href: anchor[:route], rel: :relativeanchor, alt: anchor[:sign], title: anchor[:sign]}
         %span{ class: "fa fa-#{anchor[:icon]}" }
         .hidden-xs.hidden-sm.smooth= anchor[:sign]
-    .separator
+    .buffer
     - if stop.present?
       .text-center
         #reading-actions.list-group.list-group-horizontal
           - pathway.stops(active).locations.each do |name,location|
             = link_to location[:label], location[:route], class: "list-group-item#{' active' if stop.eql?(name)}"
-      .separator
+      .buffer

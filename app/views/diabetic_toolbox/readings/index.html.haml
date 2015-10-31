@@ -25,3 +25,4 @@
                   %span.hidden-xs.hidden-sm= "(#{Time.zone.parse(reading.test_time.to_s).strftime('%D')})"
                   %span.hidden-md.hidden-lg.hidden-desktop= Time.zone.parse(reading.test_time.to_s).strftime('%D')
         = paginate @readings, theme: 'diabetic_toolbox', subject: @readings
+    .buffer
