@@ -36,12 +36,6 @@ module DiabeticToolbox
         end
       end
     end
-
-    hook :after do
-      if call_result.success?
-        # TODO: Must implement the mailer here to confirm the member.
-      end
-    end
     #endregion
   end
 end
