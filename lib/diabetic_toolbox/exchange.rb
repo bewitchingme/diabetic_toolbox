@@ -50,7 +50,8 @@ module DiabeticToolbox
       call_hook(:before)
       call_hook(:default)
       call_hook(:after)
-      @result
+
+      call_result
     end
     #endregion
 
