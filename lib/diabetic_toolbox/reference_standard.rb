@@ -17,6 +17,7 @@ module DiabeticToolbox
   #
   module ReferenceStandard
     #:enddoc:
+    #region Data Table
     @nutrients = {
       fat:          {value: 65,   unit: :gram},
       trans_fat:    {value: 20,   unit: :gram},
@@ -51,7 +52,9 @@ module DiabeticToolbox
       chloride:     {value: 3400, unit: :milligram},
       protein:      {value: 51,   unit: :gram}
     }
+    #endregion
 
+    #region Methods
     def self.nutrients
       @nutrients
     end
@@ -71,5 +74,6 @@ module DiabeticToolbox
     def self.units_for(nutrient)
       @nutrients[nutrient][:unit]
     end
+    #endregion
   end
 end
