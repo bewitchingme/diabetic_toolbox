@@ -2,7 +2,7 @@ require_dependency 'diabetic_toolbox/application_controller'
 
 module DiabeticToolbox
   #:enddoc:
-  class MembersController < DiabeticToolbox::ApplicationController
+  class MembersController < ApplicationController
     #region Class methods
     load_and_authorize_resource
     respond_to :html, :json
